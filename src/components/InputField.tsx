@@ -12,24 +12,30 @@ export function InputField({
   onChangeText: (text: string) => void;
   value: string;
 }) {
-  const [focus, setFocus] = useState(true);
+  const [focus, setFocus] = useState(false);
+  function change(text:string){
+    onChangeText(text);
+    if(text === ""){
+      setFocus(false);
+    } else {
+      setFocus(true);
+    }
+  }
 
   return (
     <View style={[styles.container, isInvalid && styles.inputError]}>
       <View style={styles.inputContainer}>
-        <Text style={[focus ? styles.labelfocused : styles.disable, isInvalid && styles.labelErro]}>Name</Text>
+        <Text style={[focus ? styles.labelfocused : styles.disable, isInvalid && styles.labelErro]}>{placeholder}</Text>
         <TextInput
           style={styles.input}
           placeholder={placeholder}
-          onChangeText={onChangeText}
-          onFocus={() => {
-            setFocus(true);
-          }}
-          value={value}
+          placeholderTextColor="#9B9B9B"
+          onChangeText={(text) => {change(text);}}
+          value={value} 
         />
       </View>
-      <Image source={require("../assets/images/Succes-icon.png")} style={!isInvalid && styles.disable }/>
-      <Image source={require("../assets/images/Outline-close.png")} style={isInvalid && styles.disable }/>
+      <Image source={require("../assets/images/Succes-icon.png")} style={(isInvalid || !focus) && styles.disable}/>
+      <Image source={require("../assets/images/Outline-close.png")} style={!isInvalid && styles.disable}/>
     </View>
   );
 }
