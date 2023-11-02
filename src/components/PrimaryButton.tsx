@@ -4,24 +4,44 @@ import {
   Pressable,
   GestureResponderEvent,
   StyleSheet,
+  ActivityIndicator,
 } from "react-native";
+import { Colors } from "react-native/Libraries/NewAppScreen";
 
 export function PrimaryButton({
   children,
   onPress,
+  isDisable,
 }: {
   children: string;
   onPress: (event: GestureResponderEvent) => void;
+  isDisable: boolean;
 }) {
+  function Content() {
+    if (!isDisable) {
+      return (
+        <View>
+          <Text style={styles.text}>{children}</Text>
+        </View>
+      );
+    } else {
+      return(
+        <ActivityIndicator size={30} color={Colors.secundaryColor}/>
+      );
+    }
+  }
+
   return (
     <Pressable
+      disabled={isDisable}
       onPress={onPress}
-      style={({pressed}) =>
-        pressed ? [styles.button, styles.pressed] : styles.button
+      style={
+        !isDisable
+          ? ({pressed}) =>
+              pressed ? [styles.button, styles.pressed] : styles.button
+          : [styles.button, styles.disable]
       }>
-      <View>
-        <Text style={styles.text}>{children}</Text>
-      </View>
+      <Content />
     </Pressable>
   );
 }
@@ -42,6 +62,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.29,
     shadowRadius: 4,
     elevation: 7,
+  },
+
+  disable: {
+    backgroundColor: "#565656",
   },
 
   text: {
