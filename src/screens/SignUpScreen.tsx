@@ -11,6 +11,7 @@ import {Colors} from "../assets/constants/Colors";
 import {InputField} from "../components/InputField";
 import {PrimaryButton} from "../components/PrimaryButton";
 import {SocialButtons} from "../components/SocialButtons";
+import { useState } from "react";
 
 export function SignUpScreen({navigation}: {navigation: any}) {
   const {
@@ -25,6 +26,8 @@ export function SignUpScreen({navigation}: {navigation: any}) {
       email: "",
     },
   });
+
+  const [isDisable, setDisable] = useState(false);
 
   const onSubmit = async (userData: {
     name: string;
@@ -129,7 +132,7 @@ export function SignUpScreen({navigation}: {navigation: any}) {
           </Text>
         </Pressable>
 
-        <PrimaryButton onPress={handleSubmit(onSubmit)}>SIGN UP</PrimaryButton>
+        <PrimaryButton onPress={handleSubmit(onSubmit)} isDisable={isDisable}>SIGN UP</PrimaryButton>
 
         <View style={styles.bottom}>
           <Text style={styles.paragraph}>

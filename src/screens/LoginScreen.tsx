@@ -11,6 +11,7 @@ import {Colors} from "../assets/constants/Colors";
 import {InputField} from "../components/InputField";
 import {PrimaryButton} from "../components/PrimaryButton";
 import {SocialButtons} from "../components/SocialButtons";
+import { useState } from "react";
 
 export function LoginScreen({navigation}: {navigation: any}) {
   const {
@@ -24,10 +25,12 @@ export function LoginScreen({navigation}: {navigation: any}) {
       password: "",
     },
   });
-
+  const [isDisable, setDisable] = useState(false);
   const onSubmit = async (userData: {email: string; password: string}) => {
     try {
+      setDisable(true);
       // precisa fazer a função de criar usúario
+      setDisable(false);
       navigation.navigate("HomeScreen");
     } catch (error) {
       Alert.alert(
@@ -101,7 +104,7 @@ export function LoginScreen({navigation}: {navigation: any}) {
           </Text>
         </Pressable>
 
-        <PrimaryButton onPress={handleSubmit(onSubmit)}>LOGIN</PrimaryButton>
+        <PrimaryButton onPress={handleSubmit(onSubmit)}isDisable={isDisable}>LOGIN</PrimaryButton>
 
         <View style={styles.bottom}>
           <Text style={styles.paragraph}>
