@@ -33,7 +33,7 @@ export function SignUpScreen({navigation}: {navigation: any}) {
   }) => {
     try {
       // precisa fazer a função de criar usúario
-      navigation.navigate("Login");
+      navigation.navigate("LoginScreen");
     } catch (error) {
       Alert.alert(
         "Authentication failed!",
@@ -124,8 +124,8 @@ export function SignUpScreen({navigation}: {navigation: any}) {
           style={styles.paragraphContainer}
           onPress={navigationHandler}>
           <Text style={styles.paragraph}>
-            Already have an{" "}
-            <Text style={[styles.paragraph, styles.textDetail]}>account</Text>?
+            Already have an
+            <Text style={[styles.paragraph, styles.textDetail]}> account</Text>?
           </Text>
         </Pressable>
 
@@ -133,8 +133,8 @@ export function SignUpScreen({navigation}: {navigation: any}) {
 
         <View style={styles.bottom}>
           <Text style={styles.paragraph}>
-            Or{" "}
-            <Text style={[styles.paragraph, styles.textDetail]}>sign up</Text>{" "}
+            Or
+            <Text style={[styles.paragraph, styles.textDetail]}> sign up </Text>
             with social account
           </Text>
           <SocialButtons />
@@ -146,6 +146,7 @@ export function SignUpScreen({navigation}: {navigation: any}) {
 
 const styles = StyleSheet.create({
   background: {
+    backgroundColor: "#fff",
     height: "100%",
   },
 
@@ -174,7 +175,6 @@ const styles = StyleSheet.create({
   },
 
   paragraphContainer: {
-    width: "52%",
     alignSelf: "flex-end",
     marginBottom: "12%",
     marginTop: "6%",
