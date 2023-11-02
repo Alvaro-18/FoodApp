@@ -11,7 +11,8 @@ import {Colors} from "../assets/constants/Colors";
 import {InputField} from "../components/InputField";
 import {PrimaryButton} from "../components/PrimaryButton";
 import {SocialButtons} from "../components/SocialButtons";
-import { useState } from "react";
+import {useState} from "react";
+import {createUser} from "../services/Authentication";
 
 export function SignUpScreen({navigation}: {navigation: any}) {
   const {
@@ -26,17 +27,14 @@ export function SignUpScreen({navigation}: {navigation: any}) {
       email: "",
     },
   });
-
-  const [isDisable, setDisable] = useState(false);
-
   const onSubmit = async (userData: {
     name: string;
     password: string;
     email: string;
   }) => {
     try {
-      // precisa fazer a função de criar usúario
-      navigation.navigate("LoginScreen");
+      createUser(userData.name, userData.email, userData.password);
+      //navigation.navigate("LoginScreen");
     } catch (error) {
       Alert.alert(
         "Authentication failed!",
@@ -132,7 +130,9 @@ export function SignUpScreen({navigation}: {navigation: any}) {
           </Text>
         </Pressable>
 
-        <PrimaryButton onPress={handleSubmit(onSubmit)} isDisable={isDisable}>SIGN UP</PrimaryButton>
+        <PrimaryButton onPress={handleSubmit(onSubmit)}>
+          SIGN UP
+        </PrimaryButton>
 
         <View style={styles.bottom}>
           <Text style={styles.paragraph}>
