@@ -1,16 +1,9 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  ImageBackground,
-  Pressable,
-  Alert,
-} from "react-native";
+import {View, Text, StyleSheet, ImageBackground, Alert} from "react-native";
 import {useForm, Controller} from "react-hook-form";
 import {Colors} from "../assets/constants/Colors";
 import {InputField} from "../components/InputField";
 import {PrimaryButton} from "../components/PrimaryButton";
-import {SocialButtons} from "../components/SocialButtons";
+import {useState} from "react";
 
 export function ForgotPasswordScreen({navigation}: {navigation: any}) {
   const {
@@ -24,24 +17,21 @@ export function ForgotPasswordScreen({navigation}: {navigation: any}) {
     },
   });
 
-  const onSubmit = async (userData: {
-    email: string;
-  }) => {
+  const [isDisable, setDisable] = useState(false);
+
+  const onSubmit = async (userData: {email: string}) => {
     try {
-      // precisa fazer a função de criar usúario
-      navigation.navigate("Login");
+      setDisable(true);
+      setDisable(false);
     } catch (error) {
       Alert.alert(
         "Authentication failed!",
-        "Unable to create user, please check your informations and try again",
+        "Not a valid email address. Should be your@email.com.",
       );
     }
     resetField("email", {defaultValue: ""});
+    Alert.alert("Email send!", "Please, check your email.");
   };
-
-  function navigationHandler() {
-    navigation.navigate("Login");
-  }
 
   return (
     <ImageBackground
@@ -53,47 +43,36 @@ export function ForgotPasswordScreen({navigation}: {navigation: any}) {
           <Text style={styles.title}> up</Text>
         </Text>
 
+        <Text style={styles.paragraph}>
+          Please, enter your email address. You will receive a link to create a
+          new password via email.
+        </Text>
+
         <View style={styles.formContainer}>
-            <Controller
-              name="email"
-              control={control}
-              rules={{
-                required: true,
-                pattern: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}/,
-              }}
-              render={({field: {onChange, value}, fieldState}) => (
-                <InputField
-                  placeholder="Email"
-                  onChangeText={onChange}
-                  isInvalid={fieldState.invalid}
-                  value={value}
-                />
-              )}
-            />
-            {errors.email && (
-              <Text style={styles.alertText}>Not a valid email address.</Text>
+          <Controller
+            name="email"
+            control={control}
+            rules={{
+              required: true,
+              pattern: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}/,
+            }}
+            render={({field: {onChange, value}, fieldState}) => (
+              <InputField
+                placeholder="Email"
+                onChangeText={onChange}
+                isInvalid={fieldState.invalid}
+                value={value}
+              />
             )}
+          />
+          {errors.email && (
+            <Text style={styles.alertText}>Not a valid email address.</Text>
+          )}
         </View>
 
-        <Pressable
-          style={styles.paragraphContainer}
-          onPress={navigationHandler}>
-          <Text style={styles.paragraph}>
-            Already have an{" "}
-            <Text style={[styles.paragraph, styles.textDetail]}>account</Text>?
-          </Text>
-        </Pressable>
-
-        <PrimaryButton onPress={handleSubmit(onSubmit)}>SIGN UP</PrimaryButton>
-
-        <View style={styles.bottom}>
-          <Text style={styles.paragraph}>
-            Or{" "}
-            <Text style={[styles.paragraph, styles.textDetail]}>sign up</Text>{" "}
-            with social account
-          </Text>
-          <SocialButtons />
-        </View>
+        <PrimaryButton onPress={handleSubmit(onSubmit)} isDisable={isDisable}>
+          SEND
+        </PrimaryButton>
       </View>
     </ImageBackground>
   );
@@ -102,8 +81,8 @@ export function ForgotPasswordScreen({navigation}: {navigation: any}) {
 const styles = StyleSheet.create({
   background: {
     height: "100%",
+    backgroundColor: "#fff",
   },
-
   container: {
     alignSelf: "center",
     width: "90%",
@@ -118,31 +97,18 @@ const styles = StyleSheet.create({
   textDetail: {
     color: Colors.secundaryColor,
   },
-
-  alertText: {
-    color: "red",
+  paragraph: {
+    marginTop: "18%",
+    color: "#222222",
+    fontSize: 14,
+    fontWeight: "500",
   },
-
   formContainer: {
-    marginTop: "20%",
+    marginTop: "6%",
+    marginBottom: "10%",
     gap: 10,
   },
-
-  paragraphContainer: {
-    width: "52%",
-    alignSelf: "flex-end",
-    marginBottom: "12%",
-    marginTop: "6%",
-  },
-
-  paragraph: {
-    textAlign: "center",
-    color: "#000",
-    fontSize: 14,
-    fontWeight: "600",
-  },
-
-  bottom: {
-    marginTop: "24%",
+  alertText: {
+    color: "red",
   },
 });
