@@ -4,6 +4,7 @@ import {Colors} from "../assets/constants/Colors";
 import {InputField} from "../components/InputField";
 import {PrimaryButton} from "../components/PrimaryButton";
 import {useState} from "react";
+import { resetPassword } from "../services/Authentication";
 
 export function ForgotPasswordScreen({navigation}: {navigation: any}) {
   const {
@@ -17,12 +18,9 @@ export function ForgotPasswordScreen({navigation}: {navigation: any}) {
     },
   });
 
-  const [isDisable, setDisable] = useState(false);
-
   const onSubmit = async (userData: {email: string}) => {
     try {
-      setDisable(true);
-      setDisable(false);
+      resetPassword(userData.email);
     } catch (error) {
       Alert.alert(
         "Authentication failed!",
@@ -70,7 +68,7 @@ export function ForgotPasswordScreen({navigation}: {navigation: any}) {
           )}
         </View>
 
-        <PrimaryButton onPress={handleSubmit(onSubmit)} isDisable={isDisable}>
+        <PrimaryButton onPress={handleSubmit(onSubmit)}>
           SEND
         </PrimaryButton>
       </View>

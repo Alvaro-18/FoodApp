@@ -4,44 +4,25 @@ import {
   Pressable,
   GestureResponderEvent,
   StyleSheet,
-  ActivityIndicator,
 } from "react-native";
-import { Colors } from "react-native/Libraries/NewAppScreen";
+
 
 export function PrimaryButton({
   children,
   onPress,
-  isDisable,
 }: {
   children: string;
   onPress: (event: GestureResponderEvent) => void;
-  isDisable: boolean;
 }) {
-  function Content() {
-    if (!isDisable) {
-      return (
-        <View>
-          <Text style={styles.text}>{children}</Text>
-        </View>
-      );
-    } else {
-      return(
-        <ActivityIndicator size={30} color={Colors.secundaryColor}/>
-      );
-    }
-  }
-
   return (
     <Pressable
-      disabled={isDisable}
       onPress={onPress}
-      style={
-        !isDisable
-          ? ({pressed}) =>
-              pressed ? [styles.button, styles.pressed] : styles.button
-          : [styles.button, styles.disable]
+      style={({pressed}) =>
+        pressed ? [styles.button, styles.pressed] : styles.button
       }>
-      <Content />
+      <View>
+        <Text style={styles.text}>{children}</Text>
+      </View>
     </Pressable>
   );
 }
