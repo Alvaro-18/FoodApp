@@ -12,7 +12,7 @@ import {InputField} from "../components/InputField";
 import {PrimaryButton} from "../components/PrimaryButton";
 import {SocialButtons} from "../components/SocialButtons";
 
-export function SignUpScreen({navigation}: {navigation: any}) {
+export function LoginScreen({navigation}: {navigation: any}) {
   const {
     control,
     handleSubmit,
@@ -20,33 +20,27 @@ export function SignUpScreen({navigation}: {navigation: any}) {
     formState: {errors},
   } = useForm({
     defaultValues: {
-      name: "",
-      password: "",
       email: "",
+      password: "",
     },
   });
 
-  const onSubmit = async (userData: {
-    name: string;
-    password: string;
-    email: string;
-  }) => {
+  const onSubmit = async (userData: {email: string; password: string}) => {
     try {
       // precisa fazer a função de criar usúario
-      navigation.navigate("LoginScreen");
+      navigation.navigate("HomeScreen");
     } catch (error) {
       Alert.alert(
         "Authentication failed!",
-        "Unable to create user, please check your informations and try again",
+        "Unable to log in, check your credentials and try again",
       );
     }
-    resetField("name", {defaultValue: ""});
     resetField("email", {defaultValue: ""});
     resetField("password", {defaultValue: ""});
   };
 
   function navigationHandler() {
-    navigation.navigate("Login");
+    navigation.navigate("ForgotPasswordScreen");
   }
 
   return (
@@ -54,31 +48,9 @@ export function SignUpScreen({navigation}: {navigation: any}) {
       source={require("../assets/images/Background.png")}
       style={styles.background}>
       <View style={styles.container}>
-        <Text style={[styles.title, styles.textDetail]}>
-          Sign
-          <Text style={styles.title}> up</Text>
-        </Text>
+        <Text style={styles.title}>Login</Text>
 
         <View style={styles.formContainer}>
-          <View>
-            <Controller
-              name="name"
-              control={control}
-              rules={{required: true, minLength: 3}}
-              render={({field: {onChange, value}, fieldState}) => (
-                <InputField
-                  placeholder="Name"
-                  onChangeText={onChange}
-                  isInvalid={fieldState.invalid}
-                  value={value}
-                />
-              )}
-            />
-            {errors.name && (
-              <Text style={styles.alertText}>This name is required.</Text>
-            )}
-          </View>
-
           <View>
             <Controller
               name="email"
@@ -115,7 +87,7 @@ export function SignUpScreen({navigation}: {navigation: any}) {
               )}
             />
             {errors.password && (
-              <Text style={styles.alertText}>Invalid password</Text>
+              <Text style={styles.alertText}>Email or password incorrect</Text>
             )}
           </View>
         </View>
@@ -124,17 +96,17 @@ export function SignUpScreen({navigation}: {navigation: any}) {
           style={styles.paragraphContainer}
           onPress={navigationHandler}>
           <Text style={styles.paragraph}>
-            Already have an
-            <Text style={[styles.paragraph, styles.textDetail]}> account</Text>?
+            Forgot your
+            <Text style={[styles.paragraph, styles.textDetail]}> password</Text>?
           </Text>
         </Pressable>
 
-        <PrimaryButton onPress={handleSubmit(onSubmit)}>SIGN UP</PrimaryButton>
+        <PrimaryButton onPress={handleSubmit(onSubmit)}>LOGIN</PrimaryButton>
 
         <View style={styles.bottom}>
           <Text style={styles.paragraph}>
             Or
-            <Text style={[styles.paragraph, styles.textDetail]}> sign up </Text>
+            <Text style={[styles.paragraph, styles.textDetail]}> login </Text>
             with social account
           </Text>
           <SocialButtons />
@@ -157,10 +129,11 @@ const styles = StyleSheet.create({
   },
   title: {
     marginTop: "6%",
-    color: "#000",
+    color: Colors.secundaryColor,
     fontSize: 34,
     fontWeight: "bold",
   },
+
   textDetail: {
     color: Colors.secundaryColor,
   },
@@ -188,6 +161,6 @@ const styles = StyleSheet.create({
   },
 
   bottom: {
-    marginTop: "24%",
+    marginTop: "40%",
   },
 });
