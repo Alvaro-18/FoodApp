@@ -1,8 +1,8 @@
 import {Pressable, Image, StyleSheet, GestureResponderEvent} from "react-native";
 
-export function GoBackButton(onPress: {onPress: (event: GestureResponderEvent) => void;}) {
+export function GoBackButton({onPress} : {onPress: (event: GestureResponderEvent) => void;}) {
   return (
-    <Pressable>
+    <Pressable onPress={onPress}>
       <Image
         source={require("../assets/images/Arrow-back.png")}
         resizeMode={"contain"}
