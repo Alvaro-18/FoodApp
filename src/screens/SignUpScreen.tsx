@@ -11,10 +11,12 @@ import {Colors} from "../assets/constants/Colors";
 import {InputField} from "../components/InputField";
 import {PrimaryButton} from "../components/PrimaryButton";
 import {SocialButtons} from "../components/SocialButtons";
-import {useState} from "react";
 import {createUser} from "../services/Authentication";
+import {useNavigation} from "@react-navigation/native";
+import {GoBackButton} from "../components/GoBackButton";
 
-export function SignUpScreen({navigation}: {navigation: any}) {
+export function SignUpScreen() {
+  const navigation = useNavigation<any>();
   const {
     control,
     handleSubmit,
@@ -27,27 +29,37 @@ export function SignUpScreen({navigation}: {navigation: any}) {
       email: "",
     },
   });
+
+  function resetFields() {
+    resetField("name", {defaultValue: ""});
+    resetField("email", {defaultValue: ""});
+    resetField("password", {defaultValue: ""});
+  }
+
+  function navigationHandlerLogin() {
+    navigation.navigate("Login");
+    resetFields();
+  }
+
   const onSubmit = async (userData: {
     name: string;
     password: string;
     email: string;
   }) => {
-    try {
+    try { 
       createUser(userData.name, userData.email, userData.password);
-      //navigation.navigate("LoginScreen");
+      navigationHandlerLogin();
     } catch (error) {
       Alert.alert(
         "Authentication failed!",
         "Unable to create user, please check your informations and try again",
       );
     }
-    resetField("name", {defaultValue: ""});
-    resetField("email", {defaultValue: ""});
-    resetField("password", {defaultValue: ""});
   };
 
-  function navigationHandler() {
-    navigation.navigate("Login");
+  function navigationHandlerHome() {
+    navigation.goBack();
+    resetFields();
   }
 
   return (
@@ -55,6 +67,8 @@ export function SignUpScreen({navigation}: {navigation: any}) {
       source={require("../assets/images/Background.png")}
       style={styles.background}>
       <View style={styles.container}>
+        <GoBackButton onPress={navigationHandlerHome} />
+
         <Text style={[styles.title, styles.textDetail]}>
           Sign
           <Text style={styles.title}> up</Text>
@@ -123,16 +137,14 @@ export function SignUpScreen({navigation}: {navigation: any}) {
 
         <Pressable
           style={styles.paragraphContainer}
-          onPress={navigationHandler}>
+          onPress={navigationHandlerLogin}>
           <Text style={styles.paragraph}>
             Already have an
             <Text style={[styles.paragraph, styles.textDetail]}> account</Text>?
           </Text>
         </Pressable>
 
-        <PrimaryButton onPress={handleSubmit(onSubmit)}>
-          SIGN UP
-        </PrimaryButton>
+        <PrimaryButton onPress={handleSubmit(onSubmit)}>SIGN UP</PrimaryButton>
 
         <View style={styles.bottom}>
           <Text style={styles.paragraph}>
@@ -156,10 +168,10 @@ const styles = StyleSheet.create({
   container: {
     alignSelf: "center",
     width: "90%",
-    marginTop: "12%",
+    marginTop: "6%",
   },
   title: {
-    marginTop: "6%",
+    marginTop: "8%",
     color: "#000",
     fontSize: 34,
     fontWeight: "bold",
