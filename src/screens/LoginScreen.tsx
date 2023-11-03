@@ -11,10 +11,12 @@ import {Colors} from "../assets/constants/Colors";
 import {InputField} from "../components/InputField";
 import {PrimaryButton} from "../components/PrimaryButton";
 import {SocialButtons} from "../components/SocialButtons";
-import {useState} from "react";
-import { logUser } from "../services/Authentication";
+import {logUser} from "../services/Authentication";
+import {useNavigation} from "@react-navigation/native";
+import {GoBackButton} from "../components/GoBackButton";
 
-export function LoginScreen({navigation}: {navigation: any}) {
+export function LoginScreen() {
+  const navigation = useNavigation<any>();
   const {
     control,
     handleSubmit,
@@ -27,22 +29,32 @@ export function LoginScreen({navigation}: {navigation: any}) {
     },
   });
 
+  function resetFields() {
+    resetField("email", {defaultValue: ""});
+    resetField("password", {defaultValue: ""});
+  }
+
   const onSubmit = async (userData: {email: string; password: string}) => {
     try {
       logUser(userData.email, userData.password);
-      //navigation.navigate("HomeScreen");
+      navigation.navigate("Home");
     } catch (error) {
       Alert.alert(
         "Authentication failed!",
         "Unable to log in, check your credentials and try again",
       );
     }
-    resetField("email", {defaultValue: ""});
-    resetField("password", {defaultValue: ""});
+    resetFields();
   };
 
-  function navigationHandler() {
-    navigation.navigate("ForgotPasswordScreen");
+  function navigationHandlerForgot() {
+    navigation.navigate("ForgotPassword");
+    resetFields();
+  }
+
+  function navigationHandlerGoBack() {
+    navigation.goBack();
+    resetFields();
   }
 
   return (
@@ -50,6 +62,8 @@ export function LoginScreen({navigation}: {navigation: any}) {
       source={require("../assets/images/Background.png")}
       style={styles.background}>
       <View style={styles.container}>
+        <GoBackButton onPress={navigationHandlerGoBack} />
+
         <Text style={styles.title}>Login</Text>
 
         <View style={styles.formContainer}>
@@ -96,7 +110,7 @@ export function LoginScreen({navigation}: {navigation: any}) {
 
         <Pressable
           style={styles.paragraphContainer}
-          onPress={navigationHandler}>
+          onPress={navigationHandlerForgot}>
           <Text style={styles.paragraph}>
             Forgot your
             <Text style={[styles.paragraph, styles.textDetail]}> password</Text>
@@ -104,9 +118,7 @@ export function LoginScreen({navigation}: {navigation: any}) {
           </Text>
         </Pressable>
 
-        <PrimaryButton onPress={handleSubmit(onSubmit)}>
-          LOGIN
-        </PrimaryButton>
+        <PrimaryButton onPress={handleSubmit(onSubmit)}>LOGIN</PrimaryButton>
 
         <View style={styles.bottom}>
           <Text style={styles.paragraph}>
@@ -130,10 +142,10 @@ const styles = StyleSheet.create({
   container: {
     alignSelf: "center",
     width: "90%",
-    marginTop: "12%",
+    marginTop: "6%",
   },
   title: {
-    marginTop: "6%",
+    marginTop: "8%",
     color: Colors.secundaryColor,
     fontSize: 34,
     fontWeight: "bold",
