@@ -3,10 +3,12 @@ import {useForm, Controller} from "react-hook-form";
 import {Colors} from "../assets/constants/Colors";
 import {InputField} from "../components/InputField";
 import {PrimaryButton} from "../components/PrimaryButton";
-import {useState} from "react";
 import { resetPassword } from "../services/Authentication";
+import { useNavigation } from "@react-navigation/native";
+import { GoBackButton } from "../components/GoBackButton";
 
-export function ForgotPasswordScreen({navigation}: {navigation: any}) {
+export function ForgotPasswordScreen() {
+  const navigation = useNavigation<any>();
   const {
     control,
     handleSubmit,
@@ -17,6 +19,10 @@ export function ForgotPasswordScreen({navigation}: {navigation: any}) {
       email: "",
     },
   });
+
+  function navigationHandler(){
+    navigation.goBack();
+  }
 
   const onSubmit = async (userData: {email: string}) => {
     try {
@@ -36,6 +42,8 @@ export function ForgotPasswordScreen({navigation}: {navigation: any}) {
       source={require("../assets/images/Background.png")}
       style={styles.background}>
       <View style={styles.container}>
+        <GoBackButton onPress={navigationHandler}/>
+
         <Text style={[styles.title, styles.textDetail]}>
           Sign
           <Text style={styles.title}> up</Text>
@@ -84,10 +92,10 @@ const styles = StyleSheet.create({
   container: {
     alignSelf: "center",
     width: "90%",
-    marginTop: "12%",
+    marginTop: "6%",
   },
   title: {
-    marginTop: "6%",
+    marginTop: "8%",
     color: "#000",
     fontSize: 34,
     fontWeight: "bold",
