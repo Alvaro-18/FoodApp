@@ -5,20 +5,23 @@ import {
   GestureResponderEvent,
   StyleSheet,
 } from "react-native";
+import { Colors } from "../assets/constants/Colors";
 
 
 export function PrimaryButton({
   children,
   onPress,
+  colorNumber
 }: {
   children: string;
   onPress: (event: GestureResponderEvent) => void;
+  colorNumber?: number
 }) {
   return (
     <Pressable
       onPress={onPress}
       style={({pressed}) =>
-        pressed ? [styles.button, styles.pressed] : styles.button
+        pressed ? [(colorNumber === undefined) ? styles.button : [styles.button, styles.buttonApp], styles.pressed] : (colorNumber === undefined) ? styles.button : [styles.button, styles.buttonApp]
       }>
       <View>
         <Text style={styles.text}>{children}</Text>
@@ -31,7 +34,7 @@ const styles = StyleSheet.create({
   button: {
     width: "100%",
     height: 48,
-    backgroundColor: "#DB3022",
+    backgroundColor: "#D32626",
     borderRadius: 25,
     alignItems: "center",
     justifyContent: "center",
@@ -45,14 +48,14 @@ const styles = StyleSheet.create({
     elevation: 7,
   },
 
-  disable: {
-    backgroundColor: "#565656",
+  buttonApp: {
+    backgroundColor: Colors.secundaryColor
   },
 
   text: {
     color: "#fff",
-    fontSize: 14,
-    fontFamily: "Roboto500",
+    fontSize: 20,
+    fontWeight: "bold",
   },
 
   pressed: {
