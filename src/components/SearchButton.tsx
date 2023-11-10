@@ -23,6 +23,7 @@ export function SearchButton() {
             <Pressable
               onPress={() => {
                 setVisibility(false);
+                setSearch("");
               }}
               style={({pressed}) => pressed && styles.pressed}>
               <Image
@@ -43,7 +44,7 @@ export function SearchButton() {
           <FlatList
             data={PRODUCTS}
             renderItem={({item}) => <SimplifiedCardProduct data={item} />}
-            style={(search !== "") ? styles.list : styles.empty}
+            style={search !== "" ? styles.list : styles.empty}
           />
         </View>
         <Pressable
@@ -117,6 +118,7 @@ const styles = StyleSheet.create({
   list: {
     marginTop: 16,
     maxHeight: 280,
+    backgroundColor: "#fff",
   },
 
   empty:{
