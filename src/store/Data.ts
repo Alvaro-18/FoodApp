@@ -1,6 +1,7 @@
 import { Option } from "../types/interfaces/Option";
 import { Notification } from "../types/interfaces/Notification";
 import { Product } from "../types/interfaces/Product";
+import { Store } from "../types/interfaces/Store";
 
 export const ADDRESS:Option[] = [
  {
@@ -111,5 +112,110 @@ export const  PRODUCTS:Product[] = [
     productDescription: "lorem",
     productPrice: "12",
     store: "Starbucks"
+  },
+];
+
+
+export const CATEGORIES:[
+  {title:string},
+  {title:string},
+  {title:string},
+  {title:string},
+  {title:string},
+  {title:string},
+  {title:string},
+  {title:string},
+] = [
+   {title: "Offers"},
+    {title: "Drinks"},
+    {title: "Vegan"},
+    {title: "Food"},
+    {title: "Fruits"},
+    {title: "Lacto"},
+    {title: "Gluten"},
+    {title: "Food"},
+];
+
+
+export const STORE:Store[] = [
+  {
+    storeImageUrl: "https://cdn.ibahia.com/img/Artigo-Destaque/290000/Artigo-Destaque_00292013_00.jpg?xid=1299388",
+    storeName: "Starbucks",
+    storeDescription:"Include crisp lettuce varieties like romaine, iceberg, or mixed greens as a base .you'll find tomatoes, cucumbers, and bell peppers.",
+    storeDistance: "1.2km",
+    deliveryTime: "45min",
+    storeNote: "10", 
+  },
+  {
+    storeImageUrl: "https://cdn.ibahia.com/img/Artigo-Destaque/290000/Artigo-Destaque_00292013_00.jpg?xid=1299388",
+    storeName: "Starbucks",
+    storeDescription:"Include crisp lettuce varieties like romaine, iceberg, or mixed greens as a base .you'll find tomatoes, cucumbers, and bell peppers.",
+    storeDistance: "1.2km",
+    deliveryTime: "45min",
+    storeNote: "10", 
+  },
+  {
+    storeImageUrl: "https://cdn.ibahia.com/img/Artigo-Destaque/290000/Artigo-Destaque_00292013_00.jpg?xid=1299388",
+    storeName: "Starbucks",
+    storeDescription:"Include crisp lettuce varieties like romaine, iceberg, or mixed greens as a base .you'll find tomatoes, cucumbers, and bell peppers.",
+    storeDistance: "1.2km",
+    deliveryTime: "45min",
+    storeNote: "10", 
+  },
+  {
+    storeImageUrl: "https://cdn.ibahia.com/img/Artigo-Destaque/290000/Artigo-Destaque_00292013_00.jpg?xid=1299388",
+    storeName: "Starbucks",
+    storeDescription:"Include crisp lettuce varieties like romaine, iceberg, or mixed greens as a base .you'll find tomatoes, cucumbers, and bell peppers.",
+    storeDistance: "1.2km",
+    deliveryTime: "45min",
+    storeNote: "10", 
+  },
+  {
+    storeImageUrl: "https://cdn.ibahia.com/img/Artigo-Destaque/290000/Artigo-Destaque_00292013_00.jpg?xid=1299388",
+    storeName: "Starbucks",
+    storeDescription:"Include crisp lettuce varieties like romaine, iceberg, or mixed greens as a base .you'll find tomatoes, cucumbers, and bell peppers.",
+    storeDistance: "1.2km",
+    deliveryTime: "45min",
+    storeNote: "10", 
+  },
+  {
+    storeImageUrl: "https://cdn.ibahia.com/img/Artigo-Destaque/290000/Artigo-Destaque_00292013_00.jpg?xid=1299388",
+    storeName: "Starbucks",
+    storeDescription:"Include crisp lettuce varieties like romaine, iceberg, or mixed greens as a base .you'll find tomatoes, cucumbers, and bell peppers.",
+    storeDistance: "1.2km",
+    deliveryTime: "45min",
+    storeNote: "10", 
+  },
+  {
+    storeImageUrl: "https://cdn.ibahia.com/img/Artigo-Destaque/290000/Artigo-Destaque_00292013_00.jpg?xid=1299388",
+    storeName: "Starbucks",
+    storeDescription:"Include crisp lettuce varieties like romaine, iceberg, or mixed greens as a base .you'll find tomatoes, cucumbers, and bell peppers.",
+    storeDistance: "1.2km",
+    deliveryTime: "45min",
+    storeNote: "10", 
+  },
+  {
+    storeImageUrl: "https://cdn.ibahia.com/img/Artigo-Destaque/290000/Artigo-Destaque_00292013_00.jpg?xid=1299388",
+    storeName: "Starbucks",
+    storeDescription:"Include crisp lettuce varieties like romaine, iceberg, or mixed greens as a base .you'll find tomatoes, cucumbers, and bell peppers.",
+    storeDistance: "1.2km",
+    deliveryTime: "45min",
+    storeNote: "10", 
+  },
+  {
+    storeImageUrl: "https://cdn.ibahia.com/img/Artigo-Destaque/290000/Artigo-Destaque_00292013_00.jpg?xid=1299388",
+    storeName: "Starbucks",
+    storeDescription:"Include crisp lettuce varieties like romaine, iceberg, or mixed greens as a base .you'll find tomatoes, cucumbers, and bell peppers.",
+    storeDistance: "1.2km",
+    deliveryTime: "45min",
+    storeNote: "10", 
+  },
+  {
+    storeImageUrl: "https://cdn.ibahia.com/img/Artigo-Destaque/290000/Artigo-Destaque_00292013_00.jpg?xid=1299388",
+    storeName: "Starbucks",
+    storeDescription:"Include crisp lettuce varieties like romaine, iceberg, or mixed greens as a base .you'll find tomatoes, cucumbers, and bell peppers.",
+    storeDistance: "1.2km",
+    deliveryTime: "45min",
+    storeNote: "10", 
   },
 ];
