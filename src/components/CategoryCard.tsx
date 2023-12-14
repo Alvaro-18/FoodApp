@@ -2,7 +2,7 @@ import {Pressable, Image, StyleSheet, GestureResponderEvent, Text} from "react-n
 
 export function CategoryCard({onPress, title} : {onPress: (event: GestureResponderEvent) => void, title:string}) {
   return (
-    <Pressable onPress={onPress} style={styles.button}>
+    <Pressable onPress={onPress} style={({pressed}) => pressed ? [styles.button, styles.pressed] : styles.button}>
       <Image
         source={require("../assets/images/Coffe.jpg")}
         resizeMode={"contain"}
@@ -31,6 +31,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.29,
     shadowRadius: 4,
     elevation: 7,
+  },
+
+  pressed: {
+    opacity: 0.75
   },
 
   image:  {

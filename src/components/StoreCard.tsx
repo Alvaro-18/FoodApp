@@ -3,7 +3,7 @@ import {Store} from "../types/interfaces/Store";
 
 export function StoreCard({data}: {data: Store}) {
   return (
-    <Pressable style={styles.button}>
+    <Pressable style={({pressed}) => pressed ? [styles.button, styles.pressed] : styles.button}>
       <View style={styles.containerImage}>
         <Image source={{uri: data.storeImageUrl}} style={styles.image} />
 
@@ -31,6 +31,10 @@ const styles = StyleSheet.create({
     width: 120,
     height: 146,
     marginRight: 12,
+  },
+
+  pressed: {
+    opacity: 0.75
   },
 
   containerImage: {
