@@ -1,9 +1,7 @@
-
-import {RootStack} from "./src/routes/RootStack";
-
+import { AppStack } from "./src/routes/AppStack";
 
 function App(): JSX.Element {
-  return <RootStack />;
+  return <AppStack />;
 }
 
 export default App;
