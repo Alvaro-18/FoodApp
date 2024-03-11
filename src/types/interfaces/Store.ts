@@ -5,4 +5,5 @@ export interface Store  {
   storeDistance: string,
   deliveryTime: string,
   storeNote: string,
+  category: string,
 }

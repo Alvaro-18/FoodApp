@@ -10,13 +10,15 @@ export const AppContext = createContext({
   isAuthenticated: false,
   cart: [] as Product[],
   authenticate: ()=> {},
-  logout : ()=> {}
+  logout : ()=> {},
+  favorites: [] as Product[]
 });
 
-export function AppContextProvider({children}: {children: React.ReactNode}) {
+export async function AppContextProvider({children}: {children: React.ReactNode}) {
   const [token, setToken] = useState("");
   const [user, setUser] = useState<User | null>(null);
   const [cart, setCart] = useState<Product[]>([]);
+  const [favorites, setFavorites] = useState<Product[]>([]);
 
   function authenticate() {
     const token = JSON.stringify(AsyncStorage.getItem("token"));
@@ -37,6 +39,7 @@ export function AppContextProvider({children}: {children: React.ReactNode}) {
         cart: cart,
         authenticate: authenticate,
         logout: logout,
+        favorites:favorites,
       }}>
       {children}
     </AppContext.Provider>

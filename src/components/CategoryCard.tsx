@@ -1,17 +1,23 @@
 import {Pressable, Image, StyleSheet, GestureResponderEvent, Text} from "react-native";
+import {memo} from "react";
 
-export function CategoryCard({onPress, title} : {onPress: (event: GestureResponderEvent) => void, title:string}) {
-  return (
-    <Pressable onPress={onPress} style={({pressed}) => pressed ? [styles.button, styles.pressed] : styles.button}>
-      <Image
-        source={require("../assets/images/Coffe.jpg")}
-        resizeMode={"contain"}
-        style={styles.image}
-      />
-      <Text style={styles.text}>{title}</Text>
-    </Pressable>
-  );
-}
+
+// eslint-disable-next-line react/display-name
+export const CategoryCard = memo(
+  ({onPress, title} : {onPress: (event: GestureResponderEvent) => void, title:string}) => {
+    return (
+      <Pressable onPress={onPress} style={({pressed}) => pressed ? [styles.button, styles.pressed] : styles.button}>
+        <Image
+          source={require("../assets/images/Coffe.jpg")}
+          resizeMode={"contain"}
+          style={styles.image}
+        />
+        <Text style={styles.text}>{title}</Text>
+      </Pressable>
+    );
+  }
+);
+
 
 const styles = StyleSheet.create({
   button: {

@@ -3,8 +3,8 @@ import {RootStack} from "./RootStack";
 
 export function AppStack() {
   return (
-    <AppContextProvider>
-      <RootStack />
-    </AppContextProvider>
+      <AppContextProvider>
+        <RootStack />
+      </AppContextProvider>
   );
 }

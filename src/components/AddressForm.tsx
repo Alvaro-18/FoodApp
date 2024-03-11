@@ -1,6 +1,6 @@
 import {View, Text, StyleSheet, Alert} from "react-native";
 import {useForm, Controller} from "react-hook-form";
-import {InputField} from "../components/InputField";
+import {InputField} from "./InputField";
 import {PrimaryButton} from "./PrimaryButton";
 
 export function AddressForm() {
