@@ -1,8 +1,15 @@
 import {useState} from "react";
-import {View, Pressable, Image, Modal, StyleSheet, Text, FlatList} from "react-native";
-import { Colors } from "../assets/constants/Colors";
-import { NotificationCard } from "./NotificationCard";
-import { NOTIFICATIONS } from "../store/Data";
+import {
+  View,
+  Pressable,
+  Image,
+  Modal,
+  StyleSheet,
+  FlatList,
+} from "react-native";
+import {Colors} from "../assets/constants/Colors";
+import {NotificationCard} from "./NotificationCard";
+import {NOTIFICATIONS} from "../store/Data";
 
 export function NotificationButton() {
   const [visibility, setVisibility] = useState(false);
@@ -16,35 +23,34 @@ export function NotificationButton() {
             onPress={() => {
               setVisibility(false);
             }}
-            style={({pressed}) => pressed && styles.pressed}
-            >
+            style={({pressed}) => pressed && styles.pressed}>
             <Image
               source={require("../assets/images/Bell-icon.png")}
               style={styles.image}
               resizeMode="center"
             />
-            <View style={ hasNotification && styles.badge}/>
+            <View style={hasNotification && styles.badge} />
           </Pressable>
 
           <View style={styles.triangle}></View>
           <View style={styles.notificationContainer}>
-          <FlatList
-            data={NOTIFICATIONS}
-            renderItem={({item}) => (
-              <NotificationCard
-              title={item.title}
-              description={item.description}
-              isRead={item.isRead}
-              />
-            )}
-
-          />
+            <FlatList
+              data={NOTIFICATIONS}
+              renderItem={({item}) => (
+                <NotificationCard
+                  title={item.title}
+                  description={item.description}
+                  isRead={item.isRead}
+                />
+              )}
+            />
           </View>
         </View>
-        <Pressable style={styles.screen} onPress={() => {
-          setVisibility(false);
-        }}>
-          </Pressable>
+        <Pressable
+          style={styles.screen}
+          onPress={() => {
+            setVisibility(false);
+          }}></Pressable>
       </Modal>
 
       <Pressable
@@ -57,7 +63,7 @@ export function NotificationButton() {
           style={styles.image}
           resizeMode="center"
         />
-        <View style={ hasNotification && styles.badge}/>
+        <View style={hasNotification && styles.badge} />
       </Pressable>
     </View>
   );
@@ -99,9 +105,8 @@ const styles = StyleSheet.create({
     opacity: 0.5,
   },
 
-
-  screen:{
-    height: "100%"
+  screen: {
+    height: "100%",
   },
 
   badge: {
@@ -110,6 +115,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.secundaryColor,
     borderRadius: 50,
     position: "absolute",
-    alignSelf: "flex-end"
-  }
+    alignSelf: "flex-end",
+  },
 });

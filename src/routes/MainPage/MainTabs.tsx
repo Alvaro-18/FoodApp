@@ -2,6 +2,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { HomeScreen } from "../../screens/HomeScreen";
 import { View } from "react-native";
 import { mainPageOptions } from "./MainPageOptions";
+import { FavoritesScreen } from "../../screens/FavoritesScreen";
 
 const Tab = createBottomTabNavigator();
 export function HomeTabs() {
@@ -14,7 +15,7 @@ export function HomeTabs() {
       />
       <Tab.Screen
         name="favorites"
-        component={View}
+        component={FavoritesScreen}
         options={mainPageOptions.favoritesOptions}
       />
       <Tab.Screen

@@ -1,23 +1,25 @@
 import {View, Text, StyleSheet, FlatList} from "react-native";
-import { Store } from "../types/interfaces/Store";
-import { StoreCard } from "./StoreCard";
+import {Store} from "../types/interfaces/Store";
+import {StoreCard} from "./StoreCard";
+import {memo} from "react";
 
-export function StoreSection({data, title}:{data:Store[], title:string}) {
-  return (
-    <View>
-      <Text style={styles.title}>{title}</Text>
+export const StoreSection = memo(
+  ({data, title}: {data: Store[]; title: string}) => {
+    return (
+      <View>
+        <Text style={styles.title}>{title}</Text>
 
-      <FlatList
-        data={data}
-        renderItem={({item}) => (
-          <StoreCard data={item}/> 
-        )}
-        horizontal={true}
-      />
-    </View>
-  );
-}
+        <FlatList
+          data={data}
+          renderItem={({item}) => <StoreCard data={item} />}
+          horizontal={true}
+          maxToRenderPerBatch={2}
+        />
+      </View>
+    );
+  });
 
+StoreSection.displayName = "StoreSection";
 
 const styles = StyleSheet.create({
   title: {

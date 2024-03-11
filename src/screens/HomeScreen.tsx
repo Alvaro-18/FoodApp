@@ -15,10 +15,11 @@ export function HomeScreen() {
         ListHeaderComponent={()=> (
           <CategoriesSection data={CATEGORIES}/>
         )}
-        data={STORE}
+        data={CATEGORIES}
         renderItem={({item}) => (
-          <StoreSection data={STORE} title={"Recommend"}/>
+          <StoreSection data={STORE} title={item.title}/>
         )}
+        initialNumToRender={4}
       />
     </View>
   );

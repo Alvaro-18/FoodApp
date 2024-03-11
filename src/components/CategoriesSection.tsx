@@ -1,16 +1,8 @@
 import {View, FlatList} from "react-native";
-import {CategoryCard} from "../components/CategoryCard";
+import {CategoryCard} from "./CategoryCard";
+interface categories {title:string}
 
-export function CategoriesSection({data}: {data: [
-  {title:string},
-  {title:string},
-  {title:string},
-  {title:string},
-  {title:string},
-  {title:string},
-  {title:string},
-  {title:string},
-]}) {
+export function CategoriesSection({data}: {data:categories[]}) {
   return (
     <View>
       <FlatList

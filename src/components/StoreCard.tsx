@@ -1,9 +1,14 @@
 import {View, Pressable, StyleSheet, Text, Image} from "react-native";
 import {Store} from "../types/interfaces/Store";
+import {memo} from "react";
 
-export function StoreCard({data}: {data: Store}) {
+
+export const StoreCard = memo(({data}: {data: Store}) => {
   return (
-    <Pressable style={({pressed}) => pressed ? [styles.button, styles.pressed] : styles.button}>
+    <Pressable
+      style={({pressed}) =>
+        pressed ? [styles.button, styles.pressed] : styles.button
+      }>
       <View style={styles.containerImage}>
         <Image source={{uri: data.storeImageUrl}} style={styles.image} />
 
@@ -24,7 +29,9 @@ export function StoreCard({data}: {data: Store}) {
       </View>
     </Pressable>
   );
-}
+});
+
+StoreCard.displayName = "StoreCard";
 
 const styles = StyleSheet.create({
   button: {
@@ -34,7 +41,7 @@ const styles = StyleSheet.create({
   },
 
   pressed: {
-    opacity: 0.75
+    opacity: 0.75,
   },
 
   containerImage: {
@@ -74,7 +81,7 @@ const styles = StyleSheet.create({
 
   textContainer: {
     marginTop: 6,
-    alignItems: "center"
+    alignItems: "center",
   },
 
   storeName: {

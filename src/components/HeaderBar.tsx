@@ -1,7 +1,7 @@
 import {View, StyleSheet} from "react-native";
-import {SearchButton} from "../components/SearchButton";
-import {NotificationButton} from "../components/NotificationButton";
-import {LocationButton} from "../components/LocationButton";
+import {SearchButton} from "./SearchButton";
+import {NotificationButton} from "./NotificationButton";
+import {LocationButton} from "./LocationButton";
 
 export function HeaderBar() {
   return (
@@ -12,7 +12,6 @@ export function HeaderBar() {
     </View>
   );
 }
-
 
 const styles = StyleSheet.create({
   headerBar: {
