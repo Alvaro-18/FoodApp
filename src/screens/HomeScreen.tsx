@@ -1,23 +1,20 @@
 import {View, StyleSheet, FlatList} from "react-native";
 
-import { CategoriesSection } from "../components/CategoriesSection";
-import { CATEGORIES, STORE } from "../store/Data";
-import { StoreSection } from "../components/StoreSection";
-import { HeaderBar } from "../components/HeaderBar";
-
+import {CategoriesSection} from "../components/home/CategoriesSection";
+import {CATEGORIES, STORE} from "../store/Data";
+import {StoreSection} from "../components/home/StoreSection";
+import {HeaderBar} from "../components/home/HeaderBar";
 
 export function HomeScreen() {
   return (
     <View style={styles.container}>
-      <HeaderBar/>
+      <HeaderBar />
       <FlatList
         style={styles.list}
-        ListHeaderComponent={()=> (
-          <CategoriesSection data={CATEGORIES}/>
-        )}
+        ListHeaderComponent={() => <CategoriesSection data={CATEGORIES} />}
         data={CATEGORIES}
         renderItem={({item}) => (
-          <StoreSection data={STORE} title={item.title}/>
+          <StoreSection data={STORE} title={item.title} />
         )}
         initialNumToRender={4}
       />
@@ -33,6 +30,7 @@ const styles = StyleSheet.create({
   },
 
   list: {
-    marginBottom: "14%"
-  }
+    marginBottom: "14%",
+    marginTop: 2,
+  },
 });

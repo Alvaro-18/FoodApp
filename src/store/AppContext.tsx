@@ -14,7 +14,7 @@ export const AppContext = createContext({
   favorites: [] as Product[]
 });
 
-export async function AppContextProvider({children}: {children: React.ReactNode}) {
+export function AppContextProvider({children}: {children: React.ReactNode}) {
   const [token, setToken] = useState("");
   const [user, setUser] = useState<User | null>(null);
   const [cart, setCart] = useState<Product[]>([]);

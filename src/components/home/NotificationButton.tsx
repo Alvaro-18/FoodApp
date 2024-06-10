@@ -7,9 +7,9 @@ import {
   StyleSheet,
   FlatList,
 } from "react-native";
-import {Colors} from "../assets/constants/Colors";
+import {Colors} from "../../assets/constants/Colors";
 import {NotificationCard} from "./NotificationCard";
-import {NOTIFICATIONS} from "../store/Data";
+import {NOTIFICATIONS} from "../../store/Data";
 
 export function NotificationButton() {
   const [visibility, setVisibility] = useState(false);
@@ -25,7 +25,7 @@ export function NotificationButton() {
             }}
             style={({pressed}) => pressed && styles.pressed}>
             <Image
-              source={require("../assets/images/Bell-icon.png")}
+              source={require("../../assets/images/Bell-icon.png")}
               style={styles.image}
               resizeMode="center"
             />
@@ -59,7 +59,7 @@ export function NotificationButton() {
         }}
         style={({pressed}) => pressed && styles.pressed}>
         <Image
-          source={require("../assets/images/Bell-icon.png")}
+          source={require("../../assets/images/Bell-icon.png")}
           style={styles.image}
           resizeMode="center"
         />

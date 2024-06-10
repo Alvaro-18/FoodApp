@@ -34,8 +34,8 @@ export function InputField({
           value={value} 
         />
       </View>
-      <Image source={require("../assets/images/Succes-icon.png")} style={(isInvalid || !focus) && styles.disable}/>
-      <Image source={require("../assets/images/Outline-close.png")} style={!isInvalid && styles.disable}/>
+      <Image source={require("../../assets/images/Succes-icon.png")} style={(isInvalid || !focus) && styles.disable}/>
+      <Image source={require("../../assets/images/Outline-close.png")} style={!isInvalid && styles.disable}/>
     </View>
   );
 }

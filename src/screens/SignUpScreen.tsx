@@ -8,12 +8,12 @@ import {
 } from "react-native";
 import {useForm, Controller} from "react-hook-form";
 import {Colors} from "../assets/constants/Colors";
-import {InputField} from "../components/InputField";
-import {PrimaryButton} from "../components/PrimaryButton";
-import {SocialButtons} from "../components/SocialButtons";
+import {InputField} from "../components/auth/InputField";
+import {PrimaryButton} from "../components/util/PrimaryButton";
+import {SocialButtons} from "../components/auth/SocialButtons";
 import {createUser} from "../services/Authentication";
 import {useNavigation} from "@react-navigation/native";
-import {GoBackButton} from "../components/GoBackButton";
+import {GoBackButton} from "../components/util/GoBackButton";
 
 export function SignUpScreen() {
   const navigation = useNavigation<any>();
@@ -46,7 +46,7 @@ export function SignUpScreen() {
     password: string;
     email: string;
   }) => {
-    try { 
+    try {
       createUser(userData.name, userData.email, userData.password);
       navigationHandlerLogin();
     } catch (error) {

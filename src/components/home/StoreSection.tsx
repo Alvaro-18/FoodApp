@@ -1,5 +1,5 @@
 import {View, Text, StyleSheet, FlatList} from "react-native";
-import {Store} from "../types/interfaces/Store";
+import {Store} from "../../types/interfaces/Store";
 import {StoreCard} from "./StoreCard";
 import {memo} from "react";
 
@@ -17,7 +17,8 @@ export const StoreSection = memo(
         />
       </View>
     );
-  });
+  },
+);
 
 StoreSection.displayName = "StoreSection";
 

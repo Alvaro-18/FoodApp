@@ -9,8 +9,8 @@ import {
   FlatList,
 } from "react-native";
 import {OptionButton} from "./OptionButton";
-import {ADDRESS} from "../store/Data";
-import {PrimaryButton} from "./PrimaryButton";
+import {ADDRESS} from "../../store/Data";
+import {PrimaryButton} from "../util/PrimaryButton";
 import {AddressForm} from "./AddressForm";
 
 export function LocationButton() {
@@ -43,7 +43,7 @@ export function LocationButton() {
                 setVisibilityModaAddShipping(false);
               }}>
               <Image
-                source={require("../assets/images/Arrow-back.png")}
+                source={require("../../assets/images/Arrow-back.png")}
                 style={styles.arrow}
               />
             </Pressable>
@@ -65,7 +65,7 @@ export function LocationButton() {
               setVisibilityModalSelect(false);
             }}>
             <Image
-              source={require("../assets/images/Location-dot.png")}
+              source={require("../../assets/images/Location-dot.png")}
               style={styles.image}
             />
             <Text style={styles.text}>Salvador, BA</Text>
@@ -103,7 +103,7 @@ export function LocationButton() {
           setVisibilityModalSelect(true);
         }}>
         <Image
-          source={require("../assets/images/Location-dot.png")}
+          source={require("../../assets/images/Location-dot.png")}
           style={styles.image}
         />
         <Text style={styles.text}>Salvador, BA</Text>
@@ -182,12 +182,11 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingRight: "20%"
+    paddingRight: "20%",
   },
 
   arrow: {
     width: 24,
     height: 24,
   },
-  
 });

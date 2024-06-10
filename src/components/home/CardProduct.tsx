@@ -1,33 +1,14 @@
 import {View, Pressable, StyleSheet, Text, Image} from "react-native";
-import {useState} from "react";
-import {Product} from "../types/interfaces/Product";
+import {Product} from "../../types/interfaces/Product";
+import { HeartButton } from "../util/HeartButton";
 
-export function SimplifiedCardProduct({data}: {data: Product}) {
-  const [isFavorite, setFavorite] = useState(false);
-
-  function Favorite() {
-    if (isFavorite) {
-      return (
-        <Image
-          source={require("../assets/images/Heart-solid-green.png")}
-          style={styles.heartIcon}
-        />
-      );
-    } else {
-      return (
-        <Image
-          source={require("../assets/images/Heart-regular-green.png")}
-          style={styles.heartIcon}
-        />
-      );
-    }
-  }
+export function CardProduct({data}: {data: Product}) {
 
   return (
     <View style={styles.container}>
       <Pressable style={styles.button}>
         <Image
-          source={require("../assets/images/Coffe.jpg")}
+          source={require("../../assets/images/Coffe.jpg")}
           style={styles.image}
         />
 
@@ -39,19 +20,13 @@ export function SimplifiedCardProduct({data}: {data: Product}) {
         </View>
       </Pressable>
 
-      <Pressable
-        onPress={() => {
-          setFavorite(!isFavorite);
-        }}>
-        <Favorite />
-      </Pressable>
+      <HeartButton/>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 2,
     marginBottom: 12,
     alignSelf: "center",
     width: "96%",
@@ -73,7 +48,6 @@ const styles = StyleSheet.create({
 
   button: {
     width: "76%",
-    height: 68,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
@@ -83,11 +57,6 @@ const styles = StyleSheet.create({
     width: 42,
     height: 42,
     borderRadius: 50,
-  },
-
-  heartIcon: {
-    width: 30,
-    height: 27,
   },
 
   textContainer: {

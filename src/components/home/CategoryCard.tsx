@@ -8,7 +8,7 @@ export const CategoryCard = memo(
     return (
       <Pressable onPress={onPress} style={({pressed}) => pressed ? [styles.button, styles.pressed] : styles.button}>
         <Image
-          source={require("../assets/images/Coffe.jpg")}
+          source={require("../../assets/images/Coffe.jpg")}
           resizeMode={"contain"}
           style={styles.image}
         />

@@ -1,5 +1,5 @@
 import {View, Pressable, StyleSheet, Text} from "react-native";
-import {Colors} from "../assets/constants/Colors";
+import {Colors} from "../../assets/constants/Colors";
 
 export function NotificationCard({
   title,

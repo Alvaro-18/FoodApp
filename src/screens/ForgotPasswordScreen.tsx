@@ -1,11 +1,11 @@
 import {View, Text, StyleSheet, ImageBackground, Alert} from "react-native";
 import {useForm, Controller} from "react-hook-form";
 import {Colors} from "../assets/constants/Colors";
-import {InputField} from "../components/InputField";
-import {PrimaryButton} from "../components/PrimaryButton";
-import { resetPassword } from "../services/Authentication";
-import { useNavigation } from "@react-navigation/native";
-import { GoBackButton } from "../components/GoBackButton";
+import {InputField} from "../components/auth/InputField";
+import {PrimaryButton} from "../components/util/PrimaryButton";
+import {resetPassword} from "../services/Authentication";
+import {useNavigation} from "@react-navigation/native";
+import {GoBackButton} from "../components/util/GoBackButton";
 
 export function ForgotPasswordScreen() {
   const navigation = useNavigation<any>();
@@ -20,7 +20,7 @@ export function ForgotPasswordScreen() {
     },
   });
 
-  function navigationHandler(){
+  function navigationHandler() {
     navigation.goBack();
   }
 
@@ -42,7 +42,7 @@ export function ForgotPasswordScreen() {
       source={require("../assets/images/Background.png")}
       style={styles.background}>
       <View style={styles.container}>
-        <GoBackButton onPress={navigationHandler}/>
+        <GoBackButton onPress={navigationHandler} />
 
         <Text style={[styles.title, styles.textDetail]}>
           Sign
@@ -76,9 +76,7 @@ export function ForgotPasswordScreen() {
           )}
         </View>
 
-        <PrimaryButton onPress={handleSubmit(onSubmit)}>
-          SEND
-        </PrimaryButton>
+        <PrimaryButton onPress={handleSubmit(onSubmit)}>SEND</PrimaryButton>
       </View>
     </ImageBackground>
   );
