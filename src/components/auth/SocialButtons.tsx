@@ -5,13 +5,13 @@ export function SocialButtons() {
       <View style={styles.buttonContainer}>
           <Pressable>
            <View style={styles.button}>
-            <Image source={require("../assets/images/Facebook-icon.png")} style={styles.img}/>
+            <Image source={require("../../assets/images/Facebook-icon.png")} style={styles.img}/>
             </View>
           </Pressable>
 
         <Pressable>
           <View style={styles.button}>
-            <Image source={require("../assets/images/Google-icon.png")} style={styles.img}/>
+            <Image source={require("../../assets/images/Google-icon.png")} style={styles.img}/>
           </View>
         </Pressable>
       </View>

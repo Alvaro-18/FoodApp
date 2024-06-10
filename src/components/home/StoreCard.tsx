@@ -1,7 +1,6 @@
 import {View, Pressable, StyleSheet, Text, Image} from "react-native";
-import {Store} from "../types/interfaces/Store";
+import {Store} from "../../types/interfaces/Store";
 import {memo} from "react";
-
 
 export const StoreCard = memo(({data}: {data: Store}) => {
   return (
@@ -14,7 +13,7 @@ export const StoreCard = memo(({data}: {data: Store}) => {
 
         <View style={styles.noteContainer}>
           <Image
-            source={require("../assets/images/Star-full.png")}
+            source={require("../../assets/images/Star-full.png")}
             style={styles.starIcon}
           />
           <Text style={styles.note}>{data.storeNote}</Text>

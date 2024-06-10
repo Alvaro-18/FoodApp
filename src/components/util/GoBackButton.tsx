@@ -4,7 +4,7 @@ export function GoBackButton({onPress} : {onPress: (event: GestureResponderEvent
   return (
     <Pressable onPress={onPress}>
       <Image
-        source={require("../assets/images/Arrow-back.png")}
+        source={require("../../assets/images/Arrow-back.png")}
         resizeMode={"contain"}
         style={styles.image}
       />

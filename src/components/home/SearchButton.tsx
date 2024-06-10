@@ -8,8 +8,8 @@ import {
   StyleSheet,
   FlatList,
 } from "react-native";
-import {PRODUCTS} from "../store/Data";
-import {SimplifiedCardProduct} from "./SimplifiedCardProduct";
+import {PRODUCTS} from "../../store/Data";
+import {CardProduct} from "./CardProduct";
 
 export function SearchButton() {
   const [visibility, setVisibility] = useState(false);
@@ -27,7 +27,7 @@ export function SearchButton() {
               }}
               style={({pressed}) => pressed && styles.pressed}>
               <Image
-                source={require("../assets/images/Search-icon.png")}
+                source={require("../../assets/images/Search-icon.png")}
                 style={styles.image}
                 resizeMode="center"
               />
@@ -43,7 +43,7 @@ export function SearchButton() {
 
           <FlatList
             data={PRODUCTS}
-            renderItem={({item}) => <SimplifiedCardProduct data={item} />}
+            renderItem={({item}) => <CardProduct data={item} />}
             style={search !== "" ? styles.list : styles.empty}
           />
         </View>
@@ -60,7 +60,7 @@ export function SearchButton() {
         }}
         style={({pressed}) => pressed && styles.pressed}>
         <Image
-          source={require("../assets/images/Search-icon.png")}
+          source={require("../../assets/images/Search-icon.png")}
           style={styles.image}
           resizeMode="center"
         />
@@ -121,8 +121,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
 
-  empty:{
-    display: "none"
+  empty: {
+    display: "none",
   },
 
   screen: {

@@ -3,6 +3,7 @@ import { HomeScreen } from "../../screens/HomeScreen";
 import { View } from "react-native";
 import { mainPageOptions } from "./MainPageOptions";
 import { FavoritesScreen } from "../../screens/FavoritesScreen";
+import { OrdersScreen } from "../../screens/OrdersScreen";
 
 const Tab = createBottomTabNavigator();
 export function HomeTabs() {
@@ -20,7 +21,7 @@ export function HomeTabs() {
       />
       <Tab.Screen
         name="orders"
-        component={View}
+        component={OrdersScreen}
         options={mainPageOptions.ordersOptions}
       />
       <Tab.Screen
