@@ -1,7 +1,7 @@
 import {View, StyleSheet, FlatList} from "react-native";
 import {HeaderBar} from "../components/home/HeaderBar";
 import {PRODUCTS} from "../store/Data";
-import {CardProduct} from "../components/home/CardProduct";
+import {FavoritesCard} from "../components/home/FavoritesCard";
 
 export function FavoritesScreen() {
   return (
@@ -10,7 +10,7 @@ export function FavoritesScreen() {
       <FlatList
         style={styles.list}
         data={PRODUCTS}
-        renderItem={({item}) => <CardProduct data={item} />}
+        renderItem={({item}) => <FavoritesCard data={item} />}
       />
     </View>
   );
