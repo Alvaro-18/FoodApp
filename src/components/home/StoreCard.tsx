@@ -1,24 +1,34 @@
-import {View, Pressable, StyleSheet, Text, Image} from "react-native";
+import {
+  View,
+  Pressable,
+  StyleSheet,
+  Text,
+  ImageBackground,
+} from "react-native";
 import {Store} from "../../types/interfaces/Store";
 import {memo} from "react";
+import {ParamListBase, useNavigation} from "@react-navigation/native";
+import {NativeStackNavigationProp} from "@react-navigation/native-stack";
+import {NoteIndicator} from "../UI/NoteIndicator";
 
 export const StoreCard = memo(({data}: {data: Store}) => {
+  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
+  function navigationHandler() {
+    navigation.navigate("product");
+  }
+
   return (
     <Pressable
       style={({pressed}) =>
         pressed ? [styles.button, styles.pressed] : styles.button
-      }>
-      <View style={styles.containerImage}>
-        <Image source={{uri: data.storeImageUrl}} style={styles.image} />
-
-        <View style={styles.noteContainer}>
-          <Image
-            source={require("../../assets/images/Star-full.png")}
-            style={styles.starIcon}
-          />
-          <Text style={styles.note}>{data.storeNote}</Text>
-        </View>
-      </View>
+      }
+      onPress={navigationHandler}>
+      <ImageBackground
+        source={{uri: data.storeImageUrl}}
+        style={styles.image}
+        imageStyle={{borderRadius: 12}}>
+        <NoteIndicator note={data.storeNote} />
+      </ImageBackground>
 
       <View style={styles.textContainer}>
         <Text style={styles.storeName}>{data.storeName}</Text>
@@ -43,14 +53,12 @@ const styles = StyleSheet.create({
     opacity: 0.75,
   },
 
-  containerImage: {
-    flexDirection: "row",
-  },
-
   image: {
     width: 120,
     height: 100,
-    borderRadius: 12,
+    justifyContent: "flex-end",
+    paddingBottom: 6,
+    paddingLeft: 8
   },
 
   noteContainer: {
