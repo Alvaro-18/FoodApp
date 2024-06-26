@@ -9,7 +9,7 @@ import {
   FlatList,
 } from "react-native";
 import {PRODUCTS} from "../../store/Data";
-import {CardProduct} from "./CardProduct";
+import {FavoritesCard} from "./FavoritesCard";
 
 export function SearchButton() {
   const [visibility, setVisibility] = useState(false);
@@ -43,7 +43,7 @@ export function SearchButton() {
 
           <FlatList
             data={PRODUCTS}
-            renderItem={({item}) => <CardProduct data={item} />}
+            renderItem={({item}) => <FavoritesCard data={item} />}
             style={search !== "" ? styles.list : styles.empty}
           />
         </View>

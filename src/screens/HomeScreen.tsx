@@ -9,7 +9,7 @@ export function HomeScreen() {
   return (
     <View style={styles.container}>
       <HeaderBar />
-      <FlatList
+     <FlatList
         style={styles.list}
         ListHeaderComponent={() => <CategoriesSection data={CATEGORIES} />}
         data={CATEGORIES}
