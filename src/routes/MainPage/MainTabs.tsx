@@ -1,16 +1,16 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { HomeScreen } from "../../screens/HomeScreen";
-import { View } from "react-native";
 import { mainPageOptions } from "./MainPageOptions";
 import { FavoritesScreen } from "../../screens/FavoritesScreen";
 import { OrdersScreen } from "../../screens/OrdersScreen";
+import { UserScreen } from "../../screens/UserScreen";
 
 const Tab = createBottomTabNavigator();
 export function HomeTabs() {
   return (
     <Tab.Navigator screenOptions={mainPageOptions.screenOptions}>
       <Tab.Screen
-        name="Home"
+        name="home"
         component={HomeScreen}
         options={mainPageOptions.homeOptions}
       />
@@ -25,8 +25,8 @@ export function HomeTabs() {
         options={mainPageOptions.ordersOptions}
       />
       <Tab.Screen
-        name="Profile"
-        component={View}
+        name="profile"
+        component={UserScreen}
         options={mainPageOptions.profileOptions}
       />
     </Tab.Navigator>
