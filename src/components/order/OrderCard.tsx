@@ -1,27 +1,28 @@
 import {View, StyleSheet, Text, Image, FlatList} from "react-native";
 import {Product} from "../../types/interfaces/Product";
-import {HeartButton} from "../util/HeartButton";
+import {HeartButton} from "../UI/HeartButton";
 import {Status} from "../../types/enums/Status";
+import {ContactButtons} from "../UI/ContactButtons";
 
 const itensInTheOrder = [
-  {name: "Coffe with milk",
-    price: 14.92
-  },
-  {name: "Traditional Cappuccino",
-    price: 20
-  },
+  {name: "Coffe with milk", price: 14.92},
+  {name: "Traditional Cappuccino", price: 20},
 ];
 
 export function OrderCard({data, status}: {data: Product; status: Status}) {
   function OrderStatusHandler() {
     if (status == "SENDING") {
       return (
-        <View style={styles.statusContainer}>
-          <Image
-            source={require("../../assets/images/Status-wait.png")}
-            style={styles.statusIcon}
-          />
-          <Text style={styles.statusText}>Order order on the way</Text>
+        <View style={[styles.statusContainer, styles.sendingContainer]}>
+          <View style={styles.sendingContainer}>
+            <Image
+              source={require("../../assets/images/Status-wait.png")}
+              style={styles.statusIcon}
+            />
+            <Text style={styles.statusText}>Order on way</Text>
+          </View>
+
+          <ContactButtons />
         </View>
       );
     }
@@ -66,13 +67,13 @@ export function OrderCard({data, status}: {data: Product; status: Status}) {
         <Text style={styles.text}>Status</Text>
         <OrderStatusHandler />
         <FlatList
-        style={{marginTop: 12}}
-        data={itensInTheOrder}
-        renderItem={({item})=> (
-          <Text style={styles.item}>
-            - {item.name} - R${item.price}
-          </Text>
-        )}
+          style={{marginTop: 12}}
+          data={itensInTheOrder}
+          renderItem={({item}) => (
+            <Text style={styles.item}>
+              - {item.name} - R${item.price}
+            </Text>
+          )}
         />
       </View>
     </View>
@@ -118,13 +119,19 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderBottomWidth: 1,
     paddingVertical: 12,
+    alignItems: "center",
+  },
+
+  sendingContainer: {
+    justifyContent: "space-between",
+    flexDirection: "row",
     alignItems: "center"
   },
 
   statusIcon: {
     width: 20,
     height: 20,
-    marginRight: 6
+    marginRight: 6,
   },
 
   storeName: {
@@ -150,5 +157,5 @@ const styles = StyleSheet.create({
     color: "#3D3D3D",
     fontSize: 14,
     fontWeight: "500",
-  }
+  },
 });
