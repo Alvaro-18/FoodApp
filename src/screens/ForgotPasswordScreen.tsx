@@ -2,10 +2,10 @@ import {View, Text, StyleSheet, ImageBackground, Alert} from "react-native";
 import {useForm, Controller} from "react-hook-form";
 import {Colors} from "../assets/constants/Colors";
 import {InputField} from "../components/auth/InputField";
-import {PrimaryButton} from "../components/util/PrimaryButton";
+import {PrimaryButton} from "../components/UI/PrimaryButton";
 import {resetPassword} from "../services/Authentication";
 import {useNavigation} from "@react-navigation/native";
-import {GoBackButton} from "../components/util/GoBackButton";
+import {GoBackButton} from "../components/UI/GoBackButton";
 
 export function ForgotPasswordScreen() {
   const navigation = useNavigation<any>();

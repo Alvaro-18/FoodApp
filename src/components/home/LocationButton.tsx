@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import {OptionButton} from "./OptionButton";
 import {ADDRESS} from "../../store/Data";
-import {PrimaryButton} from "../util/PrimaryButton";
+import {PrimaryButton} from "../UI/PrimaryButton";
 import {AddressForm} from "./AddressForm";
 
 export function LocationButton() {

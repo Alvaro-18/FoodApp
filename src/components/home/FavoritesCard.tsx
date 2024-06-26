@@ -1,9 +1,8 @@
 import {View, Pressable, StyleSheet, Text, Image} from "react-native";
 import {Product} from "../../types/interfaces/Product";
-import { HeartButton } from "../util/HeartButton";
+import {HeartButton} from "../UI/HeartButton";
 
-export function CardProduct({data}: {data: Product}) {
-
+export function FavoritesCard({data}: {data: Product}) {
   return (
     <View style={styles.container}>
       <Pressable style={styles.button}>
@@ -20,7 +19,7 @@ export function CardProduct({data}: {data: Product}) {
         </View>
       </Pressable>
 
-      <HeartButton/>
+      <HeartButton />
     </View>
   );
 }

@@ -173,8 +173,8 @@ export const STORE: Store[] = [
     storeName: "Starbucks",
     storeDescription:
       "Include crisp lettuce varieties like romaine, iceberg, or mixed greens as a base .you'll find tomatoes, cucumbers, and bell peppers.",
-    storeDistance: "1.2km",
-    deliveryTime: "45min",
+    storeDistance: "1.2km", // calculado dentro da aplicação
+    deliveryTime: "45min", // calculado dentro da aplicação
     storeNote: "10",
     category: "Offers",
   },

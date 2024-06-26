@@ -9,11 +9,11 @@ import {
 import {useForm, Controller} from "react-hook-form";
 import {Colors} from "../assets/constants/Colors";
 import {InputField} from "../components/auth/InputField";
-import {PrimaryButton} from "../components/util/PrimaryButton";
+import {PrimaryButton} from "../components/UI/PrimaryButton";
 import {SocialButtons} from "../components/auth/SocialButtons";
 import {logUser} from "../services/Authentication";
 import {useNavigation} from "@react-navigation/native";
-import {GoBackButton} from "../components/util/GoBackButton";
+import {GoBackButton} from "../components/UI/GoBackButton";
 
 export function LoginScreen() {
   const navigation = useNavigation<any>();
@@ -181,4 +181,3 @@ const styles = StyleSheet.create({
     marginTop: "40%",
   },
 });
-

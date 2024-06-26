@@ -87,9 +87,9 @@ const styles = StyleSheet.create({
   triangle: {
     marginTop: 6,
     borderLeftWidth: 10,
-    borderLeftColor: "#fff",
+    borderLeftColor: "#F2F2F2",
     borderRightWidth: 10,
-    borderRightColor: "#fff",
+    borderRightColor: "#F2F2F2",
     borderBottomWidth: 20,
     borderBottomColor: "#D9D9D9",
   },
