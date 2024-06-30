@@ -1,7 +1,6 @@
 
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {HomeTabs} from "./MainTabs";
-import {View} from "react-native";
 import { ProductScreen } from "../../screens/ProductScreen";
 import { StoreScreen } from "../../screens/StoreScreen";
 import { CartScreen } from "../../screens/CartScreen";
