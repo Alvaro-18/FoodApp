@@ -55,7 +55,7 @@ export function OrderCard({data, status}: {data: Product; status: OrderStatus}) 
       <View style={styles.top}>
         <View style={styles.top}>
           <Image
-            source={require("../../assets/images/Coffe.jpg")}
+            source={{uri: data.imageURL}}
             style={styles.image}
           />
           <Text style={styles.storeName}>{data.store}</Text>
@@ -96,6 +96,8 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 7,
     paddingBottom: 12,
+    marginTop: 4,
+    marginBottom: 12
   },
 
   top: {

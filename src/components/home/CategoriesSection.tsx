@@ -4,7 +4,7 @@ interface categories {title:string}
 
 export function CategoriesSection({data}: {data:categories[]}) {
   return (
-    <View>
+    <View style={{marginTop: 4}}>
       <FlatList
         data={data}
         renderItem={({item}) => (

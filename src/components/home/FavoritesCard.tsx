@@ -7,15 +7,13 @@ export function FavoritesCard({data}: {data: Product}) {
     <View style={styles.container}>
       <Pressable style={styles.button}>
         <Image
-          source={require("../../assets/images/Coffe.jpg")}
+          source={{uri: data.imageURL}}
           style={styles.image}
         />
 
         <View style={styles.textContainer}>
-          <Text style={styles.storeName}>{data.store}</Text>
-          <Text style={styles.paragraph}>
-            {data.productName} - {data.productPrice}
-          </Text>
+          <Text style={styles.storeName} numberOfLines={1}>{data.name}</Text>
+          <Text style={styles.paragraph}>R$ {data.price}</Text>
         </View>
       </Pressable>
 
@@ -26,6 +24,7 @@ export function FavoritesCard({data}: {data: Product}) {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: 4,
     marginBottom: 12,
     alignSelf: "center",
     width: "96%",

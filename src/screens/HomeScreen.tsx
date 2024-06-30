@@ -31,6 +31,5 @@ const styles = StyleSheet.create({
 
   list: {
     marginBottom: "14%",
-    marginTop: 2,
   },
 });
