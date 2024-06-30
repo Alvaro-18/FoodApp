@@ -6,9 +6,10 @@ import { OrdersScreen } from "../../screens/OrdersScreen";
 import { UserScreen } from "../../screens/UserScreen";
 
 const Tab = createBottomTabNavigator();
+const orders = [];
 export function HomeTabs() {
   return (
-    <Tab.Navigator screenOptions={mainPageOptions.screenOptions}>
+    <Tab.Navigator screenOptions={mainPageOptions.screenOptions} >
       <Tab.Screen
         name="home"
         component={HomeScreen}
@@ -22,7 +23,7 @@ export function HomeTabs() {
       <Tab.Screen
         name="orders"
         component={OrdersScreen}
-        options={mainPageOptions.ordersOptions}
+        options={orders.length == 0 ? mainPageOptions.ordersOptions : mainPageOptions.ordersOptionsActivated}
       />
       <Tab.Screen
         name="profile"
