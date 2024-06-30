@@ -4,6 +4,7 @@ import {HomeTabs} from "./MainTabs";
 import {View} from "react-native";
 import { ProductScreen } from "../../screens/ProductScreen";
 import { StoreScreen } from "../../screens/StoreScreen";
+import { CartScreen } from "../../screens/CartScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +18,7 @@ export function MainStack() {
       <Stack.Screen name="homeTabs" component={HomeTabs} />
       <Stack.Screen name="product" component={ProductScreen} />
       <Stack.Screen name="store" component={StoreScreen} />
+      <Stack.Screen name="cart" component={CartScreen}/>
     </Stack.Navigator>
   );
 }

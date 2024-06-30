@@ -56,6 +56,10 @@ export function ProductScreen({route}: {route: any}) {
     // falta fazer o efeito de pressionar
   }
 
+  function navigationCartHandler(){
+    navigation.navigate("cart");
+  }
+
   function removeCart() {
     setIsInTheCart(false);
     setCounter(1);
@@ -127,7 +131,9 @@ export function ProductScreen({route}: {route: any}) {
               style={
                 isInTheCart ? styles.cartBtn : [styles.cartBtn, styles.disabled]
               }
-              disabled={isInTheCart}>
+              disabled={!isInTheCart}
+              onPress={navigationCartHandler}
+              >
               <Text style={styles.cartText}>View cart</Text>
             </Pressable>
           </View>
