@@ -1,7 +1,7 @@
 import {View, StyleSheet, Text, Image, FlatList} from "react-native";
 import {Product} from "../../types/interfaces/Product";
 import {HeartButton} from "../UI/HeartButton";
-import {Status} from "../../types/enums/Status";
+import {OrderStatus} from "../../types/enums/OrderStatus";
 import {ContactButtons} from "../UI/ContactButtons";
 
 const itensInTheOrder = [
@@ -9,9 +9,9 @@ const itensInTheOrder = [
   {name: "Traditional Cappuccino", price: 20},
 ];
 
-export function OrderCard({data, status}: {data: Product; status: Status}) {
+export function OrderCard({data, status}: {data: Product; status: OrderStatus}) {
   function OrderStatusHandler() {
-    if (status == "SENDING") {
+    if (status == OrderStatus.SENDING) {
       return (
         <View style={[styles.statusContainer, styles.sendingContainer]}>
           <View style={styles.sendingContainer}>
@@ -26,7 +26,7 @@ export function OrderCard({data, status}: {data: Product; status: Status}) {
         </View>
       );
     }
-    if (status == "COMPLETED") {
+    if (status == OrderStatus.COMPLETED) {
       return (
         <View style={styles.statusContainer}>
           <Image
@@ -37,7 +37,7 @@ export function OrderCard({data, status}: {data: Product; status: Status}) {
         </View>
       );
     }
-    if (status == "CANCELED") {
+    if (status == OrderStatus.CANCELED) {
       return (
         <View style={styles.statusContainer}>
           <Image
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
   sendingContainer: {
     justifyContent: "space-between",
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
   },
 
   statusIcon: {
