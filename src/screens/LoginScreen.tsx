@@ -12,11 +12,12 @@ import {InputField} from "../components/auth/InputField";
 import {PrimaryButton} from "../components/UI/PrimaryButton";
 import {SocialButtons} from "../components/auth/SocialButtons";
 import {logUser} from "../services/Authentication";
-import {useNavigation} from "@react-navigation/native";
 import {DarkGoBackButton} from "../components/UI/DarkGoBackButton";
+import {ParamListBase, useNavigation} from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 export function LoginScreen() {
-  const navigation = useNavigation<any>();
+  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
   const {
     control,
     handleSubmit,
