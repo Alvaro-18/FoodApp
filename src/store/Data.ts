@@ -5,6 +5,7 @@ import {Store} from "../types/interfaces/Store";
 import {Favorite} from "../types/interfaces/Favorite";
 import {Categories} from "../types/interfaces/Categories";
 import { StoreStatus } from "../types/enums/StoreStatus";
+import { OrderStatus } from "../types/enums/OrderStatus";
 
 export const ADDRESS: Option[] = [
   {
@@ -333,5 +334,38 @@ export const FAVORITES: Favorite[] = [
     storeName: "Starbucks",
     info: "Coffee with milk",
     price: "14",
+  },
+];
+
+export const ORDERS: Product[] = [
+  {
+    id: "1",
+    imageURL:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQu40Hn8BS9s0a5eJK1-Ll1KPq1once0zkthQ&s",
+    name: "Mediterranean Delight Salad",
+    description: "Indulge in the vibrant and refreshing flavors of the Mediterranean with our Mediterranean Salad. This delightful dish features a colorful medley of fresh ingredients, including crisp romaine, lorem lorem lorem lorem",
+    price: 22.90,
+    store: "Starbucks",
+    status: OrderStatus.COMPLETED
+  },
+  {
+    id: "2",
+    imageURL:
+      "https://exame.com/wp-content/uploads/2020/05/Vinil-Burger.jpg?quality=70&strip=info",
+    name: "Tasty bite",
+    description: "This mouthwatering creation features a juicy, perfectly seasoned beef patty, grilled to perfection. It's topped with melted cheddar cheese, crisp lettuce, ripe tomatoes, and crunchy pickles....",
+    price: 32.25,
+    store: "Starbucks",
+    status: OrderStatus.SENDING
+  },
+  {
+    id: "3",
+    imageURL:
+      "https://img.freepik.com/fotos-gratis/xicara-de-cafe-latte-quente_1339-8381.jpg?w=360&t=st=1699337551~exp=1699338151~hmac=3a5de69c3afaa55150bf7662d9706715fcb3d56334fbed49815fea92646a1742",
+    name: "Coffee with milk",
+    description: "Strong, dark, and aromatic, typically one or two shots. Whole milk is often used for its creaminess, but you can choose based on your preference",
+    price: 12,
+    store: "Starbucks",
+    status: OrderStatus.CANCELED
   },
 ];
