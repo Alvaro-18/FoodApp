@@ -14,7 +14,7 @@ import {NoteIndicator} from "../UI/NoteIndicator";
 export const StoreCard = memo(({data}: {data: Store}) => {
   const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
   function navigationHandler() {
-    navigation.navigate("product");
+    navigation.navigate("store");
   }
 
   return (
@@ -24,14 +24,14 @@ export const StoreCard = memo(({data}: {data: Store}) => {
       }
       onPress={navigationHandler}>
       <ImageBackground
-        source={{uri: data.storeImageUrl}}
+        source={{uri: data.bannerURL}}
         style={styles.image}
         imageStyle={{borderRadius: 12}}>
-        <NoteIndicator note={data.storeNote} />
+        <NoteIndicator note={data.note} />
       </ImageBackground>
 
       <View style={styles.textContainer}>
-        <Text style={styles.storeName}>{data.storeName}</Text>
+        <Text style={styles.storeName}>{data.name}</Text>
         <Text style={styles.paragraph}>
           {data.storeDistance} - {data.deliveryTime}
         </Text>
