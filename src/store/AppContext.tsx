@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import React, {createContext, useState} from "react";
 import {Product} from "../types/interfaces/Product";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { User } from "../types/interfaces/User";
 
 export const AppContext = createContext({
@@ -21,13 +20,11 @@ export function AppContextProvider({children}: {children: React.ReactNode}) {
   const [favorites, setFavorites] = useState<Product[]>([]);
 
   function authenticate() {
-    const token = JSON.stringify(AsyncStorage.getItem("token"));
     setToken(token);
   }
 
   function logout() {
     setToken("");
-    AsyncStorage.removeItem("token");
   }
 
   return (
