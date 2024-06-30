@@ -10,29 +10,12 @@ import {ParamListBase, useNavigation} from "@react-navigation/native";
 import {NativeStackNavigationProp} from "@react-navigation/native-stack";
 import {Colors} from "../assets/constants/Colors";
 import {StorePresentationCard} from "../components/store/StorePresentationCard";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
-const dado = {
-  id: "19231-329-491-24",
-  name: "Mediterranean Deligth Salad",
-  imageURL:
-    "https://img.freepik.com/fotos-gratis/frango-grelhado-arroz-grao-de-bico-picante-abacate-repolho-pimenta-na-tigela-buda_127032-1996.jpg?t=st=1718854008~exp=1718857608~hmac=efe25f2d1122db54173d5f6bb06442bf998610b6df108131bbc6109eae19c137&w=740",
-  description:
-    "Include crisp lettuce varieties like romaine, iceberg, or mixed greens as a base .you'll find tomatoes, cucumbers, and bell peppers.",
-  price: 22.8,
-  deliveryTime: "52 min - 60 min", // tempo médio de entrega e preparo
-  store: {
-    storeName: "Startbucks",
-    storeImageUrl:
-      "https://itaupowershopping.com.br/cont/uploads/2023/02/starbucks-1-1-1-1.jpg",
-    storeDescription:
-      "Starbucks is like a coffee wonderland. Imagine a cozy yet bustling space where the rich aroma of freshly brewed coffee envelops you the moment you step inside. ",
-    storeNote: "7.2",
-    category: "Restaurant",
-  },
-};
+import {STORE, PRODUCTS} from "../store/Data";
+import {Product} from "../types/interfaces/Product";
 
-export function ProductScreen() {
+export function ProductScreen({route}: {route: any}) {
   // id do produto
   // pegar os dados do produto na api
 
@@ -41,27 +24,41 @@ export function ProductScreen() {
   function navigationHandler() {
     navigation.goBack();
   }
-
+  const {id} = route.params;
   const [count, setCounter] = useState(1);
   const [isInTheCart, setIsInTheCart] = useState(false);
+  const [dado, setDado] = useState<Product>();
 
   function setCart() {
-    if(!isInTheCart) {
+    if (!isInTheCart) {
       addCart();
     } else {
       removeCart();
     }
   }
 
-  function addCart(){
+  useEffect(() => {
+    async function fetchProduct() {
+      const product = PRODUCTS.find(product => product.id === id);
+      if (product) {
+        setDado(product);
+      } else {
+        setDado(PRODUCTS[0]);
+      }
+    }
+
+    fetchProduct();
+  }, [id]);
+
+  function addCart() {
     //adicionar ao carrinho;
-      setIsInTheCart(true);
-      // falta fazer o efeito de pressionar
+    setIsInTheCart(true);
+    // falta fazer o efeito de pressionar
   }
 
-  function removeCart(){
-      setIsInTheCart(false);
-      setCounter(1);
+  function removeCart() {
+    setIsInTheCart(false);
+    setCounter(1);
   }
 
   function increaseCount() {
@@ -77,7 +74,7 @@ export function ProductScreen() {
   }
 
   function FetchImage({children}: {children: React.ReactNode}) {
-    if (dado.imageURL !== "" && dado.imageURL !== null) {
+    if (dado && dado.imageURL) {
       return (
         <ImageBackground source={{uri: dado.imageURL}} style={styles.banner}>
           {children}
@@ -88,6 +85,9 @@ export function ProductScreen() {
     }
   }
 
+  if (!dado) {
+    return <Text>Loading...</Text>;
+  }
   return (
     <View>
       <FetchImage>
@@ -102,55 +102,65 @@ export function ProductScreen() {
       </FetchImage>
 
       <View style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.name}>{dado.name}</Text>
+        <View>
+          <View style={styles.header}>
+            <Text style={styles.name}>{dado.name}</Text>
 
-          <Text style={styles.price}>R$ {dado.price}</Text>
-        </View>
-
-        <Text style={styles.description}>{dado.description}</Text>
-
-        <StorePresentationCard dado={dado.store} />
-
-        <View style={styles.totalContainer}>
-          <View>
-            <Text style={styles.totalLabel}>Total without tax:</Text>
-            <Text style={styles.total}>RS: {(dado.price * count).toFixed(2)}</Text>
+            <Text style={styles.price}>R$ {dado.price}</Text>
           </View>
 
-          <Pressable style={(isInTheCart) ? styles.cartBtn : [styles.cartBtn, styles.disabled]} disabled={isInTheCart}>
-            <Text style={styles.cartText}>View cart</Text>
-          </Pressable>
+          <Text style={styles.description}>{dado.description}</Text>
+
+          <StorePresentationCard dado={STORE[0]} />
         </View>
 
-        <View style={styles.bottom}>
-          <View style={styles.counterContainer}>
-            <Pressable onPress={decreaseCount}>
-              <Image
-                source={require("../assets/images/Minus-solid.png")}
-                style={styles.counterBtnIcon}
-              />
-            </Pressable>
-            <Text style={styles.counterText}>{count}</Text>
-            <Pressable onPress={increaseCount}>
-              <Image
-                source={require("../assets/images/Plus-solid.png")}
-                style={styles.counterBtnIcon}
-              />
+        <View>
+          <View style={styles.totalContainer}>
+            <View>
+              <Text style={styles.totalLabel}>Total without tax:</Text>
+              <Text style={styles.total}>
+                RS: {(dado.price * count).toFixed(2)}
+              </Text>
+            </View>
+
+            <Pressable
+              style={
+                isInTheCart ? styles.cartBtn : [styles.cartBtn, styles.disabled]
+              }
+              disabled={isInTheCart}>
+              <Text style={styles.cartText}>View cart</Text>
             </Pressable>
           </View>
 
-          <Pressable
-            style={
-              isInTheCart
-                ? [styles.addCartBtn, styles.removeCartBtn]
-                : styles.addCartBtn
-            }
-            onPress={setCart}>
-            <Text style={{color: "#fff", fontSize: 18, fontWeight: "500"}}>
-              {isInTheCart ?  "Remove from cart" : "Add to cart" }
-            </Text>
-          </Pressable>
+          <View style={styles.bottom}>
+            <View style={styles.counterContainer}>
+              <Pressable onPress={decreaseCount}>
+                <Image
+                  source={require("../assets/images/Minus-solid.png")}
+                  style={styles.counterBtnIcon}
+                />
+              </Pressable>
+              <Text style={styles.counterText}>{count}</Text>
+              <Pressable onPress={increaseCount}>
+                <Image
+                  source={require("../assets/images/Plus-solid.png")}
+                  style={styles.counterBtnIcon}
+                />
+              </Pressable>
+            </View>
+
+            <Pressable
+              style={
+                isInTheCart
+                  ? [styles.addCartBtn, styles.removeCartBtn]
+                  : styles.addCartBtn
+              }
+              onPress={setCart}>
+              <Text style={{color: "#fff", fontSize: 18, fontWeight: "500"}}>
+                {isInTheCart ? "Remove from cart" : "Add to cart"}
+              </Text>
+            </Pressable>
+          </View>
         </View>
       </View>
     </View>
@@ -166,6 +176,7 @@ const styles = StyleSheet.create({
     width: "92%",
     alignSelf: "center",
     justifyContent: "space-between",
+    height: "73%",
   },
 
   header: {
@@ -193,6 +204,7 @@ const styles = StyleSheet.create({
 
   description: {
     marginTop: 6,
+    marginBottom: 16,
     color: "#000",
     fontSize: 12,
     fontWeight: "400",
@@ -215,7 +227,6 @@ const styles = StyleSheet.create({
     borderBottomColor: "#AFAFAF",
     borderBottomWidth: 2,
     borderRadius: 2,
-    marginTop: "76%",
   },
 
   totalLabel: {
