@@ -13,7 +13,7 @@ import {PrimaryButton} from "../components/UI/PrimaryButton";
 import {SocialButtons} from "../components/auth/SocialButtons";
 import {createUser} from "../services/Authentication";
 import {useNavigation} from "@react-navigation/native";
-import {GoBackButton} from "../components/UI/GoBackButton";
+import {DarkGoBackButton} from "../components/UI/DarkGoBackButton";
 
 export function SignUpScreen() {
   const navigation = useNavigation<any>();
@@ -67,7 +67,7 @@ export function SignUpScreen() {
       source={require("../assets/images/Background.png")}
       style={styles.background}>
       <View style={styles.container}>
-        <GoBackButton onPress={navigationHandlerHome} />
+        <DarkGoBackButton onPress={navigationHandlerHome} />
 
         <Text style={[styles.title, styles.textDetail]}>
           Sign

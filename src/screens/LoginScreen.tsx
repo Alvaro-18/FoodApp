@@ -13,7 +13,7 @@ import {PrimaryButton} from "../components/UI/PrimaryButton";
 import {SocialButtons} from "../components/auth/SocialButtons";
 import {logUser} from "../services/Authentication";
 import {useNavigation} from "@react-navigation/native";
-import {GoBackButton} from "../components/UI/GoBackButton";
+import {DarkGoBackButton} from "../components/UI/DarkGoBackButton";
 
 export function LoginScreen() {
   const navigation = useNavigation<any>();
@@ -62,7 +62,7 @@ export function LoginScreen() {
       source={require("../assets/images/Background.png")}
       style={styles.background}>
       <View style={styles.container}>
-        <GoBackButton onPress={navigationHandlerGoBack} />
+        <DarkGoBackButton onPress={navigationHandlerGoBack} />
 
         <Text style={styles.title}>Login</Text>
 
