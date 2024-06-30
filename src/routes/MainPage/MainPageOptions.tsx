@@ -35,6 +35,23 @@ export const mainPageOptions = {
         size={size}
       />
     ),
+
+  },
+
+  ordesOptionsActivated: {
+    tabBarIcon: ({color, size, focused}: any) => (
+      <Ionicons
+        name={focused ? "reader" : "reader-outline"}
+        color={color}
+        size={size}
+      />
+    ),
+    tabBarBadge: false,
+    tabBarBadgeStyle: {
+      maxWidth: 6,
+      maxHeight: 8,
+      backgroundColor: "red"
+    }
   },
 
   ordersOptionsActivated: {
