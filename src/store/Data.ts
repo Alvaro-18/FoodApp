@@ -4,6 +4,7 @@ import {Product} from "../types/interfaces/Product";
 import {Store} from "../types/interfaces/Store";
 import {Favorite} from "../types/interfaces/Favorite";
 import {Categories} from "../types/interfaces/Categories";
+import { StoreStatus } from "../types/enums/StoreStatus";
 
 export const ADDRESS: Option[] = [
   {
@@ -86,47 +87,92 @@ export const NOTIFICATIONS: Notification[] = [
 export const PRODUCTS: Product[] = [
   {
     id: "1",
-    productImageUrl:
-      "https://img.freepik.com/fotos-gratis/xicara-de-cafe-latte-quente_1339-8381.jpg?w=360&t=st=1699337551~exp=1699338151~hmac=3a5de69c3afaa55150bf7662d9706715fcb3d56334fbed49815fea92646a1742",
-    productName: "Coffee with milk",
-    productDescription: "lorem",
-    productPrice: "12",
+    imageURL:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQu40Hn8BS9s0a5eJK1-Ll1KPq1once0zkthQ&s",
+    name: "Mediterranean Delight Salad",
+    description: "Indulge in the vibrant and refreshing flavors of the Mediterranean with our Mediterranean Salad. This delightful dish features a colorful medley of fresh ingredients, including crisp romaine, lorem lorem lorem lorem",
+    price: 22.90,
     store: "Starbucks",
   },
   {
     id: "2",
-    productImageUrl:
-      "https://img.freepik.com/fotos-gratis/xicara-de-cafe-latte-quente_1339-8381.jpg?w=360&t=st=1699337551~exp=1699338151~hmac=3a5de69c3afaa55150bf7662d9706715fcb3d56334fbed49815fea92646a1742",
-    productName: "Coffee with milk",
-    productDescription: "lorem",
-    productPrice: "12",
+    imageURL:
+      "https://exame.com/wp-content/uploads/2020/05/Vinil-Burger.jpg?quality=70&strip=info",
+    name: "Tasty bite",
+    description: "This mouthwatering creation features a juicy, perfectly seasoned beef patty, grilled to perfection. It's topped with melted cheddar cheese, crisp lettuce, ripe tomatoes, and crunchy pickles....",
+    price: 32.25,
     store: "Starbucks",
   },
   {
     id: "3",
-    productImageUrl:
+    imageURL:
       "https://img.freepik.com/fotos-gratis/xicara-de-cafe-latte-quente_1339-8381.jpg?w=360&t=st=1699337551~exp=1699338151~hmac=3a5de69c3afaa55150bf7662d9706715fcb3d56334fbed49815fea92646a1742",
-    productName: "Coffee with milk",
-    productDescription: "lorem",
-    productPrice: "12",
+    name: "Coffee with milk",
+    description: "Strong, dark, and aromatic, typically one or two shots. Whole milk is often used for its creaminess, but you can choose based on your preference",
+    price: 12,
     store: "Starbucks",
   },
   {
     id: "4",
-    productImageUrl:
+    imageURL:
       "https://img.freepik.com/fotos-gratis/xicara-de-cafe-latte-quente_1339-8381.jpg?w=360&t=st=1699337551~exp=1699338151~hmac=3a5de69c3afaa55150bf7662d9706715fcb3d56334fbed49815fea92646a1742",
-    productName: "Coffee with milk",
-    productDescription: "lorem",
-    productPrice: "12",
+    name: "Coffee with milk",
+    description: "Strong, dark, and aromatic, typically one or two shots. Whole milk is often used for its creaminess, but you can choose based on your preference",
+    price: 12,
     store: "Starbucks",
   },
   {
-    id: "5",
-    productImageUrl:
+    id: "6",
+    imageURL:
       "https://img.freepik.com/fotos-gratis/xicara-de-cafe-latte-quente_1339-8381.jpg?w=360&t=st=1699337551~exp=1699338151~hmac=3a5de69c3afaa55150bf7662d9706715fcb3d56334fbed49815fea92646a1742",
-    productName: "Coffee with milk",
-    productDescription: "lorem",
-    productPrice: "12",
+    name: "Coffee with milk",
+    description: "lorem",
+    price: 12,
+    store: "Starbucks",
+  },
+  {
+    id: "7",
+    imageURL:
+      "https://img.freepik.com/fotos-gratis/xicara-de-cafe-latte-quente_1339-8381.jpg?w=360&t=st=1699337551~exp=1699338151~hmac=3a5de69c3afaa55150bf7662d9706715fcb3d56334fbed49815fea92646a1742",
+    name: "Coffee with milk",
+    description: "lorem",
+    price: 12,
+    store: "Starbucks",
+  },
+  {
+    id: "8",
+    imageURL:
+      "https://img.freepik.com/fotos-gratis/xicara-de-cafe-latte-quente_1339-8381.jpg?w=360&t=st=1699337551~exp=1699338151~hmac=3a5de69c3afaa55150bf7662d9706715fcb3d56334fbed49815fea92646a1742",
+    name: "Coffee with milk",
+    description: "lorem",
+    price: 12,
+    store: "Starbucks",
+  },
+  {
+    id: "9",
+    imageURL:
+      "https://img.freepik.com/fotos-gratis/xicara-de-cafe-latte-quente_1339-8381.jpg?w=360&t=st=1699337551~exp=1699338151~hmac=3a5de69c3afaa55150bf7662d9706715fcb3d56334fbed49815fea92646a1742",
+    name: "Coffee with milk",
+    description: "lorem",
+    price: 12,
+    store: "Starbucks",
+  },
+  {
+    id: "10",
+    imageURL:
+      "https://img.freepik.com/fotos-gratis/xicara-de-cafe-latte-quente_1339-8381.jpg?w=360&t=st=1699337551~exp=1699338151~hmac=3a5de69c3afaa55150bf7662d9706715fcb3d56334fbed49815fea92646a1742",
+    name: "Coffee with milk",
+    description: "lorem",
+    price: 12,
+    store: "Starbucks",
+  },
+  {
+    id: "11",
+    imageURL:
+      "https://img.freepik.com/fotos-gratis/xicara-de-cafe-latte-quente_1339-8381.jpg?w=360&t=st=1699337551~exp=1699338151~hmac=3a5de69c3afaa55150bf7662d9706715fcb3d56334fbed49815fea92646a1742",
+    name: "Coffee with milk",
+    description: "lorem",
+    price: 12,
     store: "Starbucks",
   },
 ];
@@ -137,145 +183,147 @@ export const CATEGORIES: Categories[] = [
     id: "1",
   },
   {
-    title: "Drinks", 
-    id: "2"
+    title: "Drinks",
+    id: "2",
   },
   {
-    title: "Vegan", 
-    id: "3"
+    title: "Vegan",
+    id: "3",
   },
   {
-    title: "Food", 
-    id: "4"
+    title: "Food",
+    id: "4",
   },
   {
-    title: "Fruits", 
-    id: "5"
+    title: "Fruits",
+    id: "5",
   },
   {
-    title: "Lacto", 
-    id: "6"
+    title: "Lacto",
+    id: "6",
   },
   {
-    title: "Gluten", 
-    id: "7"
+    title: "Gluten",
+    id: "7",
   },
   {
-    title: "Food", 
-    id: "8"
+    title: "Food",
+    id: "8",
   },
 ];
 
 export const STORE: Store[] = [
   {
-    storeImageUrl:
-      "https://cdn.ibahia.com/img/Artigo-Destaque/290000/Artigo-Destaque_00292013_00.jpg?xid=1299388",
-    storeName: "Starbucks",
-    storeDescription:
-      "Include crisp lettuce varieties like romaine, iceberg, or mixed greens as a base .you'll find tomatoes, cucumbers, and bell peppers.",
+    name: "Startbucks",
+    status: StoreStatus.OPEN,
+    logoURL:
+      "https://itaupowershopping.com.br/cont/uploads/2023/02/starbucks-1-1-1-1.jpg",
+    bannerURL:
+      "https://www.cartacapital.com.br/wp-content/uploads/2023/11/1280px-Starbucks_Coffee_Mannheim_August_2012.jpeg",
+    description:
+      "Starbucks is like a coffee wonderland. Imagine a cozy yet bustling space where the rich aroma of freshly brewed coffee envelops you the moment you step inside. ",
+    note: "7.2",
+    category: "Restaurant",
     storeDistance: "1.2km", // calculado dentro da aplicação
     deliveryTime: "45min", // calculado dentro da aplicação
-    storeNote: "10",
-    category: "Offers",
   },
   {
-    storeImageUrl:
-      "https://cdn.ibahia.com/img/Artigo-Destaque/290000/Artigo-Destaque_00292013_00.jpg?xid=1299388",
-    storeName: "Starbucks",
-    storeDescription:
-      "Include crisp lettuce varieties like romaine, iceberg, or mixed greens as a base .you'll find tomatoes, cucumbers, and bell peppers.",
-    storeDistance: "1.2km",
-    deliveryTime: "46min",
-    storeNote: "10",
-    category: "Offers",
+    name: "Startbucks",
+    status: StoreStatus.OPEN,
+    logoURL:
+      "https://itaupowershopping.com.br/cont/uploads/2023/02/starbucks-1-1-1-1.jpg",
+    bannerURL:
+      "https://www.cartacapital.com.br/wp-content/uploads/2023/11/1280px-Starbucks_Coffee_Mannheim_August_2012.jpeg",
+    description:
+      "Starbucks is like a coffee wonderland. Imagine a cozy yet bustling space where the rich aroma of freshly brewed coffee envelops you the moment you step inside. ",
+    note: "7.2",
+    category: "Restaurant",
+    storeDistance: "1.2km", // calculado dentro da aplicação
+    deliveryTime: "45min", // calculado dentro da aplicação
   },
   {
-    storeImageUrl:
-      "https://cdn.ibahia.com/img/Artigo-Destaque/290000/Artigo-Destaque_00292013_00.jpg?xid=1299388",
-    storeName: "Starbucks",
-    storeDescription:
-      "Include crisp lettuce varieties like romaine, iceberg, or mixed greens as a base .you'll find tomatoes, cucumbers, and bell peppers.",
-    storeDistance: "1.2km",
-    deliveryTime: "45min",
-    storeNote: "10",
-    category: "Vegan",
+    name: "Startbucks",
+    status: StoreStatus.OPEN,
+    logoURL:
+      "https://itaupowershopping.com.br/cont/uploads/2023/02/starbucks-1-1-1-1.jpg",
+    bannerURL:
+      "https://www.cartacapital.com.br/wp-content/uploads/2023/11/1280px-Starbucks_Coffee_Mannheim_August_2012.jpeg",
+    description:
+      "Starbucks is like a coffee wonderland. Imagine a cozy yet bustling space where the rich aroma of freshly brewed coffee envelops you the moment you step inside. ",
+    note: "7.2",
+    category: "Restaurant",
+    storeDistance: "1.2km", // calculado dentro da aplicação
+    deliveryTime: "45min", // calculado dentro da aplicação
   },
   {
-    storeImageUrl:
-      "https://cdn.ibahia.com/img/Artigo-Destaque/290000/Artigo-Destaque_00292013_00.jpg?xid=1299388",
-    storeName: "Starbucks",
-    storeDescription:
-      "Include crisp lettuce varieties like romaine, iceberg, or mixed greens as a base .you'll find tomatoes, cucumbers, and bell peppers.",
-    storeDistance: "1.2km",
-    deliveryTime: "45min",
-    storeNote: "10",
-    category: "Vegan",
+    name: "Startbucks",
+    status: StoreStatus.OPEN,
+    logoURL:
+      "https://itaupowershopping.com.br/cont/uploads/2023/02/starbucks-1-1-1-1.jpg",
+    bannerURL:
+      "https://www.cartacapital.com.br/wp-content/uploads/2023/11/1280px-Starbucks_Coffee_Mannheim_August_2012.jpeg",
+    description:
+      "Starbucks is like a coffee wonderland. Imagine a cozy yet bustling space where the rich aroma of freshly brewed coffee envelops you the moment you step inside. ",
+    note: "7.2",
+    category: "Restaurant",
+    storeDistance: "1.2km", // calculado dentro da aplicação
+    deliveryTime: "45min", // calculado dentro da aplicação
   },
   {
-    storeImageUrl:
-      "https://cdn.ibahia.com/img/Artigo-Destaque/290000/Artigo-Destaque_00292013_00.jpg?xid=1299388",
-    storeName: "Starbucks",
-    storeDescription:
-      "Include crisp lettuce varieties like romaine, iceberg, or mixed greens as a base .you'll find tomatoes, cucumbers, and bell peppers.",
-    storeDistance: "1.2km",
-    deliveryTime: "45min",
-    storeNote: "10",
-    category: "Vegan",
+    name: "Startbucks",
+    status: StoreStatus.OPEN,
+    logoURL:
+      "https://itaupowershopping.com.br/cont/uploads/2023/02/starbucks-1-1-1-1.jpg",
+    bannerURL:
+      "https://www.cartacapital.com.br/wp-content/uploads/2023/11/1280px-Starbucks_Coffee_Mannheim_August_2012.jpeg",
+    description:
+      "Starbucks is like a coffee wonderland. Imagine a cozy yet bustling space where the rich aroma of freshly brewed coffee envelops you the moment you step inside. ",
+    note: "7.2",
+    category: "Restaurant",
+    storeDistance: "1.2km", // calculado dentro da aplicação
+    deliveryTime: "45min", // calculado dentro da aplicação
   },
   {
-    storeImageUrl:
-      "https://cdn.ibahia.com/img/Artigo-Destaque/290000/Artigo-Destaque_00292013_00.jpg?xid=1299388",
-    storeName: "Starbucks",
-    storeDescription:
-      "Include crisp lettuce varieties like romaine, iceberg, or mixed greens as a base .you'll find tomatoes, cucumbers, and bell peppers.",
-    storeDistance: "1.2km",
-    deliveryTime: "45min",
-    storeNote: "10",
-    category: "Vegan",
+    name: "Startbucks",
+    status: StoreStatus.OPEN,
+    logoURL:
+      "https://itaupowershopping.com.br/cont/uploads/2023/02/starbucks-1-1-1-1.jpg",
+    bannerURL:
+      "https://www.cartacapital.com.br/wp-content/uploads/2023/11/1280px-Starbucks_Coffee_Mannheim_August_2012.jpeg",
+    description:
+      "Starbucks is like a coffee wonderland. Imagine a cozy yet bustling space where the rich aroma of freshly brewed coffee envelops you the moment you step inside. ",
+    note: "7.2",
+    category: "Restaurant",
+    storeDistance: "1.2km", // calculado dentro da aplicação
+    deliveryTime: "45min", // calculado dentro da aplicação
   },
   {
-    storeImageUrl:
-      "https://cdn.ibahia.com/img/Artigo-Destaque/290000/Artigo-Destaque_00292013_00.jpg?xid=1299388",
-    storeName: "Starbucks",
-    storeDescription:
-      "Include crisp lettuce varieties like romaine, iceberg, or mixed greens as a base .you'll find tomatoes, cucumbers, and bell peppers.",
-    storeDistance: "1.2km",
-    deliveryTime: "45min",
-    storeNote: "10",
-    category: "Vegan",
+    name: "Startbucks",
+    status: StoreStatus.OPEN,
+    logoURL:
+      "https://itaupowershopping.com.br/cont/uploads/2023/02/starbucks-1-1-1-1.jpg",
+    bannerURL:
+      "https://www.cartacapital.com.br/wp-content/uploads/2023/11/1280px-Starbucks_Coffee_Mannheim_August_2012.jpeg",
+    description:
+      "Starbucks is like a coffee wonderland. Imagine a cozy yet bustling space where the rich aroma of freshly brewed coffee envelops you the moment you step inside. ",
+    note: "7.2",
+    category: "Restaurant",
+    storeDistance: "1.2km", // calculado dentro da aplicação
+    deliveryTime: "45min", // calculado dentro da aplicação
   },
   {
-    storeImageUrl:
-      "https://cdn.ibahia.com/img/Artigo-Destaque/290000/Artigo-Destaque_00292013_00.jpg?xid=1299388",
-    storeName: "Starbucks",
-    storeDescription:
-      "Include crisp lettuce varieties like romaine, iceberg, or mixed greens as a base .you'll find tomatoes, cucumbers, and bell peppers.",
-    storeDistance: "1.2km",
-    deliveryTime: "45min",
-    storeNote: "10",
-    category: "Vegan",
-  },
-  {
-    storeImageUrl:
-      "https://cdn.ibahia.com/img/Artigo-Destaque/290000/Artigo-Destaque_00292013_00.jpg?xid=1299388",
-    storeName: "Starbucks",
-    storeDescription:
-      "Include crisp lettuce varieties like romaine, iceberg, or mixed greens as a base .you'll find tomatoes, cucumbers, and bell peppers.",
-    storeDistance: "1.2km",
-    deliveryTime: "45min",
-    storeNote: "10",
-    category: "Vegan",
-  },
-  {
-    storeImageUrl:
-      "https://cdn.ibahia.com/img/Artigo-Destaque/290000/Artigo-Destaque_00292013_00.jpg?xid=1299388",
-    storeName: "Starbucks",
-    storeDescription:
-      "Include crisp lettuce varieties like romaine, iceberg, or mixed greens as a base .you'll find tomatoes, cucumbers, and bell peppers.",
-    storeDistance: "1.2km",
-    deliveryTime: "45min",
-    storeNote: "10",
-    category: "Vegan",
+    name: "Startbucks",
+    status: StoreStatus.OPEN,
+    logoURL:
+      "https://itaupowershopping.com.br/cont/uploads/2023/02/starbucks-1-1-1-1.jpg",
+    bannerURL:
+      "https://www.cartacapital.com.br/wp-content/uploads/2023/11/1280px-Starbucks_Coffee_Mannheim_August_2012.jpeg",
+    description:
+      "Starbucks is like a coffee wonderland. Imagine a cozy yet bustling space where the rich aroma of freshly brewed coffee envelops you the moment you step inside. ",
+    note: "7.2",
+    category: "Restaurant",
+    storeDistance: "1.2km", // calculado dentro da aplicação
+    deliveryTime: "45min", // calculado dentro da aplicação
   },
 ];
 
