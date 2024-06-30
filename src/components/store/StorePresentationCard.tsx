@@ -8,16 +8,16 @@ export function StorePresentationCard({dado}: {dado: Store}) {
       <View style={styles.header}>
         <View style={styles.header}>
           <Image
-            source={{uri: dado.storeImageUrl}}
+            source={{uri: dado.logoURL}}
             style={styles.storeIcon}
           />
-          <Text style={styles.storeName}>{dado.storeName}</Text>
+          <Text style={styles.storeName}>{dado.name}</Text>
         </View>
 
-        <NoteIndicator note={dado.storeNote} />
+        <NoteIndicator note={dado.note} />
       </View>
 
-      <Text style={styles.storeDescription}>{dado.storeDescription}</Text>
+      <Text style={styles.storeDescription}>{dado.description}</Text>
     </Pressable>
   );
 }
@@ -25,7 +25,6 @@ export function StorePresentationCard({dado}: {dado: Store}) {
 const styles = StyleSheet.create({
   card: {
     borderRadius: 8,
-    marginTop: 16,
     backgroundColor: "#fff",
     paddingLeft: 8,
     paddingRight: 14,
