@@ -1,5 +1,3 @@
-import { OrderStatus } from "../enums/OrderStatus";
-
  export interface Product {
   id: string,
   imageURL: string;
@@ -7,5 +5,4 @@ import { OrderStatus } from "../enums/OrderStatus";
   description: string;
   price: number;
   store: string;
-  status?: OrderStatus
  }
