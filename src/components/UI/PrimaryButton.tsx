@@ -10,39 +10,43 @@ import {Colors} from "../../assets/constants/Colors";
 export function PrimaryButton({
   children,
   onPress,
-  colorNumber,
+  color,
+  isDisabled,
 }: {
   children: string;
   onPress: (event: GestureResponderEvent) => void;
-  colorNumber?: number;
+  color: string;
+  isDisabled?: boolean;
 }) {
-  return (
-    <Pressable
-      onPress={onPress}
-      style={({pressed}) =>
-        pressed
-          ? [
-              colorNumber === undefined
-                ? styles.button
-                : [styles.button, styles.buttonApp],
-              styles.pressed,
-            ]
-          : colorNumber === undefined
-          ? styles.button
-          : [styles.button, styles.buttonApp]
-      }>
-      <View>
-        <Text style={styles.text}>{children}</Text>
-      </View>
-    </Pressable>
-  );
+  if (!isDisabled) {
+    return (
+      <Pressable
+        onPress={onPress}
+        style={({pressed}) =>
+          pressed
+            ? [styles.button, {backgroundColor: color}, styles.pressed]
+            : [styles.button, {backgroundColor: color}]
+        }>
+        <View>
+          <Text style={styles.text}>{children}</Text>
+        </View>
+      </Pressable>
+    );
+  } else {
+    return (
+      <Pressable onPress={onPress} style={[styles.button, {backgroundColor: "#565656"}]}>
+        <View>
+          <Text style={styles.text}>{children}</Text>
+        </View>
+      </Pressable>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
   button: {
     width: "100%",
     height: 48,
-    backgroundColor: "#D32626",
     borderRadius: 25,
     alignItems: "center",
     justifyContent: "center",

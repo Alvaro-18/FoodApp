@@ -1,9 +1,11 @@
-
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {HomeTabs} from "./MainTabs";
-import {View} from "react-native";
-import { ProductScreen } from "../../screens/ProductScreen";
-import { StoreScreen } from "../../screens/StoreScreen";
+import {ProductScreen} from "../../screens/ProductScreen";
+import {StoreScreen} from "../../screens/StoreScreen";
+import {CartScreen} from "../../screens/CartScreen";
+import {LocationButton} from "../../components/home/LocationButton";
+import {NotificationButton} from "../../components/home/NotificationButton";
+import {SearchButton} from "../../components/home/SearchButton";
 
 const Stack = createNativeStackNavigator();
 
@@ -11,12 +13,38 @@ export function MainStack() {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: false,
-        contentStyle: {backgroundColor: "#fff"}
+        headerShown: true,
+        contentStyle: {backgroundColor: "#fff"},
       }}>
-      <Stack.Screen name="homeTabs" component={HomeTabs} />
-      <Stack.Screen name="product" component={ProductScreen} />
-      <Stack.Screen name="store" component={StoreScreen} />
+      <Stack.Screen
+        name="homeTabs"
+        component={HomeTabs}
+        options={{
+          headerTitle: () => <LocationButton />,
+          headerRight: () => <NotificationButton />,
+          headerLeft: () => <SearchButton />,
+          headerShadowVisible: false,
+          headerStyle: {
+            backgroundColor: "#F2F2F2",
+          },
+          headerTitleAlign: "center",
+        }}
+      />
+      <Stack.Screen
+        name="product"
+        component={ProductScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="store"
+        component={StoreScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="cart"
+        component={CartScreen}
+        options={{headerShown: false}}
+      />
     </Stack.Navigator>
   );
 }

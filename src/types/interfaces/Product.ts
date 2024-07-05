@@ -4,5 +4,5 @@
   name: string;
   description: string;
   price: number;
-  store: string
+  store: string;
  }

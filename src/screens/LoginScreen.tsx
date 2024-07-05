@@ -12,11 +12,12 @@ import {InputField} from "../components/auth/InputField";
 import {PrimaryButton} from "../components/UI/PrimaryButton";
 import {SocialButtons} from "../components/auth/SocialButtons";
 import {logUser} from "../services/Authentication";
-import {useNavigation} from "@react-navigation/native";
-import {GoBackButton} from "../components/UI/GoBackButton";
+import {DarkGoBackButton} from "../components/UI/DarkGoBackButton";
+import {ParamListBase, useNavigation} from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 export function LoginScreen() {
-  const navigation = useNavigation<any>();
+  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
   const {
     control,
     handleSubmit,
@@ -62,7 +63,7 @@ export function LoginScreen() {
       source={require("../assets/images/Background.png")}
       style={styles.background}>
       <View style={styles.container}>
-        <GoBackButton onPress={navigationHandlerGoBack} />
+        <DarkGoBackButton onPress={navigationHandlerGoBack} />
 
         <Text style={styles.title}>Login</Text>
 

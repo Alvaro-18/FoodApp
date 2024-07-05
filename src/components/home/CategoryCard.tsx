@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 4,
     alignItems: "center",
     justifyContent: "center",
-    marginVertical: 10,
+    marginBottom: 10,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,

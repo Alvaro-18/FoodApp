@@ -4,11 +4,12 @@ import {Colors} from "../assets/constants/Colors";
 import {InputField} from "../components/auth/InputField";
 import {PrimaryButton} from "../components/UI/PrimaryButton";
 import {resetPassword} from "../services/Authentication";
-import {useNavigation} from "@react-navigation/native";
-import {GoBackButton} from "../components/UI/GoBackButton";
+import {DarkGoBackButton} from "../components/UI/DarkGoBackButton";
+import {ParamListBase, useNavigation} from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 export function ForgotPasswordScreen() {
-  const navigation = useNavigation<any>();
+  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
   const {
     control,
     handleSubmit,
@@ -42,7 +43,7 @@ export function ForgotPasswordScreen() {
       source={require("../assets/images/Background.png")}
       style={styles.background}>
       <View style={styles.container}>
-        <GoBackButton onPress={navigationHandler} />
+        <DarkGoBackButton onPress={navigationHandler} />
 
         <Text style={[styles.title, styles.textDetail]}>
           Sign

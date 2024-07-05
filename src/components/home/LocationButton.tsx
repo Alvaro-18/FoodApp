@@ -12,11 +12,16 @@ import {OptionButton} from "./OptionButton";
 import {ADDRESS} from "../../store/Data";
 import {PrimaryButton} from "../UI/PrimaryButton";
 import {AddressForm} from "./AddressForm";
+import { Colors } from "../../assets/constants/Colors";
+import { Option } from "../../types/interfaces/Option";
+
 
 export function LocationButton() {
   const [visibilityModalSelect, setVisibilityModalSelect] = useState(false);
   const [visibilityModaAddShipping, setVisibilityModaAddShipping] =
     useState(false);
+
+  const [isSelected, setIsSelected] = useState<Option>(ADDRESS[0]);  
 
   function addNewLocation() {
     return (
@@ -28,6 +33,10 @@ export function LocationButton() {
         <Text style={styles.footerListText}>Add new location +</Text>
       </Pressable>
     );
+  }
+
+  function selectHandler(item:Option){
+    setIsSelected(item);
   }
 
   return (
@@ -60,15 +69,12 @@ export function LocationButton() {
         visible={visibilityModalSelect}>
         <View style={styles.modalContainer}>
           <Pressable
-            style={styles.button}
-            onPress={() => {
-              setVisibilityModalSelect(false);
-            }}>
+            style={[styles.button, styles.textModal]}>
             <Image
               source={require("../../assets/images/Location-dot.png")}
               style={styles.image}
             />
-            <Text style={styles.text}>Salvador, BA</Text>
+            <Text style={styles.text}>{isSelected.title}</Text>
           </Pressable>
 
           <Text style={styles.modalTitle}>Address selection</Text>
@@ -77,10 +83,9 @@ export function LocationButton() {
             data={ADDRESS}
             renderItem={({item}) => (
               <OptionButton
-                selected={item.isSelected}
-                title={item.title}
-                subtitle1={item.subtitle1}
-                subtitle2={item.subtitle2}
+                selected={item == isSelected}
+                data={item}
+                onPress={() => {selectHandler(item);}}
               />
             )}
             style={styles.list}
@@ -91,7 +96,7 @@ export function LocationButton() {
             onPress={() => {
               setVisibilityModalSelect(false);
             }}
-            colorNumber={1}>
+            color={Colors.secundaryColor}>
             Confirm address
           </PrimaryButton>
         </View>
@@ -106,7 +111,7 @@ export function LocationButton() {
           source={require("../../assets/images/Location-dot.png")}
           style={styles.image}
         />
-        <Text style={styles.text}>Salvador, BA</Text>
+        <Text style={styles.text}>{isSelected.title}</Text>
       </Pressable>
     </View>
   );
@@ -120,23 +125,26 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     gap: 8,
-    marginBottom: "18%",
+  },
+
+  textModal: {
+    marginBottom: "12%"
   },
 
   image: {
-    width: 12,
-    height: 16,
+    width: 14,
+    height: 18,
   },
 
   text: {
     color: "#000",
     fontWeight: "bold",
-    fontSize: 16,
+    fontSize: 18,
   },
 
   modalContainer: {
-    marginTop: "5.8%",
-    width: "95%",
+    marginTop: 16,
+    width: "92%",
     alignSelf: "center",
   },
 
@@ -154,23 +162,15 @@ const styles = StyleSheet.create({
   },
 
   footerListContainer: {
-    alignSelf: "center",
-    width: "95%",
     marginTop: "4%",
     marginBottom: "8%",
     height: 88,
     borderRadius: 6,
     backgroundColor: "#fff",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.29,
-    shadowRadius: 4,
-    elevation: 7,
     alignItems: "center",
     justifyContent: "center",
+    borderColor: "#D9D9D9",
+    borderWidth: 2
   },
 
   footerListText: {
