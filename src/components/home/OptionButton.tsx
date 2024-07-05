@@ -1,29 +1,33 @@
-import {View, Text, Image, StyleSheet, Pressable} from "react-native";
+import {View, Text, Image, StyleSheet, Pressable, GestureResponderEvent} from "react-native";
 import {Colors} from "../../assets/constants/Colors";
+
+interface option {
+  title: string,
+  subtitle1?: string,
+  subtitle2?: string
+}
 
 export function OptionButton({
   selected,
-  title,
-  subtitle1,
-  subtitle2,
+  data,
+  onPress
 }: {
   selected: boolean;
-  title: string;
-  subtitle1?: string;
-  subtitle2?: string;
+  data:option
+  onPress: (event: GestureResponderEvent) => void
 }) {
   return (
-    <Pressable style={[styles.button, selected && styles.buttonSelected]}>
+    <Pressable style={[styles.button, selected && styles.buttonSelected]} onPress={onPress}>
       <View style={styles.container}>
         <View style={styles.textContainer}>
-          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.title}>{data.title}</Text>
           <Text
-            style={subtitle1 !== undefined ? styles.subtitle : styles.empty}>
-            {subtitle1}
+            style={data.subtitle1 !== undefined ? styles.subtitle : styles.empty}>
+            {data.subtitle1 }
           </Text>
           <Text
-            style={subtitle1 !== undefined ? styles.subtitle : styles.empty}>
-            {subtitle2}
+            style={data.subtitle2 !== undefined ? styles.subtitle : styles.empty}>
+            {data.subtitle2}
           </Text>
         </View>
 
@@ -39,18 +43,12 @@ export function OptionButton({
 const styles = StyleSheet.create({
   button: {
     alignSelf: "center",
-    width: "95%",
-    marginTop: "4%",
+    marginTop: 8,
     borderRadius: 6,
     backgroundColor: "#fff",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.29,
-    shadowRadius: 4,
-    elevation: 7,
+    width: "100%",
+    borderColor: "#D9D9D9",
+    borderWidth: 2
   },
 
   buttonSelected: {
@@ -59,9 +57,7 @@ const styles = StyleSheet.create({
   },
 
   container: {
-    marginVertical: 8,
-    width: "95%",
-    alignSelf: "center",
+    margin: 8,
     flexDirection: "row",
     justifyContent: "space-between",
   },
