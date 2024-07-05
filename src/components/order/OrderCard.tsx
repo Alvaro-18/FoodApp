@@ -1,17 +1,15 @@
 import {View, StyleSheet, Text, Image, FlatList} from "react-native";
-import {Product} from "../../types/interfaces/Product";
 import {HeartButton} from "../UI/HeartButton";
 import {OrderStatus} from "../../types/enums/OrderStatus";
 import {ContactButtons} from "../UI/ContactButtons";
+import {Order} from "../../types/interfaces/Order";
+import {memo} from "react";
 
-const itensInTheOrder = [
-  {name: "Coffe with milk", price: 14.92},
-  {name: "Traditional Cappuccino", price: 20},
-];
+// eslint-disable-next-line react/display-name
+export const OrderCard = memo(({data}: {data: Order}) => {
 
-export function OrderCard({data, status}: {data: Product; status: OrderStatus}) {
   function OrderStatusHandler() {
-    if (status == OrderStatus.SENDING) {
+    if (data.status == OrderStatus.SENDING) {
       return (
         <View style={[styles.statusContainer, styles.sendingContainer]}>
           <View style={styles.sendingContainer}>
@@ -26,7 +24,7 @@ export function OrderCard({data, status}: {data: Product; status: OrderStatus}) 
         </View>
       );
     }
-    if (status == OrderStatus.COMPLETED) {
+    if (data.status == OrderStatus.COMPLETED) {
       return (
         <View style={styles.statusContainer}>
           <Image
@@ -37,7 +35,7 @@ export function OrderCard({data, status}: {data: Product; status: OrderStatus}) 
         </View>
       );
     }
-    if (status == OrderStatus.CANCELED) {
+    if (data.status == OrderStatus.CANCELED) {
       return (
         <View style={styles.statusContainer}>
           <Image
@@ -54,31 +52,32 @@ export function OrderCard({data, status}: {data: Product; status: OrderStatus}) 
     <View style={styles.container}>
       <View style={styles.top}>
         <View style={styles.top}>
-          <Image
-            source={{uri: data.imageURL}}
-            style={styles.image}
-          />
-          <Text style={styles.storeName}>{data.store}</Text>
+          <Image source={{uri: data.storeImage}} style={styles.image} />
+          <Text style={styles.storeName}>{data.storeName}</Text>
         </View>
         <HeartButton />
       </View>
 
-      <View>
+      <View style={styles.border}>
         <Text style={styles.text}>Status</Text>
         <OrderStatusHandler />
         <FlatList
-          style={{marginTop: 12}}
-          data={itensInTheOrder}
+          style={styles.list}
+          data={data.itens}
           renderItem={({item}) => (
             <Text style={styles.item}>
-              - {item.name} - R${item.price}
+              - {item.name} - R$ {item.price} x {item.quantity}
             </Text>
           )}
         />
       </View>
+
+      <View>
+        <Text style={styles.total}>Total: R$ {data.total}</Text>
+      </View>
     </View>
   );
-}
+});
 
 const styles = StyleSheet.create({
   container: {
@@ -97,7 +96,7 @@ const styles = StyleSheet.create({
     elevation: 7,
     paddingBottom: 12,
     marginTop: 4,
-    marginBottom: 12
+    marginBottom: 12,
   },
 
   top: {
@@ -160,4 +159,21 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "500",
   },
+
+  total: {
+    color: "#000",
+    fontSize: 14,
+    fontWeight: "600",
+    marginTop: 12,
+  },
+
+  list: {
+    marginTop: 12,
+    marginBottom: 12,
+  },
+
+  border: {
+    borderBottomColor: "#BBBBBB", 
+    borderBottomWidth: 1
+  }
 });
