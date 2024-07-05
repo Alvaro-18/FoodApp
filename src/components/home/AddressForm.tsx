@@ -2,6 +2,7 @@ import {View, Text, StyleSheet, Alert} from "react-native";
 import {useForm, Controller} from "react-hook-form";
 import {InputField} from "../auth/InputField";
 import {PrimaryButton} from "../UI/PrimaryButton";
+import { Colors } from "../../assets/constants/Colors";
 
 export function AddressForm() {
   const {
@@ -140,7 +141,7 @@ export function AddressForm() {
         )}
       </View>
 
-      <PrimaryButton onPress={handleSubmit(onSubmit)} colorNumber={1}>
+      <PrimaryButton onPress={handleSubmit(onSubmit)} color={Colors.secundaryColor}>
         Add new address
       </PrimaryButton>
     </View>
