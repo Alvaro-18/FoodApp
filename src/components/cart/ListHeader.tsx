@@ -1,10 +1,10 @@
 import {Image, Pressable, StyleSheet, Text, View} from "react-native";
-import { ChangeButton } from "./ChangeButton";
-import { OptionButton } from "../home/OptionButton";
-import { Colors } from "../../assets/constants/Colors";
-import { useState } from "react";
-import { STORE } from "../../store/Data";
-import { useNavigation } from "@react-navigation/native";
+import {ChangeButton} from "./ChangeButton";
+import {OptionButton} from "../home/OptionButton";
+import {Colors} from "../../assets/constants/Colors";
+import {useState} from "react";
+import {STORE} from "../../store/Data";
+import {useNavigation} from "@react-navigation/native";
 
 const data = {
   storeName: "Starbucks",
@@ -28,6 +28,19 @@ const data = {
   ],
 };
 
+const deliveryOptions = {
+  delivery: {
+    title: "Delivery",
+    subtitle1: "Tax: Free",
+    subtitle2: "Delivery time: 52min - 60 min",
+  },
+
+  selfPickup: {
+    title: "Self pickup",
+    subtitle1: "Preparation time: 30 min",
+  },
+};
+
 export function ListHeader() {
   function confirmOrderhandler(): void {
     console.log("");
@@ -40,8 +53,8 @@ export function ListHeader() {
   const navigation = useNavigation();
 
   const [isSelected, setIsSelected] = useState(false);
-  
-  function selectHandler(){
+
+  function selectHandler() {
     setIsSelected(!isSelected);
   }
 
@@ -65,41 +78,39 @@ export function ListHeader() {
 
       <View style={styles.row}>
         <Text style={styles.primaryText}>Delivery address:</Text>
-        <ChangeButton onPress={confirmOrderhandler} title="Street, number" description="lorem ipsum"/>
+        <ChangeButton
+          onPress={confirmOrderhandler}
+          title="Street, number"
+          description="lorem ipsum"
+        />
       </View>
       <View style={styles.row}>
         <Text style={styles.primaryText}>Delivery methods:</Text>
         <OptionButton
           selected={isSelected}
-          title={"Delivery"}
-          subtitle1="Tax: Free"
-          subtitle2="Delivery time: 52min - 60 min"
+          data={deliveryOptions.delivery}
           onPress={selectHandler}
         />
         <OptionButton
           selected={!isSelected}
-          title={"Self pickup"}
-          subtitle1="Preparation time: 30 min"
+          data={deliveryOptions.selfPickup}
           onPress={selectHandler}
         />
       </View>
       <View style={styles.row}>
         <Text style={styles.primaryText}>Payment methods:</Text>
-        <ChangeButton onPress={confirmOrderhandler} title="Card" description="mastercard - 0942"/>
+        <ChangeButton
+          onPress={confirmOrderhandler}
+          title="Card"
+          description="mastercard - 0942"
+        />
       </View>
 
       <View style={styles.row}>
         <Text style={styles.primaryText}>Order resume:</Text>
-        <View
-          style={styles.orderContainer}>
-          <Image
-            source={{uri: data.imageURL}}
-            style={styles.orderImage}
-          />
-          <Text
-            style={styles.orderText}>
-            {data.storeName}
-          </Text>
+        <View style={styles.orderContainer}>
+          <Image source={{uri: data.imageURL}} style={styles.orderImage} />
+          <Text style={styles.orderText}>{data.storeName}</Text>
         </View>
       </View>
     </View>
@@ -175,8 +186,8 @@ const styles = StyleSheet.create({
   },
 
   orderImage: {
-    width: 42, 
-    height: 42, 
-    borderRadius: 50
-  }
+    width: 42,
+    height: 42,
+    borderRadius: 50,
+  },
 });
