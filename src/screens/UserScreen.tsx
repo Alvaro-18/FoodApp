@@ -66,7 +66,6 @@ const styles = StyleSheet.create({
   container: {
     width: "95%",
     alignSelf: "center",
-    marginTop: "6%",
   },
 
   userContainer: {
