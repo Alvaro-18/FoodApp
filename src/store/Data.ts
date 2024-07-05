@@ -4,8 +4,9 @@ import {Product} from "../types/interfaces/Product";
 import {Store} from "../types/interfaces/Store";
 import {Favorite} from "../types/interfaces/Favorite";
 import {Categories} from "../types/interfaces/Categories";
-import { StoreStatus } from "../types/enums/StoreStatus";
-import { OrderStatus } from "../types/enums/OrderStatus";
+import {StoreStatus} from "../types/enums/StoreStatus";
+import {OrderStatus} from "../types/enums/OrderStatus";
+import {Order} from "../types/interfaces/Order";
 
 export const ADDRESS: Option[] = [
   {
@@ -91,8 +92,9 @@ export const PRODUCTS: Product[] = [
     imageURL:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQu40Hn8BS9s0a5eJK1-Ll1KPq1once0zkthQ&s",
     name: "Mediterranean Delight Salad",
-    description: "Indulge in the vibrant and refreshing flavors of the Mediterranean with our Mediterranean Salad. This delightful dish features a colorful medley of fresh ingredients, including crisp romaine, lorem lorem lorem lorem",
-    price: 22.90,
+    description:
+      "Indulge in the vibrant and refreshing flavors of the Mediterranean with our Mediterranean Salad. This delightful dish features a colorful medley of fresh ingredients, including crisp romaine, lorem lorem lorem lorem",
+    price: 22.9,
     store: "Starbucks",
   },
   {
@@ -100,7 +102,8 @@ export const PRODUCTS: Product[] = [
     imageURL:
       "https://exame.com/wp-content/uploads/2020/05/Vinil-Burger.jpg?quality=70&strip=info",
     name: "Tasty bite",
-    description: "This mouthwatering creation features a juicy, perfectly seasoned beef patty, grilled to perfection. It's topped with melted cheddar cheese, crisp lettuce, ripe tomatoes, and crunchy pickles....",
+    description:
+      "This mouthwatering creation features a juicy, perfectly seasoned beef patty, grilled to perfection. It's topped with melted cheddar cheese, crisp lettuce, ripe tomatoes, and crunchy pickles....",
     price: 32.25,
     store: "Starbucks",
   },
@@ -109,7 +112,8 @@ export const PRODUCTS: Product[] = [
     imageURL:
       "https://img.freepik.com/fotos-gratis/xicara-de-cafe-latte-quente_1339-8381.jpg?w=360&t=st=1699337551~exp=1699338151~hmac=3a5de69c3afaa55150bf7662d9706715fcb3d56334fbed49815fea92646a1742",
     name: "Coffee with milk",
-    description: "Strong, dark, and aromatic, typically one or two shots. Whole milk is often used for its creaminess, but you can choose based on your preference",
+    description:
+      "Strong, dark, and aromatic, typically one or two shots. Whole milk is often used for its creaminess, but you can choose based on your preference",
     price: 12,
     store: "Starbucks",
   },
@@ -118,7 +122,8 @@ export const PRODUCTS: Product[] = [
     imageURL:
       "https://img.freepik.com/fotos-gratis/xicara-de-cafe-latte-quente_1339-8381.jpg?w=360&t=st=1699337551~exp=1699338151~hmac=3a5de69c3afaa55150bf7662d9706715fcb3d56334fbed49815fea92646a1742",
     name: "Coffee with milk",
-    description: "Strong, dark, and aromatic, typically one or two shots. Whole milk is often used for its creaminess, but you can choose based on your preference",
+    description:
+      "Strong, dark, and aromatic, typically one or two shots. Whole milk is often used for its creaminess, but you can choose based on your preference",
     price: 12,
     store: "Starbucks",
   },
@@ -337,35 +342,87 @@ export const FAVORITES: Favorite[] = [
   },
 ];
 
-export const ORDERS: Product[] = [
+export const ORDERS: Order[] = [
   {
     id: "1",
-    imageURL:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQu40Hn8BS9s0a5eJK1-Ll1KPq1once0zkthQ&s",
-    name: "Mediterranean Delight Salad",
-    description: "Indulge in the vibrant and refreshing flavors of the Mediterranean with our Mediterranean Salad. This delightful dish features a colorful medley of fresh ingredients, including crisp romaine, lorem lorem lorem lorem",
-    price: 22.90,
-    store: "Starbucks",
-    status: OrderStatus.COMPLETED
+    storeImage:
+      "https://itaupowershopping.com.br/cont/uploads/2023/02/starbucks-1-1-1-1.jpg",
+    storeName: "Starbucks",
+    status: OrderStatus.COMPLETED,
+    itens: [
+      {
+        id: "1",
+        name: "Mediterranean Delight Salad",
+        price: 22.9,
+        quantity: 2
+      },
+      {
+        id: "2",
+        name: "Tasty bite",
+        price: 32.25,
+        quantity: 2
+      },
+      {
+        id: "3",
+        name: "Coffee with milk",
+        price: 12,
+        quantity: 4
+      },
+    ],
+    total: 0
   },
   {
     id: "2",
-    imageURL:
-      "https://exame.com/wp-content/uploads/2020/05/Vinil-Burger.jpg?quality=70&strip=info",
-    name: "Tasty bite",
-    description: "This mouthwatering creation features a juicy, perfectly seasoned beef patty, grilled to perfection. It's topped with melted cheddar cheese, crisp lettuce, ripe tomatoes, and crunchy pickles....",
-    price: 32.25,
-    store: "Starbucks",
-    status: OrderStatus.SENDING
+    storeImage:
+      "https://itaupowershopping.com.br/cont/uploads/2023/02/starbucks-1-1-1-1.jpg",
+    storeName: "Starbucks",
+    status: OrderStatus.SENDING,
+    itens: [
+      {
+        id: "1",
+        name: "Mediterranean Delight Salad",
+        price: 22.9,
+        quantity: 2
+      },
+    ],
+    total: 0
   },
   {
     id: "3",
-    imageURL:
-      "https://img.freepik.com/fotos-gratis/xicara-de-cafe-latte-quente_1339-8381.jpg?w=360&t=st=1699337551~exp=1699338151~hmac=3a5de69c3afaa55150bf7662d9706715fcb3d56334fbed49815fea92646a1742",
-    name: "Coffee with milk",
-    description: "Strong, dark, and aromatic, typically one or two shots. Whole milk is often used for its creaminess, but you can choose based on your preference",
-    price: 12,
-    store: "Starbucks",
-    status: OrderStatus.CANCELED
+    storeImage:
+      "https://itaupowershopping.com.br/cont/uploads/2023/02/starbucks-1-1-1-1.jpg",
+    storeName: "Starbucks",
+    status: OrderStatus.CANCELED,
+    itens: [
+      {
+        id: "2",
+        name: "Tasty bite",
+        price: 32.25,
+        quantity: 2
+      },
+      {
+        id: "3",
+        name: "Coffee with milk",
+        price: 12,
+        quantity: 2
+      },
+    ],
+    total: 0
+  },
+  {
+    id: "4",
+    storeImage:
+      "https://itaupowershopping.com.br/cont/uploads/2023/02/starbucks-1-1-1-1.jpg",
+    storeName: "Starbucks",
+    status: OrderStatus.CANCELED,
+    itens: [
+      {
+        id: "3",
+        name: "Coffee with milk",
+        price: 12,
+        quantity: 2
+      },
+    ],
+    total: 0
   },
 ];
