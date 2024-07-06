@@ -7,44 +7,48 @@ import {memo} from "react";
 
 // eslint-disable-next-line react/display-name
 export const OrderCard = memo(({data}: {data: Order}) => {
-
   function OrderStatusHandler() {
-    if (data.status == OrderStatus.SENDING) {
-      return (
-        <View style={[styles.statusContainer, styles.sendingContainer]}>
-          <View style={styles.sendingContainer}>
+    switch (data.status) {
+      case OrderStatus.SENDING:
+        return (
+          <View style={[styles.statusContainer, styles.position]}>
+            <View style={styles.position}>
+              <Image
+                source={require("../../assets/images/Status-wait.png")}
+                style={styles.statusIcon}
+              />
+              <Text style={styles.statusText}>Order on way</Text>
+            </View>
+
+            <ContactButtons />
+          </View>
+        );
+
+      case OrderStatus.COMPLETED:
+        return (
+          <View style={[styles.statusContainer, styles.position]}>
+            <View style={styles.position}>
+              <Image
+                source={require("../../assets/images/Status-ok.png")}
+                style={styles.statusIcon}
+              />
+              <Text style={styles.statusText}>Order completed</Text>
+            </View>
+
+            <ContactButtons />
+          </View>
+        );
+
+      case OrderStatus.CANCELED:
+        return (
+          <View style={styles.statusContainer}>
             <Image
-              source={require("../../assets/images/Status-wait.png")}
+              source={require("../../assets/images/Status-error.png")}
               style={styles.statusIcon}
             />
-            <Text style={styles.statusText}>Order on way</Text>
+            <Text style={styles.statusText}>Order Canceled</Text>
           </View>
-
-          <ContactButtons />
-        </View>
-      );
-    }
-    if (data.status == OrderStatus.COMPLETED) {
-      return (
-        <View style={styles.statusContainer}>
-          <Image
-            source={require("../../assets/images/Status-ok.png")}
-            style={styles.statusIcon}
-          />
-          <Text style={styles.statusText}>Order completed</Text>
-        </View>
-      );
-    }
-    if (data.status == OrderStatus.CANCELED) {
-      return (
-        <View style={styles.statusContainer}>
-          <Image
-            source={require("../../assets/images/Status-error.png")}
-            style={styles.statusIcon}
-          />
-          <Text style={styles.statusText}>Order Canceled</Text>
-        </View>
-      );
+        );
     }
   }
 
@@ -123,7 +127,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 
-  sendingContainer: {
+  position: {
     justifyContent: "space-between",
     flexDirection: "row",
     alignItems: "center",
@@ -173,7 +177,7 @@ const styles = StyleSheet.create({
   },
 
   border: {
-    borderBottomColor: "#BBBBBB", 
-    borderBottomWidth: 1
-  }
+    borderBottomColor: "#BBBBBB",
+    borderBottomWidth: 1,
+  },
 });
