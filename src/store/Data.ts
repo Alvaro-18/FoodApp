@@ -220,6 +220,7 @@ export const CATEGORIES: Categories[] = [
 
 export const STORE: Store[] = [
   {
+    id: "1",
     name: "Startbucks",
     status: StoreStatus.OPEN,
     logoURL:
@@ -234,6 +235,22 @@ export const STORE: Store[] = [
     deliveryTime: "45min", // calculado dentro da aplicação
   },
   {
+    id: "2",
+    name: "Loja do foguete",
+    status: StoreStatus.OPEN,
+    logoURL:
+      "https://itaupowershopping.com.br/cont/uploads/2023/02/starbucks-1-1-1-1.jpg",
+    bannerURL:
+      "https://www.cartacapital.com.br/wp-content/uploads/2023/11/1280px-Starbucks_Coffee_Mannheim_August_2012.jpeg",
+    description:
+      "Starbucks is like a coffee wonderland. Imagine a cozy yet bustling space where the rich aroma of freshly brewed coffee envelops you the moment you step inside. ",
+    note: "7.2",
+    category: "Restaurant",
+    storeDistance: "1.2km", // calculado dentro da aplicação
+    deliveryTime: "45min", // calculado dentro da aplicação
+  },
+  {
+    id: "3",
     name: "Startbucks",
     status: StoreStatus.OPEN,
     logoURL:
@@ -248,6 +265,7 @@ export const STORE: Store[] = [
     deliveryTime: "45min", // calculado dentro da aplicação
   },
   {
+    id: "4",
     name: "Startbucks",
     status: StoreStatus.OPEN,
     logoURL:
@@ -262,6 +280,7 @@ export const STORE: Store[] = [
     deliveryTime: "45min", // calculado dentro da aplicação
   },
   {
+    id: "5",
     name: "Startbucks",
     status: StoreStatus.OPEN,
     logoURL:
@@ -276,6 +295,7 @@ export const STORE: Store[] = [
     deliveryTime: "45min", // calculado dentro da aplicação
   },
   {
+    id: "6",
     name: "Startbucks",
     status: StoreStatus.OPEN,
     logoURL:
@@ -290,6 +310,7 @@ export const STORE: Store[] = [
     deliveryTime: "45min", // calculado dentro da aplicação
   },
   {
+    id: "7",
     name: "Startbucks",
     status: StoreStatus.OPEN,
     logoURL:
@@ -304,20 +325,7 @@ export const STORE: Store[] = [
     deliveryTime: "45min", // calculado dentro da aplicação
   },
   {
-    name: "Startbucks",
-    status: StoreStatus.OPEN,
-    logoURL:
-      "https://itaupowershopping.com.br/cont/uploads/2023/02/starbucks-1-1-1-1.jpg",
-    bannerURL:
-      "https://www.cartacapital.com.br/wp-content/uploads/2023/11/1280px-Starbucks_Coffee_Mannheim_August_2012.jpeg",
-    description:
-      "Starbucks is like a coffee wonderland. Imagine a cozy yet bustling space where the rich aroma of freshly brewed coffee envelops you the moment you step inside. ",
-    note: "7.2",
-    category: "Restaurant",
-    storeDistance: "1.2km", // calculado dentro da aplicação
-    deliveryTime: "45min", // calculado dentro da aplicação
-  },
-  {
+    id: "8",
     name: "Startbucks",
     status: StoreStatus.OPEN,
     logoURL:

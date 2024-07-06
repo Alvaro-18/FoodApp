@@ -1,6 +1,7 @@
 import { StoreStatus } from "../enums/StoreStatus";
 
 export interface Store  {
+  id: string,
   name: string,
   status: StoreStatus,
   logoURL: string,
