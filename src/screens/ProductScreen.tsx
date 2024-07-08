@@ -14,20 +14,21 @@ import {useEffect, useState} from "react";
 
 import {STORE, PRODUCTS} from "../store/Data";
 import {Product} from "../types/interfaces/Product";
+import { Store } from "../types/interfaces/Store";
 
 export function ProductScreen({route}: {route: any}) {
-  // id do produto
-  // pegar os dados do produto na api
+  const {id} = route.params;
+  const [count, setCounter] = useState(1);
+  const [isInTheCart, setIsInTheCart] = useState(false);
+  const [dado, setDado] = useState<Product>();
+  const [store, setStore] = useState<Store>();
+  
 
   const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
   function navigationHandler() {
     navigation.goBack();
   }
-  const {id} = route.params;
-  const [count, setCounter] = useState(1);
-  const [isInTheCart, setIsInTheCart] = useState(false);
-  const [dado, setDado] = useState<Product>();
 
   function setCart() {
     if (!isInTheCart) {
@@ -40,10 +41,13 @@ export function ProductScreen({route}: {route: any}) {
   useEffect(() => {
     async function fetchProduct() {
       const product = PRODUCTS.find(product => product.id === id);
+      const store = STORE.find(store => store.name === product?.store);
       if (product) {
         setDado(product);
+        setStore(store);
       } else {
         setDado(PRODUCTS[0]);
+        setStore(STORE[0]);
       }
     }
 
@@ -110,12 +114,12 @@ export function ProductScreen({route}: {route: any}) {
           <View style={styles.header}>
             <Text style={styles.name}>{dado.name}</Text>
 
-            <Text style={styles.price}>R$ {dado.price}</Text>
+            <Text style={styles.price}>R$ {dado.price.toFixed(2)}</Text>
           </View>
 
           <Text style={styles.description}>{dado.description}</Text>
 
-          <StorePresentationCard dado={STORE[0]} />
+          <StorePresentationCard dado={store ? store : STORE[0]} />
         </View>
 
         <View>
