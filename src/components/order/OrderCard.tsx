@@ -3,10 +3,23 @@ import {HeartButton} from "../UI/HeartButton";
 import {OrderStatus} from "../../types/enums/OrderStatus";
 import {ContactButtons} from "../UI/ContactButtons";
 import {Order} from "../../types/interfaces/Order";
-import {memo} from "react";
+import {memo, useCallback} from "react";
+import {ParamListBase, useNavigation} from "@react-navigation/native";
+import {NativeStackNavigationProp} from "@react-navigation/native-stack";
+import { Store } from "../../types/interfaces/Store";
 
-// eslint-disable-next-line react/display-name
+
 export const OrderCard = memo(({data}: {data: Order}) => {
+  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
+
+  const chatHandler = useCallback((item: Store) => {
+    navigation.navigate("chat", {id: item.id});
+  }, []);
+
+  function phoneHandler(){
+    console.log("ring");
+  } 
+
   function OrderStatusHandler() {
     switch (data.status) {
       case OrderStatus.SENDING:
@@ -20,7 +33,7 @@ export const OrderCard = memo(({data}: {data: Order}) => {
               <Text style={styles.statusText}>Order on way</Text>
             </View>
 
-            <ContactButtons />
+            <ContactButtons onPressChatBtn={() => chatHandler} onPressPhoneBtn={phoneHandler}/>
           </View>
         );
 
@@ -35,7 +48,7 @@ export const OrderCard = memo(({data}: {data: Order}) => {
               <Text style={styles.statusText}>Order completed</Text>
             </View>
 
-            <ContactButtons />
+            <ContactButtons onPressChatBtn={() => chatHandler} onPressPhoneBtn={phoneHandler}/>
           </View>
         );
 
@@ -70,7 +83,7 @@ export const OrderCard = memo(({data}: {data: Order}) => {
           data={data.itens}
           renderItem={({item}) => (
             <Text style={styles.item}>
-              - {item.name} - R$ {item.price} x {item.quantity}
+              - {item.name} - R$ {item.price.toFixed(2)} x {item.quantity}
             </Text>
           )}
         />
@@ -82,6 +95,8 @@ export const OrderCard = memo(({data}: {data: Order}) => {
     </View>
   );
 });
+
+OrderCard.displayName = "OrderCard";
 
 const styles = StyleSheet.create({
   container: {

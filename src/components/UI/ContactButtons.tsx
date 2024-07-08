@@ -1,12 +1,20 @@
-import {Image, Pressable, View, StyleSheet} from "react-native";
+import {Image, Pressable, View, StyleSheet, GestureResponderEvent} from "react-native";
 
-export function ContactButtons() {
+export function ContactButtons(
+  {
+    onPressChatBtn,
+    onPressPhoneBtn
+  }: {
+    onPressChatBtn: (event: GestureResponderEvent) => void;
+    onPressPhoneBtn: (event: GestureResponderEvent) => void;
+  }
+) {
   return (
     <View style={styles.container}>
-      <Pressable style={styles.btn}>
+      <Pressable style={styles.btn} onPress={onPressChatBtn}>
         <Image source={require("../../assets/images/Chat-solid.png")} style={styles.img}/>
       </Pressable>
-      <Pressable style={styles.btn}>
+      <Pressable style={styles.btn} onPress={onPressPhoneBtn}>
         <Image source={require("../../assets/images/Phone-solid.png")} style={styles.img}/>
       </Pressable>
     </View>

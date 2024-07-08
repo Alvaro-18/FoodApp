@@ -11,41 +11,48 @@ import {
 } from "react-native";
 import {Colors} from "../assets/constants/Colors";
 import {StorePresentationCard} from "../components/store/StorePresentationCard";
-import {StoreStatus} from "../types/enums/StoreStatus";
 import {ContactButtons} from "../components/UI/ContactButtons";
-import {PRODUCTS} from "../store/Data";
+import { STORE} from "../store/Data";
 import {ProductCard} from "../components/store/ProductCard";
-import {useCallback} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {Product} from "../types/interfaces/Product";
-const dado = {
-  name: "Startbucks",
-  status: StoreStatus.OPEN,
-  logoURL:
-    "https://upload.wikimedia.org/wikipedia/pt/0/0f/Starbucks_Corporation_Logo_2011.svg.png",
-  bannerURL:
-    "https://www.cartacapital.com.br/wp-content/uploads/2023/11/1280px-Starbucks_Coffee_Mannheim_August_2012.jpeg",
-  description:
-    "Starbucks is like a coffee wonderland. Imagine a cozy yet bustling space where the rich aroma of freshly brewed coffee envelops you the moment you step inside. ",
-  note: "7.2",
-  category: "Restaurant",
-};
+import { Store } from "../types/interfaces/Store";
 
-export function StoreScreen() {
-  // id do produto
-  // pegar os dados do produto na api
-
+export function StoreScreen({route}: {route: any}) {
+  const {id} = route.params;
+  const [dado, setDado] = useState<Store>();
+  
   const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
   function navigationHandler() {
     navigation.goBack();
   }
 
+  const chatHandler = useCallback((item: Store) => {
+    navigation.navigate("chat", {id: item.id});
+  }, []);
+
+  function phoneHandler(){
+    console.log("ring");
+  }
+
   const productNavigation = useCallback((item: Product) => {
     navigation.navigate("product", {id: item.id});
   }, []);
 
+  useEffect(() => {
+    async function fetchStore() {
+      const store = STORE.find(store => store.id === id);
+      if (store) {
+        setDado(store);
+      } 
+    }
+    
+    fetchStore();
+  }, [id]);
+
   function FetchImage({children}: {children: React.ReactNode}) {
-    if (dado.bannerURL !== "" && dado.bannerURL !== null) {
+    if (dado && dado.bannerURL) {
       return (
         <ImageBackground source={{uri: dado.bannerURL}} style={styles.banner}>
           {children}
@@ -69,7 +76,7 @@ export function StoreScreen() {
             </Pressable>
           </View>
           <View style={styles.cardContainer}>
-            <StorePresentationCard dado={dado} />
+            <StorePresentationCard dado={(dado) ? dado : STORE[0]} />
           </View>
         </FetchImage>
 
@@ -79,7 +86,7 @@ export function StoreScreen() {
               Status:
               <Text style={styles.statusText}> Open for delivery</Text>
             </Text>
-            <ContactButtons />
+            <ContactButtons onPressChatBtn={() => chatHandler} onPressPhoneBtn={phoneHandler}/>
           </View>
         </View>
       </View>
@@ -90,7 +97,7 @@ export function StoreScreen() {
     <View>
       <FlatList
         ListHeaderComponent={listHeader}
-        data={PRODUCTS}
+        data={dado?.products}
         renderItem={({item}) => <ProductCard data={item} onPress={productNavigation}/>}
       />
     </View>
