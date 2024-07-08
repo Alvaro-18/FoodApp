@@ -2,7 +2,6 @@ import {Pressable, Image, StyleSheet, GestureResponderEvent, Text} from "react-n
 import {memo} from "react";
 
 
-// eslint-disable-next-line react/display-name
 export const CategoryCard = memo(
   ({onPress, title} : {onPress: (event: GestureResponderEvent) => void, title:string}) => {
     return (
@@ -18,6 +17,7 @@ export const CategoryCard = memo(
   }
 );
 
+CategoryCard.displayName = "CategoryCard";
 
 const styles = StyleSheet.create({
   button: {
