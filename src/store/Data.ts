@@ -3,10 +3,39 @@ import {Notification} from "../types/interfaces/Notification";
 import {Product} from "../types/interfaces/Product";
 import {Store} from "../types/interfaces/Store";
 import {Favorite} from "../types/interfaces/Favorite";
-import {Categories} from "../types/interfaces/Categories";
+import {Category} from "../types/interfaces/Category";
 import {StoreStatus} from "../types/enums/StoreStatus";
 import {OrderStatus} from "../types/enums/OrderStatus";
 import {Order} from "../types/interfaces/Order";
+import {Message} from "../types/interfaces/Message";
+import {MessageStatus} from "../types/enums/MessageStatus";
+
+export const MSGLIST: Message[] = [
+  {
+    to: 0,
+    from: 0,
+    id: 120,
+    message: "Hello world, lorem ipsum dolor sit amefasnfasfsnd",
+    createdAt: "2024-07-10 17:00:00",
+    status: MessageStatus.READ,
+  },
+  {
+    to: 0,
+    from: 0,
+    id: 143,
+    message: "Hello world, lorem ipsum dolor sit amefasnfasfsnd",
+    createdAt: "2024-07-10 17:10:00",
+    status: MessageStatus.RECEIVED,
+  },
+  {
+    to: 0,
+    from: 0,
+    id: 452,
+    message: "Hello world, lorem ipsum dolor sit amefasnfasfsnd",
+    createdAt: "2024-07-10 17:12:00",
+    status: MessageStatus.SENDED,
+  },
+];
 
 export const ADDRESS: Option[] = [
   {
@@ -339,38 +368,46 @@ export const PRODUCTS: Product[] = [
   },
 ];
 
-export const CATEGORIES: Categories[] = [
+export const CATEGORIES: Category[] = [
   {
     title: "Offers",
     id: "1",
+    iconName: "percentage",
   },
   {
     title: "Drinks",
     id: "2",
+    iconName: "glass-martini",
   },
   {
-    title: "Vegan",
+    title: "Vegans",
     id: "3",
+    iconName: "seedling",
   },
   {
-    title: "Gourmet",
+    title: "Coffees",
     id: "4",
+    iconName: "coffee",
   },
   {
     title: "Fruits",
     id: "5",
-  },
-  {
-    title: "Home",
-    id: "6",
+    iconName: "apple-alt",
   },
   {
     title: "Desserts",
-    id: "7",
+    id: "6",
+    iconName: "cookie-bite",
   },
   {
-    title: "Inter",
+    title: "Snacks",
+    id: "7",
+    iconName: "bread-slice",
+  },
+  {
+    title: "Dinners",
     id: "8",
+    iconName: "utensils",
   },
 ];
 
@@ -444,8 +481,10 @@ export const STORE: Store[] = [
     id: "2",
     name: "The Smoking Barrel",
     status: StoreStatus.OPEN,
-    logoURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfoOuA5KjGX9CuAsDSTauNpkWfJgd1OVz4XQ&s",
-    bannerURL: "https://saopauloparacriancas.com.br/wp-content/uploads/2017/12/image-43-1.jpg",
+    logoURL:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfoOuA5KjGX9CuAsDSTauNpkWfJgd1OVz4XQ&s",
+    bannerURL:
+      "https://saopauloparacriancas.com.br/wp-content/uploads/2017/12/image-43-1.jpg",
     description:
       "The Smoking Barrel is a cozy tavern known for its warm atmosphere and hearty meals. As you enter, the inviting aroma of roasting meats and bubbling stews fills the air1", // texto grande tá quebrando no exemplo
     note: "5.0",
