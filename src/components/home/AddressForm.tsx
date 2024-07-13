@@ -152,16 +152,17 @@ const styles = StyleSheet.create({
   container: {
     alignSelf: "center",
     width: "95%",
-    marginTop: "15%",
+    marginTop: "12%",
   },
 
   form: {
     justifyContent: "space-between",
-    height: 375,
-    marginBottom: "20%",
+    height: "64%",
+    marginBottom: "40%",
   },
 
   alertText: {
     color: "red",
+    marginVertical: "2%"
   },
 });
