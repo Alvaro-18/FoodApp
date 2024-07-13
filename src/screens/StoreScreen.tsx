@@ -86,7 +86,7 @@ export function StoreScreen({route}: {route: any}) {
               Status:
               <Text style={styles.statusText}> Open for delivery</Text>
             </Text>
-            <ContactButtons onPressChatBtn={() => chatHandler} onPressPhoneBtn={phoneHandler}/>
+            <ContactButtons onPressChatBtn={chatHandler} onPressPhoneBtn={phoneHandler} data={(dado) ? dado : STORE[0]}/>
           </View>
         </View>
       </View>
