@@ -24,8 +24,5 @@ const styles = StyleSheet.create({
   container: {
     alignSelf: "center",
     width: "95%",
-
   },
-
-
 });

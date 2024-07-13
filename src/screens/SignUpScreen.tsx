@@ -145,7 +145,7 @@ export function SignUpScreen() {
           </Text>
         </Pressable>
 
-        <PrimaryButton onPress={handleSubmit(onSubmit)}>SIGN UP</PrimaryButton>
+        <PrimaryButton onPress={handleSubmit(onSubmit)} color={Colors.secundaryColor}>SIGN UP</PrimaryButton>
 
         <View style={styles.bottom}>
           <Text style={styles.paragraph}>
