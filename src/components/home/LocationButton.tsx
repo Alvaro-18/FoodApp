@@ -11,15 +11,20 @@ import {
 import {OptionButton} from "./OptionButton";
 import {ADDRESS} from "../../store/Data";
 import {PrimaryButton} from "../UI/PrimaryButton";
-import {AddressForm} from "./AddressForm";
 import { Colors } from "../../assets/constants/Colors";
 import { Option } from "../../types/interfaces/Option";
+import {ParamListBase, useNavigation} from "@react-navigation/native";
+import {NativeStackNavigationProp} from "@react-navigation/native-stack";
 
 
 export function LocationButton() {
+  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
+
+  function navigationHandler() {
+    navigation.navigate("address");
+    setVisibilityModalSelect(false);
+  }
   const [visibilityModalSelect, setVisibilityModalSelect] = useState(false);
-  const [visibilityModaAddShipping, setVisibilityModaAddShipping] =
-    useState(false);
 
   const [isSelected, setIsSelected] = useState<Option>(ADDRESS[0]);  
 
@@ -27,9 +32,7 @@ export function LocationButton() {
     return (
       <Pressable
         style={styles.footerListContainer}
-        onPress={() => {
-          setVisibilityModaAddShipping(true);
-        }}>
+        onPress={navigationHandler}>
         <Text style={styles.footerListText}>Add new location +</Text>
       </Pressable>
     );
@@ -41,27 +44,6 @@ export function LocationButton() {
 
   return (
     <View>
-      <Modal
-        animationType="fade"
-        transparent={false}
-        visible={visibilityModaAddShipping}>
-        <View style={styles.modalContainer}>
-          <View style={styles.header}>
-            <Pressable
-              onPress={() => {
-                setVisibilityModaAddShipping(false);
-              }}>
-              <Image
-                source={require("../../assets/images/Arrow-back.png")}
-                style={styles.arrow}
-              />
-            </Pressable>
-            <Text style={styles.modalTitle}>Adding shipping address</Text>
-          </View>
-
-          <AddressForm />
-        </View>
-      </Modal>
 
       <Modal
         animationType="fade"
@@ -177,16 +159,5 @@ const styles = StyleSheet.create({
     color: "#000",
     fontWeight: "bold",
     fontSize: 16,
-  },
-
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    paddingRight: "20%",
-  },
-
-  arrow: {
-    width: 24,
-    height: 24,
   },
 });
