@@ -1,26 +1,33 @@
 import {View, Pressable, StyleSheet, Text} from "react-native";
 import {Colors} from "../../assets/constants/Colors";
+import {memo, useState} from "react";
 
-export function NotificationCard({
-  title,
-  description,
-  isRead,
-}: {
-  title: string;
-  description: string;
-  isRead: boolean;
-}) {
-  return (
-    <Pressable style={styles.button}>
-      <View style={styles.header}>
-        <Text style={styles.title}>{title}</Text>
-        <View style={!isRead && styles.badge} />
-      </View>
+export const NotificationCard = memo(
+  ({
+    title,
+    description,
+    isRead,
+  }: {
+    title: string;
+    description: string;
+    isRead: boolean;
+  }) => {
+    const [read, setRead] = useState(isRead);
 
-      <Text style={styles.description}>{description}</Text>
-    </Pressable>
-  );
-}
+    return (
+      <Pressable style={styles.button} onPress={() => setRead(true)}>
+        <View style={styles.header}>
+          <Text style={styles.title}>{title}</Text>
+          <View style={!read && styles.badge} />
+        </View>
+
+        <Text style={styles.description}>{description}</Text>
+      </Pressable>
+    );
+  },
+);
+
+NotificationCard.displayName = "NotificationCard";
 
 const styles = StyleSheet.create({
   button: {

@@ -1,6 +1,8 @@
 import { StoreStatus } from "../enums/StoreStatus";
+import { Product } from "./Product";
 
 export interface Store  {
+  id: string,
   name: string,
   status: StoreStatus,
   logoURL: string,
@@ -9,5 +11,6 @@ export interface Store  {
   note: string,
   category: string,
   storeDistance?:  string,
-  deliveryTime?: string
+  deliveryTime?: string,
+  products: Product[],
 }

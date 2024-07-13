@@ -6,6 +6,8 @@ import {CartScreen} from "../../screens/CartScreen";
 import {LocationButton} from "../../components/home/LocationButton";
 import {NotificationButton} from "../../components/home/NotificationButton";
 import {SearchButton} from "../../components/home/SearchButton";
+import { ChatScreen } from "../../screens/ChatScreen";
+import { FormAddressScreen } from "../../screens/FormAddressScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -43,6 +45,16 @@ export function MainStack() {
       <Stack.Screen
         name="cart"
         component={CartScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="chat"
+        component={ChatScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="address"
+        component={FormAddressScreen}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

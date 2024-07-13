@@ -3,7 +3,6 @@ import {Image, Pressable, View, Text, StyleSheet} from "react-native";
 import {Product} from "../../types/interfaces/Product";
 import {HeartButton} from "../UI/HeartButton";
 
-// eslint-disable-next-line react/display-name
 export const ProductCard = memo(({data, onPress}: {data: Product, onPress: (item:Product) => void}) => {
 
   return (
@@ -18,18 +17,20 @@ export const ProductCard = memo(({data, onPress}: {data: Product, onPress: (item
             <Text style={styles.name} numberOfLines={1}>
               {data.name} 
             </Text>
-            <Text style={styles.price}>R$ {data.price}</Text>
+            <Text style={styles.price}>R$ {data.price.toFixed(2)}</Text>
           </View>
         </Pressable>
         <HeartButton />
       </View>
 
       <Pressable onPress={() => onPress(data)}>
-        <Text style={styles.description}>{data.description}</Text>
+        <Text style={styles.description} numberOfLines={3}>{data.description}</Text>
       </Pressable>
     </View>
   );
 });
+
+ProductCard.displayName = "ProductCard";
 
 const styles = StyleSheet.create({
   container: {

@@ -1,30 +1,48 @@
-import {Pressable, Image, StyleSheet, GestureResponderEvent, Text} from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  GestureResponderEvent,
+  Text,
+  View,
+} from "react-native";
 import {memo} from "react";
+import {Category} from "../../types/interfaces/Category";
+import {Colors} from "../../assets/constants/Colors";
+import { Icon } from "../UI/Icon";
 
-
-// eslint-disable-next-line react/display-name
 export const CategoryCard = memo(
-  ({onPress, title} : {onPress: (event: GestureResponderEvent) => void, title:string}) => {
+  ({
+    onPress,
+    data,
+  }: {
+    onPress: (event: GestureResponderEvent) => void;
+    data: Category;
+  }) => {
+  
     return (
-      <Pressable onPress={onPress} style={({pressed}) => pressed ? [styles.button, styles.pressed] : styles.button}>
-        <Image
-          source={require("../../assets/images/Coffe.jpg")}
-          resizeMode={"contain"}
-          style={styles.image}
-        />
-        <Text style={styles.text}>{title}</Text>
+      <Pressable
+        onPress={onPress}
+        style={({pressed}) =>
+          pressed ? [styles.button, styles.pressed] : styles.button
+        }>
+        <View style={{backgroundColor: Colors.secundaryColor, width: 46, height: 46, alignItems: "center", justifyContent: "center", borderRadius: 50, marginBottom: 4}}>
+
+        <Icon name={data.iconName} color={"#fff"} size={22} />
+        </View>
+        <Text style={styles.text}>{data.title}</Text>
       </Pressable>
     );
-  }
+  },
 );
 
+CategoryCard.displayName = "CategoryCard";
 
 const styles = StyleSheet.create({
   button: {
     width: 78,
     height: 90,
-    borderRadius:12,
-    backgroundColor:"#fff",
+    borderRadius: 12,
+    backgroundColor: "#fff",
     marginHorizontal: 4,
     alignItems: "center",
     justifyContent: "center",
@@ -40,19 +58,19 @@ const styles = StyleSheet.create({
   },
 
   pressed: {
-    opacity: 0.75
+    opacity: 0.75,
   },
 
-  image:  {
+  image: {
     width: 46,
     height: 46,
     borderRadius: 50,
-    marginBottom: 8
+    marginBottom: 8,
   },
 
-  text:{
+  text: {
     color: "#000",
     fontSize: 16,
-    fontWeight: "500"
-  }
+    fontWeight: "500",
+  },
 });

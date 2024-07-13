@@ -1,11 +1,12 @@
 import {View, Pressable, StyleSheet, Text, Image} from "react-native";
 import {Product} from "../../types/interfaces/Product";
 import {HeartButton} from "../UI/HeartButton";
+import { memo } from "react";
 
-export function FavoritesCard({data}: {data: Product}) {
+export const FavoritesCard = memo(({data, onPress}: {data: Product, onPress: (item:Product) => void}) => {
   return (
     <View style={styles.container}>
-      <Pressable style={styles.button}>
+      <Pressable style={styles.button} onPress={() => onPress(data)}>
         <Image
           source={{uri: data.imageURL}}
           style={styles.image}
@@ -13,14 +14,16 @@ export function FavoritesCard({data}: {data: Product}) {
 
         <View style={styles.textContainer}>
           <Text style={styles.storeName} numberOfLines={1}>{data.name}</Text>
-          <Text style={styles.paragraph}>R$ {data.price}</Text>
+          <Text style={styles.paragraph}>R$ {data.price.toFixed(2)}</Text>
         </View>
       </Pressable>
 
       <HeartButton />
     </View>
   );
-}
+});
+
+FavoritesCard.displayName = "FavoritesCard";
 
 const styles = StyleSheet.create({
   container: {

@@ -3,48 +3,65 @@ import {HeartButton} from "../UI/HeartButton";
 import {OrderStatus} from "../../types/enums/OrderStatus";
 import {ContactButtons} from "../UI/ContactButtons";
 import {Order} from "../../types/interfaces/Order";
-import {memo} from "react";
+import {memo, useCallback} from "react";
+import {ParamListBase, useNavigation} from "@react-navigation/native";
+import {NativeStackNavigationProp} from "@react-navigation/native-stack";
+import { Store } from "../../types/interfaces/Store";
 
-// eslint-disable-next-line react/display-name
+
 export const OrderCard = memo(({data}: {data: Order}) => {
+  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
+
+  const chatHandler = useCallback((item: Store) => {
+    navigation.navigate("chat", {id: item.id});
+  }, []);
+
+  function phoneHandler(){
+    console.log("ring");
+  } 
 
   function OrderStatusHandler() {
-    if (data.status == OrderStatus.SENDING) {
-      return (
-        <View style={[styles.statusContainer, styles.sendingContainer]}>
-          <View style={styles.sendingContainer}>
+    switch (data.status) {
+      case OrderStatus.SENDING:
+        return (
+          <View style={[styles.statusContainer, styles.position]}>
+            <View style={styles.position}>
+              <Image
+                source={require("../../assets/images/Status-wait.png")}
+                style={styles.statusIcon}
+              />
+              <Text style={styles.statusText}>Order on way</Text>
+            </View>
+
+            <ContactButtons onPressChatBtn={() => chatHandler} onPressPhoneBtn={phoneHandler}/>
+          </View>
+        );
+
+      case OrderStatus.COMPLETED:
+        return (
+          <View style={[styles.statusContainer, styles.position]}>
+            <View style={styles.position}>
+              <Image
+                source={require("../../assets/images/Status-ok.png")}
+                style={styles.statusIcon}
+              />
+              <Text style={styles.statusText}>Order completed</Text>
+            </View>
+
+            <ContactButtons onPressChatBtn={() => chatHandler} onPressPhoneBtn={phoneHandler}/>
+          </View>
+        );
+
+      case OrderStatus.CANCELED:
+        return (
+          <View style={styles.statusContainer}>
             <Image
-              source={require("../../assets/images/Status-wait.png")}
+              source={require("../../assets/images/Status-error.png")}
               style={styles.statusIcon}
             />
-            <Text style={styles.statusText}>Order on way</Text>
+            <Text style={styles.statusText}>Order Canceled</Text>
           </View>
-
-          <ContactButtons />
-        </View>
-      );
-    }
-    if (data.status == OrderStatus.COMPLETED) {
-      return (
-        <View style={styles.statusContainer}>
-          <Image
-            source={require("../../assets/images/Status-ok.png")}
-            style={styles.statusIcon}
-          />
-          <Text style={styles.statusText}>Order completed</Text>
-        </View>
-      );
-    }
-    if (data.status == OrderStatus.CANCELED) {
-      return (
-        <View style={styles.statusContainer}>
-          <Image
-            source={require("../../assets/images/Status-error.png")}
-            style={styles.statusIcon}
-          />
-          <Text style={styles.statusText}>Order Canceled</Text>
-        </View>
-      );
+        );
     }
   }
 
@@ -66,7 +83,7 @@ export const OrderCard = memo(({data}: {data: Order}) => {
           data={data.itens}
           renderItem={({item}) => (
             <Text style={styles.item}>
-              - {item.name} - R$ {item.price} x {item.quantity}
+              - {item.name} - R$ {item.price.toFixed(2)} x {item.quantity}
             </Text>
           )}
         />
@@ -78,6 +95,8 @@ export const OrderCard = memo(({data}: {data: Order}) => {
     </View>
   );
 });
+
+OrderCard.displayName = "OrderCard";
 
 const styles = StyleSheet.create({
   container: {
@@ -123,7 +142,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 
-  sendingContainer: {
+  position: {
     justifyContent: "space-between",
     flexDirection: "row",
     alignItems: "center",
@@ -173,7 +192,7 @@ const styles = StyleSheet.create({
   },
 
   border: {
-    borderBottomColor: "#BBBBBB", 
-    borderBottomWidth: 1
-  }
+    borderBottomColor: "#BBBBBB",
+    borderBottomWidth: 1,
+  },
 });

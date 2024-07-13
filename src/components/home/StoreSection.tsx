@@ -1,17 +1,26 @@
 import {View, Text, StyleSheet, FlatList} from "react-native";
 import {Store} from "../../types/interfaces/Store";
 import {StoreCard} from "./StoreCard";
-import {memo} from "react";
+import {memo, useCallback} from "react";
+import {NativeStackNavigationProp} from "@react-navigation/native-stack";
+import {ParamListBase, useNavigation} from "@react-navigation/native";
 
 export const StoreSection = memo(
   ({data, title}: {data: Store[]; title: string}) => {
+    const navigation =
+      useNavigation<NativeStackNavigationProp<ParamListBase>>();
+
+    const navigationHandler = useCallback((item: Store) => {
+      navigation.navigate("store", {id: item.id});
+    }, []);
+
     return (
       <View>
         <Text style={styles.title}>{title}</Text>
 
         <FlatList
           data={data}
-          renderItem={({item}) => <StoreCard data={item} />}
+          renderItem={({item}) => <StoreCard data={item} onPress={navigationHandler}/>}
           horizontal={true}
           maxToRenderPerBatch={2}
         />

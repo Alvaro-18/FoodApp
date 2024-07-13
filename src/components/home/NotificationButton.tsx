@@ -13,7 +13,7 @@ import {NOTIFICATIONS} from "../../store/Data";
 
 export function NotificationButton() {
   const [visibility, setVisibility] = useState(false);
-  const hasNotification = false;
+  const hasNotification = NOTIFICATIONS.find((notification) => notification.isRead);
 
   return (
     <View>
@@ -32,7 +32,6 @@ export function NotificationButton() {
             <View style={hasNotification && styles.badge} />
           </Pressable>
 
-          <View style={styles.triangle}></View>
           <View style={styles.notificationContainer}>
             <FlatList
               data={NOTIFICATIONS}
@@ -72,11 +71,11 @@ export function NotificationButton() {
 const styles = StyleSheet.create({
   modalContainer: {
     alignSelf: "center",
-    marginTop: "6%",
+    marginTop: "4.6%",
     alignItems: "flex-end",
     width: "95%",
     justifyContent: "flex-end",
-    paddingHorizontal: "3.8%",
+    paddingHorizontal: "2%"
   },
 
   image: {
@@ -84,21 +83,13 @@ const styles = StyleSheet.create({
     height: 22,
   },
 
-  triangle: {
-    marginTop: 6,
-    borderLeftWidth: 10,
-    borderLeftColor: "#F2F2F2",
-    borderRightWidth: 10,
-    borderRightColor: "#F2F2F2",
-    borderBottomWidth: 20,
-    borderBottomColor: "#D9D9D9",
-  },
-
   notificationContainer: {
+    marginTop: 16,
     width: "100%",
     height: 226,
-    padding: 6,
-    backgroundColor: "#D9D9D9",
+    padding: 10,
+    backgroundColor: Colors.secundaryColor,
+    borderRadius: 8,
   },
 
   pressed: {

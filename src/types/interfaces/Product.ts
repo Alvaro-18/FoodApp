@@ -5,4 +5,6 @@
   description: string;
   price: number;
   store: string;
+  prepTimeMin?: number,
+  prepTimeMax?: number,
  }
