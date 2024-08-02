@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
   },
 
   buttonApp: {
-    backgroundColor: Colors.secundaryColor,
+    backgroundColor: Colors.green600,
   },
 
   text: {

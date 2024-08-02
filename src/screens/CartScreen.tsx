@@ -2,9 +2,9 @@ import {FlatList, StyleSheet, Text, View} from "react-native";
 import {Colors} from "../assets/constants/Colors";
 import {PrimaryButton} from "../components/UI/PrimaryButton";
 import {ListHeader} from "../components/cart/ListHeader";
-import { OrderResumeCard } from "../components/cart/OrderResumeCard";
-import { useContext} from "react";
-import { AppContext } from "../store/AppContext";
+import {OrderResumeCard} from "../components/cart/OrderResumeCard";
+import {useContext} from "react";
+import {AppContext} from "../store/AppContext";
 
 export function CartScreen() {
   const userContext = useContext(AppContext);
@@ -12,18 +12,20 @@ export function CartScreen() {
   function confirmOrderhandler() {
     console.log("");
   }
-  
-  function bottomList() {
+
+  function Bottom() {
     return (
-      <View style={{marginBottom: 12}}>
+      <View>
         <View style={styles.totalContainer}>
           <Text style={styles.totalText}>Total with tax: </Text>
-          <Text style={styles.price}>R$ {(userContext.cartTotal().toFixed(2))}</Text>
+          <Text style={styles.price}>
+            R$ {userContext.cartTotal().toFixed(2)}
+          </Text>
         </View>
 
         <PrimaryButton
           onPress={confirmOrderhandler}
-          color={Colors.secundaryColor}
+          color={Colors.green600}
           isDisabled={false}>
           Confirm order
         </PrimaryButton>
@@ -34,15 +36,13 @@ export function CartScreen() {
   return (
     <View style={styles.container}>
       <FlatList
-        ListHeaderComponent={() => (<ListHeader id={userContext.cart[0].product.store}/>)}
-        ListFooterComponent={bottomList}
-        data={userContext.cart}
-        renderItem={({item}) => (
-          <OrderResumeCard item={item}
-          />
+        ListHeaderComponent={() => (
+          <ListHeader id={userContext.cart[0].product.store} />
         )}
-        ListEmptyComponent={()=> <View></View>}
+        data={userContext.cart}
+        renderItem={({item}) => <OrderResumeCard item={item} />}
       />
+      <Bottom />
     </View>
   );
 }
@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
   container: {
     width: "92%",
     alignSelf: "center",
+    height: "98%",
   },
 
   textMedium: {

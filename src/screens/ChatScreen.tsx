@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
   container: {
     height: "97%",
     alignSelf: "center",
-    width: "95%",
+    width: "96%",
     marginTop: 6,
     justifyContent: "space-between",
   },
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
   },
 
   storeImage: {
-    backgroundColor: Colors.secundaryColor,
+    backgroundColor: Colors.green600,
     width: 30,
     height: 30,
     borderRadius: 50,
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 30,
     borderRadius: 10,
-    backgroundColor: Colors.secundaryColor,
+    backgroundColor: Colors.green600,
     alignItems: "center",
     justifyContent: "center",
   },

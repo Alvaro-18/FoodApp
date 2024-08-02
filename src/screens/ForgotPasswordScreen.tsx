@@ -77,7 +77,7 @@ export function ForgotPasswordScreen() {
           )}
         </View>
 
-        <PrimaryButton onPress={handleSubmit(onSubmit)}>SEND</PrimaryButton>
+        <PrimaryButton onPress={handleSubmit(onSubmit)} color={Colors.red400}>SEND</PrimaryButton>
       </View>
     </ImageBackground>
   );
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   textDetail: {
-    color: Colors.secundaryColor,
+    color: Colors.green600,
   },
   paragraph: {
     marginTop: "18%",

@@ -78,7 +78,7 @@ export function LocationButton() {
             onPress={() => {
               setVisibilityModalSelect(false);
             }}
-            color={Colors.secundaryColor}>
+            color={Colors.green600}>
             Confirm address
           </PrimaryButton>
         </View>
@@ -139,8 +139,8 @@ const styles = StyleSheet.create({
 
   list: {
     marginTop: "4%",
-    height: "55%",
-    marginBottom: "30%",
+    height: "60%",
+    marginBottom: "40%",
   },
 
   footerListContainer: {

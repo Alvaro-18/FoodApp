@@ -1,11 +1,13 @@
 import {Image, Pressable, StyleSheet, Text, View} from "react-native";
+import {ParamListBase, useNavigation} from "@react-navigation/native";
+import {NativeStackNavigationProp} from "@react-navigation/native-stack";
 import {ChangeButton} from "./ChangeButton";
 import {OptionButton} from "../home/OptionButton";
 import {Colors} from "../../assets/constants/Colors";
-import {useEffect, useState} from "react";
-import {useNavigation} from "@react-navigation/native";
+import {useContext, useEffect, useState} from "react";
 import { Store } from "../../types/interfaces/Store";
 import { STORE } from "../../store/Data";
+import { AppContext } from "../../store/AppContext";
 
 
 const deliveryOptions = {
@@ -22,6 +24,7 @@ const deliveryOptions = {
 };
 
 export function ListHeader({id}:{id:string}) {
+  const userContext = useContext(AppContext);
   function confirmOrderhandler(): void {
     console.log("");
   }
@@ -30,12 +33,17 @@ export function ListHeader({id}:{id:string}) {
     navigation.goBack();
   }
 
-  const navigation = useNavigation();
+  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
   const [isSelected, setIsSelected] = useState(false);
 
   function selectHandler() {
     setIsSelected(!isSelected);
+  }
+
+  function delHandler(){
+    navigation.navigate("home");
+    userContext.clearCart();
   }
 
   const [store, setStore] = useState<Store>();
@@ -69,7 +77,7 @@ export function ListHeader({id}:{id:string}) {
           />
         </Pressable>
         <Text style={styles.headerText}>Cart</Text>
-        <Pressable>
+        <Pressable onPress={delHandler}>
           <Image
             source={require("../../assets/images/Trash-solid.png")}
             style={styles.trashIcon}
@@ -134,7 +142,7 @@ const styles = StyleSheet.create({
   goBack: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: Colors.secundaryColor,
+    backgroundColor: Colors.green600,
     borderRadius: 50,
     width: 24,
     height: 24,

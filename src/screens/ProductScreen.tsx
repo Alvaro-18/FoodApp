@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
     width: "92%",
     alignSelf: "center",
     justifyContent: "space-between",
-    height: "73%",
+    height: "76%",
   },
 
   header: {
@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: Colors.secundaryColor,
+    backgroundColor: Colors.green600,
     borderRadius: 50,
     width: 32,
     height: 32,
@@ -267,7 +267,7 @@ const styles = StyleSheet.create({
   cartBtn: {
     width: 100,
     alignItems: "center",
-    backgroundColor: Colors.secundaryColor,
+    backgroundColor: Colors.green600,
     borderRadius: 12,
     justifyContent: "center",
     marginTop: 10,
@@ -308,7 +308,7 @@ const styles = StyleSheet.create({
   },
 
   addCartBtn: {
-    backgroundColor: Colors.secundaryColor,
+    backgroundColor: Colors.green600,
     height: 46,
     width: "100%",
     alignItems: "center",

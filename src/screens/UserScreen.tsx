@@ -108,10 +108,10 @@ const styles = StyleSheet.create({
   },
 
   modaItens: {
-    backgroundColor: Colors.secundaryColor,
+    backgroundColor: Colors.green600,
     marginTop: 12,
     height: 42,
     justifyContent: "center",
-    borderRadius: 8,
+    borderRadius:8
   },
 });

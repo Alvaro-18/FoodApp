@@ -58,18 +58,11 @@ export function SignUpScreen() {
     }
   };
 
-  function navigationHandlerHome() {
-    navigation.goBack();
-    resetFields();
-  }
-
   return (
     <ImageBackground
       source={require("../assets/images/Background.png")}
       style={styles.background}>
       <View style={styles.container}>
-        <DarkGoBackButton onPress={navigationHandlerHome} />
-
         <Text style={[styles.title, styles.textDetail]}>
           Sign
           <Text style={styles.title}> up</Text>
@@ -145,7 +138,7 @@ export function SignUpScreen() {
           </Text>
         </Pressable>
 
-        <PrimaryButton onPress={handleSubmit(onSubmit)} color={Colors.secundaryColor}>SIGN UP</PrimaryButton>
+        <PrimaryButton onPress={handleSubmit(onSubmit)} color={Colors.red400}>SIGN UP</PrimaryButton>
 
         <View style={styles.bottom}>
           <Text style={styles.paragraph}>
@@ -163,7 +156,7 @@ export function SignUpScreen() {
 const styles = StyleSheet.create({
   background: {
     backgroundColor: "#fff",
-    height: "100%",
+    height: "100%"
   },
 
   container: {
@@ -172,13 +165,13 @@ const styles = StyleSheet.create({
     marginTop: "6%",
   },
   title: {
-    marginTop: "8%",
+    marginTop: "14%",
     color: "#000",
     fontSize: 34,
     fontWeight: "bold",
   },
   textDetail: {
-    color: Colors.secundaryColor,
+    color: Colors.green600,
   },
 
   alertText: {

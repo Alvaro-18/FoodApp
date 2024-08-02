@@ -38,7 +38,7 @@ export function LoginScreen() {
   const onSubmit = async (userData: {email: string; password: string}) => {
     try {
       logUser(userData.email, userData.password);
-      navigation.navigate("Home");
+      navigation.navigate("Main");
     } catch (error) {
       Alert.alert(
         "Authentication failed!",
@@ -119,7 +119,7 @@ export function LoginScreen() {
           </Text>
         </Pressable>
 
-        <PrimaryButton onPress={handleSubmit(onSubmit)}>LOGIN</PrimaryButton>
+        <PrimaryButton onPress={handleSubmit(onSubmit)} color={Colors.red400}>LOGIN</PrimaryButton>
 
         <View style={styles.bottom}>
           <Text style={styles.paragraph}>
@@ -147,13 +147,13 @@ const styles = StyleSheet.create({
   },
   title: {
     marginTop: "8%",
-    color: Colors.secundaryColor,
+    color: Colors.green600,
     fontSize: 34,
     fontWeight: "bold",
   },
 
   textDetail: {
-    color: Colors.secundaryColor,
+    color: Colors.green600,
   },
 
   alertText: {

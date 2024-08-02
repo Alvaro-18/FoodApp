@@ -20,7 +20,8 @@ export const AppContext = createContext({
   removeItem: (id: number) => {},
   cartTotal: ():number => 0,
   getItemCount: (id: number): number  => 0,
-  decrease: (id:number) => {}
+  decrease: (id:number) => {},
+  clearCart: () => {}
 });
 
 export function AppContextProvider({children}: {children: React.ReactNode}) {
@@ -80,7 +81,11 @@ export function AppContextProvider({children}: {children: React.ReactNode}) {
     return item ? item.quantity : 0;
   };
 
-  console.log(cart);
+  function clearCart() {
+    setCart([]);
+  }
+
+
 
 
   return (
@@ -98,7 +103,8 @@ export function AppContextProvider({children}: {children: React.ReactNode}) {
         setItem:setItem,
         getItemCount: getItemCount,
         removeItem: removeItem,
-        decrease: decrease
+        decrease: decrease,
+        clearCart: clearCart
       }}>
       {children}
     </AppContext.Provider>

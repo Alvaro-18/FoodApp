@@ -17,6 +17,7 @@ export function AddressForm() {
       city: "",
       state: "",
       fullName: "",
+      complement: ""
     },
   });
 
@@ -26,6 +27,7 @@ export function AddressForm() {
     city: string;
     state: string;
     fullName: string;
+    complement: string;
   }) => {
     try {
       // atualizar o context
@@ -43,6 +45,7 @@ export function AddressForm() {
     resetField("city", {defaultValue: ""});
     resetField("state", {defaultValue: ""});
     resetField("fullName", {defaultValue: ""});
+    resetField("complement", {defaultValue: ""});
   }
 
   return (
@@ -139,9 +142,27 @@ export function AddressForm() {
             Invalid information, please try again.
           </Text>
         )}
+         <Controller
+          name="complement"
+          control={control}
+          rules={{required: true, minLength: 5}}
+          render={({field: {onChange, value}, fieldState}) => (
+            <InputField
+              placeholder="complement"
+              onChangeText={onChange}
+              isInvalid={fieldState.invalid}
+              value={value}
+            />
+          )}
+        />
+        {errors.fullName && (
+          <Text style={styles.alertText}>
+            Invalid information, please try again.
+          </Text>
+        )}
       </View>
 
-      <PrimaryButton onPress={handleSubmit(onSubmit)} color={Colors.secundaryColor}>
+      <PrimaryButton onPress={handleSubmit(onSubmit)} color={Colors.green600}>
         Add new address
       </PrimaryButton>
     </View>
@@ -151,14 +172,15 @@ export function AddressForm() {
 const styles = StyleSheet.create({
   container: {
     alignSelf: "center",
-    width: "95%",
-    marginTop: "12%",
+    width: "96%",
+    marginTop: 24,
+    height: "92%",
+    justifyContent: "space-between"
   },
 
   form: {
+    height: 502,
     justifyContent: "space-between",
-    height: "64%",
-    marginBottom: "40%",
   },
 
   alertText: {

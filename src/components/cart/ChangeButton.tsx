@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   },
 
   textMediumGreen: {
-    color: Colors.secundaryColor,
+    color: Colors.green600,
     fontSize: 14,
     fontWeight: "500",
   },

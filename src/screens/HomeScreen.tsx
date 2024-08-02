@@ -23,6 +23,6 @@ export function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     alignSelf: "center",
-    width: "95%",
+    width: "94%",
   },
 });

@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: Colors.secundaryColor,
+    backgroundColor: Colors.green600,
     borderRadius: 50,
     width: 32,
     height: 32,
@@ -149,6 +149,6 @@ const styles = StyleSheet.create({
   statusText: {
     fontSize: 16,
     fontWeight: "700",
-    color: Colors.secundaryColor,
+    color: Colors.green600,
   },
 });

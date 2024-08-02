@@ -4,7 +4,7 @@ import {Colors} from "../../assets/constants/Colors";
 export const mainPageOptions = {
   screenOptions: {
     headerShown: false,
-    tabBarActiveTintColor: Colors.secundaryColor,
+    tabBarActiveTintColor: Colors.green600,
     tabBarLabelStyle: {fontSize: 14},
     tabBarHideOnKeyboard: true
   },

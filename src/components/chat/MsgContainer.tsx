@@ -23,7 +23,7 @@ export function MsgContainer(data: Message) {
         {data.createdAt.substring(10, 16)}
       </Text>
 
-      <View style={[styles.message, {backgroundColor: Colors.secundaryColor}]}>
+      <View style={[styles.message, {backgroundColor: Colors.green600}]}>
         <Text style={styles.msgText}>{data.message}</Text>
       </View>
     </View>
