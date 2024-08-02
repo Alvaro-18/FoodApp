@@ -1,9 +1,12 @@
 import {View, Pressable, StyleSheet, Text, Image} from "react-native";
 import {Product} from "../../types/interfaces/Product";
 import {HeartButton} from "../UI/HeartButton";
-import { memo } from "react";
+import { memo, useContext } from "react";
+import { AppContext } from "../../store/AppContext";
 
 export const FavoritesCard = memo(({data, onPress}: {data: Product, onPress: (item:Product) => void}) => {
+  const userContext = useContext(AppContext);
+
   return (
     <View style={styles.container}>
       <Pressable style={styles.button} onPress={() => onPress(data)}>
@@ -18,7 +21,7 @@ export const FavoritesCard = memo(({data, onPress}: {data: Product, onPress: (it
         </View>
       </Pressable>
 
-      <HeartButton />
+      <HeartButton isFavorite={userContext.favorites.includes(data)} onPress={() => userContext.addFavorite(data)}/>
     </View>
   );
 });
