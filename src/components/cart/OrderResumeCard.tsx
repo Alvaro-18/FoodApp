@@ -1,26 +1,35 @@
 import { Image, Pressable, StyleSheet, Text, View} from "react-native";
 
-import {useState} from "react";
+import { Product } from "../../types/interfaces/Product";
+import {AppContext} from "../../store/AppContext";
+import { useContext } from "react";
+import { useNavigation } from "@react-navigation/native";
 
 interface item {
-  name: string,
-  price: number,
-  quantity: number,
-  description: string,
+  product:Product,
+  quantity: number
 }
 
 export function OrderResumeCard({item}:{item:item}) {
-  const [count, setCounter] = useState(1);
-
+  const navigation = useNavigation();
+  const userContext = useContext(AppContext);
   function increaseCount() {
-    setCounter(prevState => prevState + 1);
+    if (item.product) {
+      userContext.setItem(item.product);
+    }
   }
 
   function decreaseCount() {
-    if (count == 1) {
-      setCounter(1);
+    if (item.product && item.quantity > 1) {
+      userContext.decrease(item.product.id);
     } else {
-      setCounter(prevState => prevState - 1);
+      
+      if(userContext.cart.length == 1) {
+        navigation.goBack();
+        userContext.removeItem(item.product.id);
+      } else {
+        userContext.removeItem(item.product.id);
+      }
     }
   }
 
@@ -38,10 +47,10 @@ export function OrderResumeCard({item}:{item:item}) {
           alignItems: "center",
           justifyContent: "space-between",
         }}>
-        <Text style={styles.textMedium}>{item.name}</Text>
+        <Text style={styles.textMedium}>{item.product.name}</Text>
 
         <Text style={{color: "#000", fontSize: 16, fontWeight: "600"}}>
-          R$ {(item.price * count).toFixed(2)}
+          R$ {(item.product.price * item.quantity).toFixed(2)}
         </Text>
       </View>
 
@@ -54,7 +63,7 @@ export function OrderResumeCard({item}:{item:item}) {
             maxWidth: 200,
           }}
           numberOfLines={2}>
-          {item.description}
+          {item.product.description}
         </Text>
 
         <View style={styles.counterContainer}>
@@ -64,7 +73,7 @@ export function OrderResumeCard({item}:{item:item}) {
               style={styles.counterBtnIcon}
             />
           </Pressable>
-          <Text style={styles.counterText}>{count}</Text>
+          <Text style={styles.counterText}>{item.quantity}</Text>
           <Pressable onPress={increaseCount}>
             <Image
               source={require("../../assets/images/Plus-solid.png")}

@@ -1,64 +1,24 @@
 import {FlatList, StyleSheet, Text, View} from "react-native";
 import {Colors} from "../assets/constants/Colors";
-import {STORE} from "../store/Data";
 import {PrimaryButton} from "../components/UI/PrimaryButton";
 import {ListHeader} from "../components/cart/ListHeader";
-import {useEffect, useState} from "react";
 import { OrderResumeCard } from "../components/cart/OrderResumeCard";
-
-const data = {
-  storeName: "Starbucks",
-  imageURL: STORE[1].logoURL,
-  itens: [
-    {
-      name: "Coffe with milk",
-      price: 12.99,
-      quantity: 1,
-      description:
-        "Indulge in the vibrant and refreshing flavors of the Mediterranean with our Mediterranean Salad",
-    },
-    {
-      name: "Coffe with milk",
-      price: 12.99,
-      quantity: 1,
-      description:
-        "Indulge in the vibrant and refreshing flavors of the Mediterranean with our Mediterranean Salad",
-    },
-    {
-      name: "Coffe with milk",
-      price: 12.99,
-      quantity: 1,
-      description:
-        "Indulge in the vibrant and refreshing flavors of the Mediterranean with our Mediterranean Salad",
-    },
-  ],
-};
+import { useContext} from "react";
+import { AppContext } from "../store/AppContext";
 
 export function CartScreen() {
+  const userContext = useContext(AppContext);
+
   function confirmOrderhandler() {
     console.log("");
   }
-
-  const [total, setTotal] = useState(0);
-
-  useEffect(() => {
-    function calc() {
-      for (const ob of data.itens) {
-        setTotal(prevState => prevState + (ob.price * ob.quantity));
-      }
-    }
-
-    calc();
-  },[]);
-
-  
   
   function bottomList() {
     return (
       <View style={{marginBottom: 12}}>
         <View style={styles.totalContainer}>
           <Text style={styles.totalText}>Total with tax: </Text>
-          <Text style={styles.price}>R$ {total}</Text>
+          <Text style={styles.price}>R$ {(userContext.cartTotal().toFixed(2))}</Text>
         </View>
 
         <PrimaryButton
@@ -74,13 +34,14 @@ export function CartScreen() {
   return (
     <View style={styles.container}>
       <FlatList
-        ListHeaderComponent={ListHeader}
+        ListHeaderComponent={() => (<ListHeader id={userContext.cart[0].product.store}/>)}
         ListFooterComponent={bottomList}
-        data={data.itens}
+        data={userContext.cart}
         renderItem={({item}) => (
           <OrderResumeCard item={item}
           />
         )}
+        ListEmptyComponent={()=> <View></View>}
       />
     </View>
   );
