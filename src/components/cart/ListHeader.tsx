@@ -2,31 +2,11 @@ import {Image, Pressable, StyleSheet, Text, View} from "react-native";
 import {ChangeButton} from "./ChangeButton";
 import {OptionButton} from "../home/OptionButton";
 import {Colors} from "../../assets/constants/Colors";
-import {useState} from "react";
-import {STORE} from "../../store/Data";
+import {useEffect, useState} from "react";
 import {useNavigation} from "@react-navigation/native";
+import { Store } from "../../types/interfaces/Store";
+import { STORE } from "../../store/Data";
 
-const data = {
-  storeName: "Starbucks",
-  imageURL: STORE[1].logoURL,
-  itens: [
-    {
-      name: "Coffe with milk",
-      price: 12.99,
-      quantity: 2,
-    },
-    {
-      name: "Coffe with milk",
-      price: 12.99,
-      quantity: 2,
-    },
-    {
-      name: "Coffe with milk",
-      price: 12.99,
-      quantity: 2,
-    },
-  ],
-};
 
 const deliveryOptions = {
   delivery: {
@@ -41,7 +21,7 @@ const deliveryOptions = {
   },
 };
 
-export function ListHeader() {
+export function ListHeader({id}:{id:string}) {
   function confirmOrderhandler(): void {
     console.log("");
   }
@@ -56,6 +36,27 @@ export function ListHeader() {
 
   function selectHandler() {
     setIsSelected(!isSelected);
+  }
+
+  const [store, setStore] = useState<Store>();
+
+  useEffect(() => {
+    async function fetchProduct() {
+      const store = STORE.find(store => store.id === id);
+      setStore(store);
+    }
+
+    fetchProduct();
+  }, [id]);
+
+  function FetchImage() {
+    if (store) {
+      return (
+        <Image source={{uri: store.logoURL}} style={styles.orderImage} />
+      );
+    } else {
+      return <View></View>;
+    }
   }
 
   return (
@@ -109,8 +110,8 @@ export function ListHeader() {
       <View style={styles.row}>
         <Text style={styles.primaryText}>Order resume:</Text>
         <View style={styles.orderContainer}>
-          <Image source={{uri: data.imageURL}} style={styles.orderImage} />
-          <Text style={styles.orderText}>{data.storeName}</Text>
+          <FetchImage/>
+          <Text style={styles.orderText}>{store?.name}</Text>
         </View>
       </View>
     </View>
