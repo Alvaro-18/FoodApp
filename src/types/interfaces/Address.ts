@@ -1,7 +1,9 @@
 export interface Address {
-  zipCode: string,
-  address: string,
-  city: string,
-  state: string,
-  fullName: string
+  id: string,
+  zipCode: string;
+  address: string;
+  city: string;
+  state: string;
+  name: string;
+  complement: string;
 }

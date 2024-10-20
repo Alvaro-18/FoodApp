@@ -25,6 +25,8 @@ export function MainStack() {
           headerTitle: () => <LocationButton />,
           headerRight: () => <NotificationButton />,
           headerLeft: () => <SearchButton />,
+          statusBarColor: "#F2F2F2",
+          statusBarStyle: "dark",
           headerShadowVisible: false,
           headerStyle: {
             backgroundColor: "#F2F2F2",

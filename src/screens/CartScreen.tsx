@@ -1,16 +1,48 @@
-import {FlatList, StyleSheet, Text, View} from "react-native";
+import { ScrollView, StyleSheet, Text, View} from "react-native";
 import {Colors} from "../assets/constants/Colors";
 import {PrimaryButton} from "../components/UI/PrimaryButton";
 import {ListHeader} from "../components/cart/ListHeader";
 import {OrderResumeCard} from "../components/cart/OrderResumeCard";
 import {useContext} from "react";
 import {AppContext} from "../store/AppContext";
+import {OrderStatus} from "../types/enums/OrderStatus";
+import {ParamListBase, useNavigation} from "@react-navigation/native";
+import {NativeStackNavigationProp} from "@react-navigation/native-stack";
 
 export function CartScreen() {
-  const userContext = useContext(AppContext);
+  const {cart, cartTotal, address, method, createOrder, clearCart} =
+    useContext(AppContext);
+  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
   function confirmOrderhandler() {
-    console.log("");
+    const itens = cart.map(item => {
+      return {
+        id: item.product.id.toString(),
+        name: item.product.name,
+        price: item.product.price,
+        quantity: item.quantity,
+      };
+    });
+
+    const userAddress = address.find(item => item.isSelected);
+    console.log(cart[0].product.store);
+
+    if (userAddress) {
+      createOrder({
+        id: Math.random().toString(),
+        storeId: cart[0].product.store,
+        status: OrderStatus.SENDING,
+        itens: itens,
+        total: cartTotal(),
+        address: userAddress.data,
+        date: new Date(),
+        paymentMethod: method.paymentMethods.title,
+        deliveryMethod: method.deliveryMethods.title,
+      });
+
+      navigation.navigate("orders");
+      clearCart();
+    }
   }
 
   function Bottom() {
@@ -18,9 +50,7 @@ export function CartScreen() {
       <View>
         <View style={styles.totalContainer}>
           <Text style={styles.totalText}>Total with tax: </Text>
-          <Text style={styles.price}>
-            R$ {userContext.cartTotal().toFixed(2)}
-          </Text>
+          <Text style={styles.price}>R$ {cartTotal().toFixed(2)}</Text>
         </View>
 
         <PrimaryButton
@@ -35,13 +65,12 @@ export function CartScreen() {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        ListHeaderComponent={() => (
-          <ListHeader id={userContext.cart[0].product.store} />
-        )}
-        data={userContext.cart}
-        renderItem={({item}) => <OrderResumeCard item={item} />}
-      />
+      <ScrollView >
+        <ListHeader />
+        {cart.map(item => (
+          <OrderResumeCard key={item.product.id.toString()} item={item} />
+        ))}
+      </ScrollView>
       <Bottom />
     </View>
   );

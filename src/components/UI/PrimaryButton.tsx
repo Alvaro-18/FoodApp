@@ -34,7 +34,10 @@ export function PrimaryButton({
     );
   } else {
     return (
-      <Pressable onPress={onPress} style={[styles.button, {backgroundColor: "#565656"}]}>
+      <Pressable
+        onPress={onPress}
+        style={[styles.button, {backgroundColor: "#565656"}]}
+        disabled={true}>
         <View>
           <Text style={styles.text}>{children}</Text>
         </View>

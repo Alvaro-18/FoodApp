@@ -21,7 +21,6 @@ export function SignUpScreen() {
   const {
     control,
     handleSubmit,
-    resetField,
     formState: {errors},
   } = useForm({
     defaultValues: {
@@ -31,15 +30,10 @@ export function SignUpScreen() {
     },
   });
 
-  function resetFields() {
-    resetField("name", {defaultValue: ""});
-    resetField("email", {defaultValue: ""});
-    resetField("password", {defaultValue: ""});
-  }
 
   function navigationHandlerLogin() {
     navigation.navigate("Login");
-    resetFields();
+    control._reset();
   }
 
   const onSubmit = async (userData: {

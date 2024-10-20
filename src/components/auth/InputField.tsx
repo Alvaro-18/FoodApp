@@ -1,5 +1,6 @@
 import {useState} from "react";
 import {Image, StyleSheet, TextInput, View, Text} from "react-native";
+import { Colors } from "../../assets/constants/Colors";
 
 export function InputField({
   placeholder,
@@ -25,7 +26,7 @@ export function InputField({
   return (
     <View style={[styles.container, isInvalid && styles.inputError]}>
       <View style={styles.inputContainer}>
-        <Text style={[focus ? styles.labelfocused : styles.disable, isInvalid && styles.labelErro]}>{placeholder}</Text>
+        <Text style={[focus ? styles.labelfocused : styles.disable, isInvalid && styles.labelErro]}>{placeholder}*</Text>
         <TextInput
           style={styles.input}
           placeholder={placeholder}
@@ -49,14 +50,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     flexDirection: "row",
     paddingHorizontal: 20,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.29,
-    shadowRadius: 4,
-    elevation: 7,
+    borderWidth: 2,
+    borderColor: Colors.green600,
+    borderRadius: 8,
   },
 
   inputError:{

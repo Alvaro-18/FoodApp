@@ -1,14 +1,14 @@
-import {View, StyleSheet, Pressable, Text} from "react-native";
+import {View, StyleSheet, Pressable, Text, Image} from "react-native";
 import {NativeStackNavigationProp} from "@react-navigation/native-stack";
 import {ParamListBase, useNavigation} from "@react-navigation/native";
-import {Category} from "../../types/interfaces/Category";
+
 import {Colors} from "../../assets/constants/Colors";
+import Icon from "../UI/Icon";
 
-export function CategoriesSection({data}: {data: Category[]}) {
-  const navigation =
-  useNavigation<NativeStackNavigationProp<ParamListBase>>();
+export function CategoriesSection() {
+  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
-  function navigationHandler(){
+  function navigationHandler() {
     navigation.navigate("home");
   }
 
@@ -16,63 +16,87 @@ export function CategoriesSection({data}: {data: Category[]}) {
     <View style={styles.list}>
       <View style={styles.row}>
         <Pressable
+          onPress={() => navigationHandler}
           style={({pressed}) =>
             pressed ? [styles.button, styles.pressed] : styles.button
           }>
-          <View style={styles.containerImage}></View>
-          <Text style={styles.text}>alvaro</Text>
+          <View style={styles.containerImage}>
+            <Icon name="TicketPercent" color={Colors.white200} size={32} />
+          </View>
+          <Text style={styles.text}>Offers</Text>
         </Pressable>
         <Pressable
+          onPress={() => navigationHandler}
           style={({pressed}) =>
             pressed ? [styles.button, styles.pressed] : styles.button
           }>
-          <View style={styles.containerImage}></View>
-          <Text style={styles.text}>alvaro</Text>
+          <View style={styles.containerImage}>
+            <Icon name="Martini" color={Colors.white200} size={32} />
+          </View>
+          <Text style={styles.text}>Drinks</Text>
         </Pressable>
         <Pressable
+          onPress={() => navigationHandler}
           style={({pressed}) =>
             pressed ? [styles.button, styles.pressed] : styles.button
           }>
-          <View style={styles.containerImage}></View>
-          <Text style={styles.text}>alvaro</Text>
+          <View style={styles.containerImage}>
+            <Icon name="EggOff" color={Colors.white200} size={32} />
+          </View>
+          <Text style={styles.text}>Vegans</Text>
         </Pressable>
         <Pressable
+          onPress={() => navigationHandler}
           style={({pressed}) =>
             pressed ? [styles.button, styles.pressed] : styles.button
           }>
-          <View style={styles.containerImage}></View>
-          <Text style={styles.text}>alvaro</Text>
+          <View style={styles.containerImage}>
+            <Icon name="Coffee" color={Colors.white200} size={32} />
+          </View>
+          <Text style={styles.text}>Coffees</Text>
         </Pressable>
       </View>
 
       <View style={styles.row}>
         <Pressable
+          onPress={() => navigationHandler}
           style={({pressed}) =>
             pressed ? [styles.button, styles.pressed] : styles.button
           }>
-          <View style={styles.containerImage}></View>
-          <Text style={styles.text}>alvaro</Text>
+          <View style={styles.containerImage}>
+            <Icon name="Apple" color={Colors.white200} size={32} />
+          </View>
+          <Text style={styles.text}>Fruits</Text>
         </Pressable>
         <Pressable
+          onPress={() => navigationHandler}
           style={({pressed}) =>
             pressed ? [styles.button, styles.pressed] : styles.button
           }>
-          <View style={styles.containerImage}></View>
-          <Text style={styles.text}>alvaro</Text>
+          <View style={styles.containerImage}>
+            <Icon name="Cookie" color={Colors.white200} size={32} />
+          </View>
+          <Text style={styles.text}>Desserts</Text>
         </Pressable>
         <Pressable
+          onPress={() => navigationHandler}
           style={({pressed}) =>
             pressed ? [styles.button, styles.pressed] : styles.button
           }>
-          <View style={styles.containerImage}></View>
-          <Text style={styles.text}>alvaro</Text>
+          <View style={styles.containerImage}>
+            <Icon name="Sandwich" color={Colors.white200} size={32} />
+          </View>
+          <Text style={styles.text}>Snacks</Text>
         </Pressable>
         <Pressable
+          onPress={() => navigationHandler}
           style={({pressed}) =>
             pressed ? [styles.button, styles.pressed] : styles.button
           }>
-          <View style={styles.containerImage}></View>
-          <Text style={styles.text}>alvaro</Text>
+          <View style={styles.containerImage}>
+            <Icon name="CookingPot" color={Colors.white200} size={32} />
+          </View>
+          <Text style={styles.text}>Dinners</Text>
         </Pressable>
       </View>
     </View>
@@ -83,13 +107,13 @@ const styles = StyleSheet.create({
   list: {
     marginHorizontal: 4,
     marginTop: 4,
-    marginBottom: 8
+    marginBottom: 8,
   },
 
   row: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 16
+    marginBottom: 16,
   },
 
   button: {

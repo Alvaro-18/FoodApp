@@ -16,7 +16,7 @@ export const OrderCard = memo(({data}: {data: Order}) => {
     return STORE.filter((item:Store) => item.id == id);
   }, []);
 
-  const store = fetchStore(data.id);
+  const store = fetchStore(data.storeId);
 
   const chatHandler = useCallback((item: Store) => {
     navigation.navigate("chat", {id: item.id});

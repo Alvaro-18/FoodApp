@@ -2,7 +2,6 @@ import {Option} from "../types/interfaces/Option";
 import {Notification} from "../types/interfaces/Notification";
 import {Product} from "../types/interfaces/Product";
 import {Store} from "../types/interfaces/Store";
-import {Favorite} from "../types/interfaces/Favorite";
 import {Category} from "../types/interfaces/Category";
 import {StoreStatus} from "../types/enums/StoreStatus";
 import {OrderStatus} from "../types/enums/OrderStatus";

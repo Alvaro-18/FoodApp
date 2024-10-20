@@ -5,24 +5,29 @@ import {
   StyleSheet,
   View,
   Text,
+  ActivityIndicator,
 } from "react-native";
 import {ParamListBase, useNavigation} from "@react-navigation/native";
 import {NativeStackNavigationProp} from "@react-navigation/native-stack";
-import {Colors} from "../assets/constants/Colors";
-import {StorePresentationCard} from "../components/store/StorePresentationCard";
 import {useContext, useEffect, useState} from "react";
 
 import {STORE, PRODUCTS} from "../store/Data";
 import {Product} from "../types/interfaces/Product";
 import {Store} from "../types/interfaces/Store";
 import {AppContext} from "../store/AppContext";
+import {Colors} from "../assets/constants/Colors";
 
+import { GenericModal } from "../components/UI/GenericModal";
+import {StorePresentationCard} from "../components/store/StorePresentationCard";
+import { ChevronLeft } from "lucide-react-native";
 export function ProductScreen({route}: {route: any}) {
-  const userContext = useContext(AppContext);
+  const {cart, setItem, removeItem, getItemCount, decrease, address} =
+    useContext(AppContext);
   const {id} = route.params;
   const [dado, setDado] = useState<Product>();
   const [isInTheCart, setIsInTheCart] = useState(false);
   const [store, setStore] = useState<Store>();
+  const [isOpen, setIsOpen] = useState(false);
 
   const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
@@ -41,11 +46,11 @@ export function ProductScreen({route}: {route: any}) {
   useEffect(() => {
     async function fetchProduct() {
       const product = PRODUCTS.find(product => product.id === id);
-      const store = STORE.find(store => store.name === product?.store);
+      const store = STORE.find(store => store.id === product?.store);
       if (product) {
         setDado(product);
         setStore(store);
-        setIsInTheCart(userContext.cart.some(item => item.product.id === id));
+        setIsInTheCart(cart.some(item => item.product.id === id));
       } else {
         setDado(PRODUCTS[0]);
         setStore(STORE[0]);
@@ -53,18 +58,23 @@ export function ProductScreen({route}: {route: any}) {
     }
 
     fetchProduct();
-  }, [id, userContext.cart]);
+  }, [id, cart]);
 
   function addCart() {
-    if (dado) {
-      userContext.setItem(dado);
-      setIsInTheCart(true);
+    const add = address.filter(item => item.isSelected == true).length == 0;
+    if (add) {
+      setIsOpen(true);
+    } else {
+      if (dado) {
+        setItem(dado);
+        setIsInTheCart(true);
+      }
     }
   }
 
   function removeCart() {
     if (dado) {
-      userContext.removeItem(dado.id);
+      removeItem(dado.id);
       setIsInTheCart(false);
     }
   }
@@ -75,13 +85,13 @@ export function ProductScreen({route}: {route: any}) {
 
   function increaseCount() {
     if (isInTheCart && dado) {
-      userContext.setItem(dado);
+      setItem(dado);
     }
   }
 
   function decreaseCount() {
-    if (dado && userContext.getItemCount(dado ? dado.id : PRODUCTS[0].id) > 1) {
-      userContext.decrease(dado.id);
+    if (dado && getItemCount(dado ? dado.id : PRODUCTS[0].id) > 1) {
+      decrease(dado.id);
     }
   }
 
@@ -98,21 +108,23 @@ export function ProductScreen({route}: {route: any}) {
   }
 
   if (!dado) {
-    return <Text>Loading...</Text>;
+    return (
+      <View style={{flex: 1, justifyContent: "center"}}>
+        <ActivityIndicator color={Colors.green600} size={80} />
+      </View>
+    );
   }
   return (
     <View>
       <FetchImage>
         <View style={styles.container}>
           <Pressable onPress={navigationHandler}>
-            <Image
-              source={require("../assets/images/Arrow-back.png")}
-              style={styles.icon}
-            />
+            <ChevronLeft color={Colors.white200} size={32} style={styles.icon}/>
           </Pressable>
         </View>
       </FetchImage>
 
+      <GenericModal isOpen={isOpen} message="Selecione um endereço" type="error" onClose={() => setIsOpen(false)}/>
       <View style={styles.container}>
         <View>
           <View style={styles.header}>
@@ -131,10 +143,9 @@ export function ProductScreen({route}: {route: any}) {
             <View>
               <Text style={styles.totalLabel}>Total without tax:</Text>
               <Text style={styles.total}>
-                RS:{" "}
+                R$:{" "}
                 {(
-                  dado.price *
-                  userContext.getItemCount(dado ? dado.id : PRODUCTS[0].id)
+                  dado.price * getItemCount(dado ? dado.id : PRODUCTS[0].id)
                 ).toFixed(2)}
               </Text>
             </View>
@@ -157,7 +168,7 @@ export function ProductScreen({route}: {route: any}) {
                 />
               </Pressable>
               <Text style={styles.counterText}>
-                {userContext.getItemCount(dado ? dado.id : PRODUCTS[0].id)}
+                {getItemCount(dado ? dado.id : PRODUCTS[0].id)}
               </Text>
               <Pressable onPress={increaseCount}>
                 <Image
@@ -191,7 +202,7 @@ const styles = StyleSheet.create({
   },
 
   disabled: {
-    display: "none"
+    display: "none",
   },
 
   container: {
@@ -274,7 +285,6 @@ const styles = StyleSheet.create({
     height: 32,
   },
 
-
   cartText: {
     fontSize: 14,
     color: "#fff",
@@ -324,8 +334,8 @@ const styles = StyleSheet.create({
   },
 
   btnText: {
-    color: "#fff", 
-    fontSize: 18, 
-    fontWeight: "500"
-  }
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "500",
+  },
 });
