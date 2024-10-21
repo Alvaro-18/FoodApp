@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {
   View,
   Pressable,
@@ -9,24 +9,24 @@ import {
   FlatList,
 } from "react-native";
 import {OptionButton} from "./OptionButton";
-import {ADDRESS} from "../../store/Data";
 import {PrimaryButton} from "../UI/PrimaryButton";
 import { Colors } from "../../assets/constants/Colors";
-import { Option } from "../../types/interfaces/Option";
 import {ParamListBase, useNavigation} from "@react-navigation/native";
 import {NativeStackNavigationProp} from "@react-navigation/native-stack";
+import { AppContext } from "../../store/AppContext";
 
 
 export function LocationButton() {
+  const {address,updateAddress} = useContext(AppContext);
   const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
+  const selectedAddress = address.find(item => item.isSelected)?.data.name || "Address";
+
 
   function navigationHandler() {
     navigation.navigate("address");
     setVisibilityModalSelect(false);
   }
   const [visibilityModalSelect, setVisibilityModalSelect] = useState(false);
-
-  const [isSelected, setIsSelected] = useState<Option>(ADDRESS[0]);  
 
   function addNewLocation() {
     return (
@@ -38,13 +38,12 @@ export function LocationButton() {
     );
   }
 
-  function selectHandler(item:Option){
-    setIsSelected(item);
+  function selectHandler(id:string){
+   updateAddress(id);
   }
 
   return (
     <View>
-
       <Modal
         animationType="fade"
         transparent={false}
@@ -56,18 +55,18 @@ export function LocationButton() {
               source={require("../../assets/images/Location-dot.png")}
               style={styles.image}
             />
-            <Text style={styles.text}>{isSelected.title}</Text>
+            <Text style={styles.text}>{selectedAddress}</Text>
           </Pressable>
 
           <Text style={styles.modalTitle}>Address selection</Text>
 
           <FlatList
-            data={ADDRESS}
+            data={address}
             renderItem={({item}) => (
               <OptionButton
-                selected={item == isSelected}
+                selected={item.isSelected}
                 data={item}
-                onPress={() => {selectHandler(item);}}
+                onPress={() => {selectHandler(item.data.id);}}
               />
             )}
             style={styles.list}
@@ -78,7 +77,7 @@ export function LocationButton() {
             onPress={() => {
               setVisibilityModalSelect(false);
             }}
-            color={Colors.secundaryColor}>
+            color={Colors.green600}>
             Confirm address
           </PrimaryButton>
         </View>
@@ -93,7 +92,7 @@ export function LocationButton() {
           source={require("../../assets/images/Location-dot.png")}
           style={styles.image}
         />
-        <Text style={styles.text}>{isSelected.title}</Text>
+        <Text style={styles.text}>{selectedAddress}</Text>
       </Pressable>
     </View>
   );
@@ -139,8 +138,8 @@ const styles = StyleSheet.create({
 
   list: {
     marginTop: "4%",
-    height: "55%",
-    marginBottom: "30%",
+    height: "60%",
+    marginBottom: "40%",
   },
 
   footerListContainer: {

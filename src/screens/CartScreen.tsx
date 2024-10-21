@@ -1,69 +1,61 @@
-import {FlatList, StyleSheet, Text, View} from "react-native";
+import { ScrollView, StyleSheet, Text, View} from "react-native";
 import {Colors} from "../assets/constants/Colors";
-import {STORE} from "../store/Data";
 import {PrimaryButton} from "../components/UI/PrimaryButton";
 import {ListHeader} from "../components/cart/ListHeader";
-import {useEffect, useState} from "react";
-import { OrderResumeCard } from "../components/cart/OrderResumeCard";
-
-const data = {
-  storeName: "Starbucks",
-  imageURL: STORE[1].logoURL,
-  itens: [
-    {
-      name: "Coffe with milk",
-      price: 12.99,
-      quantity: 1,
-      description:
-        "Indulge in the vibrant and refreshing flavors of the Mediterranean with our Mediterranean Salad",
-    },
-    {
-      name: "Coffe with milk",
-      price: 12.99,
-      quantity: 1,
-      description:
-        "Indulge in the vibrant and refreshing flavors of the Mediterranean with our Mediterranean Salad",
-    },
-    {
-      name: "Coffe with milk",
-      price: 12.99,
-      quantity: 1,
-      description:
-        "Indulge in the vibrant and refreshing flavors of the Mediterranean with our Mediterranean Salad",
-    },
-  ],
-};
+import {OrderResumeCard} from "../components/cart/OrderResumeCard";
+import {useContext} from "react";
+import {AppContext} from "../store/AppContext";
+import {OrderStatus} from "../types/enums/OrderStatus";
+import {ParamListBase, useNavigation} from "@react-navigation/native";
+import {NativeStackNavigationProp} from "@react-navigation/native-stack";
 
 export function CartScreen() {
+  const {cart, cartTotal, address, method, createOrder, clearCart} =
+    useContext(AppContext);
+  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
+
   function confirmOrderhandler() {
-    console.log("");
+    const itens = cart.map(item => {
+      return {
+        id: item.product.id.toString(),
+        name: item.product.name,
+        price: item.product.price,
+        quantity: item.quantity,
+      };
+    });
+
+    const userAddress = address.find(item => item.isSelected);
+    console.log(cart[0].product.store);
+
+    if (userAddress) {
+      createOrder({
+        id: Math.random().toString(),
+        storeId: cart[0].product.store,
+        status: OrderStatus.SENDING,
+        itens: itens,
+        total: cartTotal(),
+        address: userAddress.data,
+        date: new Date(),
+        paymentMethod: method.paymentMethods.title,
+        deliveryMethod: method.deliveryMethods.title,
+      });
+
+      navigation.navigate("orders");
+      clearCart();
+    }
   }
 
-  const [total, setTotal] = useState(0);
-
-  useEffect(() => {
-    function calc() {
-      for (const ob of data.itens) {
-        setTotal(prevState => prevState + (ob.price * ob.quantity));
-      }
-    }
-
-    calc();
-  },[]);
-
-  
-  
-  function bottomList() {
+  function Bottom() {
     return (
-      <View style={{marginBottom: 12}}>
+      <View>
         <View style={styles.totalContainer}>
           <Text style={styles.totalText}>Total with tax: </Text>
-          <Text style={styles.price}>R$ {total}</Text>
+          <Text style={styles.price}>R$ {cartTotal().toFixed(2)}</Text>
         </View>
 
         <PrimaryButton
           onPress={confirmOrderhandler}
-          color={Colors.secundaryColor}
+          color={Colors.green600}
           isDisabled={false}>
           Confirm order
         </PrimaryButton>
@@ -73,15 +65,13 @@ export function CartScreen() {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        ListHeaderComponent={ListHeader}
-        ListFooterComponent={bottomList}
-        data={data.itens}
-        renderItem={({item}) => (
-          <OrderResumeCard item={item}
-          />
-        )}
-      />
+      <ScrollView >
+        <ListHeader />
+        {cart.map(item => (
+          <OrderResumeCard key={item.product.id.toString()} item={item} />
+        ))}
+      </ScrollView>
+      <Bottom />
     </View>
   );
 }
@@ -90,6 +80,7 @@ const styles = StyleSheet.create({
   container: {
     width: "92%",
     alignSelf: "center",
+    height: "98%",
   },
 
   textMedium: {

@@ -1,5 +1,4 @@
 import {View, StyleSheet, Text, Image, FlatList} from "react-native";
-import {HeartButton} from "../UI/HeartButton";
 import {OrderStatus} from "../../types/enums/OrderStatus";
 import {ContactButtons} from "../UI/ContactButtons";
 import {Order} from "../../types/interfaces/Order";
@@ -7,10 +6,17 @@ import {memo, useCallback} from "react";
 import {ParamListBase, useNavigation} from "@react-navigation/native";
 import {NativeStackNavigationProp} from "@react-navigation/native-stack";
 import { Store } from "../../types/interfaces/Store";
+import { STORE } from "../../store/Data";
 
 
 export const OrderCard = memo(({data}: {data: Order}) => {
   const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
+
+  const fetchStore = useCallback((id:string) => {
+    return STORE.filter((item:Store) => item.id == id);
+  }, []);
+
+  const store = fetchStore(data.storeId);
 
   const chatHandler = useCallback((item: Store) => {
     navigation.navigate("chat", {id: item.id});
@@ -33,7 +39,7 @@ export const OrderCard = memo(({data}: {data: Order}) => {
               <Text style={styles.statusText}>Order on way</Text>
             </View>
 
-            <ContactButtons onPressChatBtn={() => chatHandler} onPressPhoneBtn={phoneHandler}/>
+            <ContactButtons onPressChatBtn={chatHandler} onPressPhoneBtn={phoneHandler} data={store[0]}/>
           </View>
         );
 
@@ -48,7 +54,7 @@ export const OrderCard = memo(({data}: {data: Order}) => {
               <Text style={styles.statusText}>Order completed</Text>
             </View>
 
-            <ContactButtons onPressChatBtn={() => chatHandler} onPressPhoneBtn={phoneHandler}/>
+            <ContactButtons onPressChatBtn={chatHandler} onPressPhoneBtn={phoneHandler} data={store[0]}/>
           </View>
         );
 
@@ -69,10 +75,10 @@ export const OrderCard = memo(({data}: {data: Order}) => {
     <View style={styles.container}>
       <View style={styles.top}>
         <View style={styles.top}>
-          <Image source={{uri: data.storeImage}} style={styles.image} />
-          <Text style={styles.storeName}>{data.storeName}</Text>
+          <Image source={{uri: store[0].logoURL}} style={styles.image} />
+          <Text style={styles.storeName}>{store[0].name}</Text>
         </View>
-        <HeartButton />
+
       </View>
 
       <View style={styles.border}>

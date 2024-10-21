@@ -5,24 +5,29 @@ import {
   StyleSheet,
   View,
   Text,
+  ActivityIndicator,
 } from "react-native";
 import {ParamListBase, useNavigation} from "@react-navigation/native";
 import {NativeStackNavigationProp} from "@react-navigation/native-stack";
-import {Colors} from "../assets/constants/Colors";
-import {StorePresentationCard} from "../components/store/StorePresentationCard";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 
 import {STORE, PRODUCTS} from "../store/Data";
 import {Product} from "../types/interfaces/Product";
-import { Store } from "../types/interfaces/Store";
+import {Store} from "../types/interfaces/Store";
+import {AppContext} from "../store/AppContext";
+import {Colors} from "../assets/constants/Colors";
 
+import { GenericModal } from "../components/UI/GenericModal";
+import {StorePresentationCard} from "../components/store/StorePresentationCard";
+import { ChevronLeft } from "lucide-react-native";
 export function ProductScreen({route}: {route: any}) {
+  const {cart, setItem, removeItem, getItemCount, decrease, address} =
+    useContext(AppContext);
   const {id} = route.params;
-  const [count, setCounter] = useState(1);
-  const [isInTheCart, setIsInTheCart] = useState(false);
   const [dado, setDado] = useState<Product>();
+  const [isInTheCart, setIsInTheCart] = useState(false);
   const [store, setStore] = useState<Store>();
-  
+  const [isOpen, setIsOpen] = useState(false);
 
   const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
@@ -41,10 +46,11 @@ export function ProductScreen({route}: {route: any}) {
   useEffect(() => {
     async function fetchProduct() {
       const product = PRODUCTS.find(product => product.id === id);
-      const store = STORE.find(store => store.name === product?.store);
+      const store = STORE.find(store => store.id === product?.store);
       if (product) {
         setDado(product);
         setStore(store);
+        setIsInTheCart(cart.some(item => item.product.id === id));
       } else {
         setDado(PRODUCTS[0]);
         setStore(STORE[0]);
@@ -52,32 +58,40 @@ export function ProductScreen({route}: {route: any}) {
     }
 
     fetchProduct();
-  }, [id]);
+  }, [id, cart]);
 
   function addCart() {
-    //adicionar ao carrinho;
-    setIsInTheCart(true);
-    // falta fazer o efeito de pressionar
-  }
-
-  function navigationCartHandler(){
-    navigation.navigate("cart");
+    const add = address.filter(item => item.isSelected == true).length == 0;
+    if (add) {
+      setIsOpen(true);
+    } else {
+      if (dado) {
+        setItem(dado);
+        setIsInTheCart(true);
+      }
+    }
   }
 
   function removeCart() {
-    setIsInTheCart(false);
-    setCounter(1);
+    if (dado) {
+      removeItem(dado.id);
+      setIsInTheCart(false);
+    }
+  }
+
+  function navigationCartHandler() {
+    navigation.navigate("cart");
   }
 
   function increaseCount() {
-    setCounter(prevState => prevState + 1);
+    if (isInTheCart && dado) {
+      setItem(dado);
+    }
   }
 
   function decreaseCount() {
-    if (count == 1) {
-      setCounter(1);
-    } else {
-      setCounter(prevState => prevState - 1);
+    if (dado && getItemCount(dado ? dado.id : PRODUCTS[0].id) > 1) {
+      decrease(dado.id);
     }
   }
 
@@ -94,21 +108,23 @@ export function ProductScreen({route}: {route: any}) {
   }
 
   if (!dado) {
-    return <Text>Loading...</Text>;
+    return (
+      <View style={{flex: 1, justifyContent: "center"}}>
+        <ActivityIndicator color={Colors.green600} size={80} />
+      </View>
+    );
   }
   return (
     <View>
       <FetchImage>
         <View style={styles.container}>
           <Pressable onPress={navigationHandler}>
-            <Image
-              source={require("../assets/images/Arrow-back.png")}
-              style={styles.icon}
-            />
+            <ChevronLeft color={Colors.white200} size={32} style={styles.icon}/>
           </Pressable>
         </View>
       </FetchImage>
 
+      <GenericModal isOpen={isOpen} message="Selecione um endereço" type="error" onClose={() => setIsOpen(false)}/>
       <View style={styles.container}>
         <View>
           <View style={styles.header}>
@@ -123,34 +139,37 @@ export function ProductScreen({route}: {route: any}) {
         </View>
 
         <View>
-          <View style={styles.totalContainer}>
+          <View style={isInTheCart ? styles.totalContainer : styles.disabled}>
             <View>
               <Text style={styles.totalLabel}>Total without tax:</Text>
               <Text style={styles.total}>
-                RS: {(dado.price * count).toFixed(2)}
+                R$:{" "}
+                {(
+                  dado.price * getItemCount(dado ? dado.id : PRODUCTS[0].id)
+                ).toFixed(2)}
               </Text>
             </View>
 
             <Pressable
-              style={
-                isInTheCart ? styles.cartBtn : [styles.cartBtn, styles.disabled]
-              }
+              style={styles.cartBtn}
               disabled={!isInTheCart}
-              onPress={navigationCartHandler}
-              >
+              onPress={navigationCartHandler}>
               <Text style={styles.cartText}>View cart</Text>
             </Pressable>
           </View>
 
           <View style={styles.bottom}>
-            <View style={styles.counterContainer}>
+            <View
+              style={isInTheCart ? styles.counterContainer : styles.disabled}>
               <Pressable onPress={decreaseCount}>
                 <Image
                   source={require("../assets/images/Minus-solid.png")}
                   style={styles.counterBtnIcon}
                 />
               </Pressable>
-              <Text style={styles.counterText}>{count}</Text>
+              <Text style={styles.counterText}>
+                {getItemCount(dado ? dado.id : PRODUCTS[0].id)}
+              </Text>
               <Pressable onPress={increaseCount}>
                 <Image
                   source={require("../assets/images/Plus-solid.png")}
@@ -166,7 +185,7 @@ export function ProductScreen({route}: {route: any}) {
                   : styles.addCartBtn
               }
               onPress={setCart}>
-              <Text style={{color: "#fff", fontSize: 18, fontWeight: "500"}}>
+              <Text style={styles.btnText}>
                 {isInTheCart ? "Remove from cart" : "Add to cart"}
               </Text>
             </Pressable>
@@ -182,11 +201,15 @@ const styles = StyleSheet.create({
     height: 198,
   },
 
+  disabled: {
+    display: "none",
+  },
+
   container: {
     width: "92%",
     alignSelf: "center",
     justifyContent: "space-between",
-    height: "73%",
+    height: "76%",
   },
 
   header: {
@@ -200,7 +223,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: Colors.secundaryColor,
+    backgroundColor: Colors.green600,
     borderRadius: 50,
     width: 32,
     height: 32,
@@ -255,15 +278,11 @@ const styles = StyleSheet.create({
   cartBtn: {
     width: 100,
     alignItems: "center",
-    backgroundColor: Colors.secundaryColor,
+    backgroundColor: Colors.green600,
     borderRadius: 12,
     justifyContent: "center",
     marginTop: 10,
     height: 32,
-  },
-
-  disabled: {
-    backgroundColor: "gray",
   },
 
   cartText: {
@@ -299,15 +318,24 @@ const styles = StyleSheet.create({
   },
 
   addCartBtn: {
-    backgroundColor: Colors.secundaryColor,
-    height: 36,
-    width: "56%",
+    backgroundColor: Colors.green600,
+    height: 46,
+    width: "100%",
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 6,
+    borderRadius: 50,
   },
 
   removeCartBtn: {
+    borderRadius: 6,
+    height: 36,
+    width: "56%",
     backgroundColor: "#c91e2d",
+  },
+
+  btnText: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "500",
   },
 });

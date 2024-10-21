@@ -1,8 +1,7 @@
-import {Pressable, StyleSheet, Image} from "react-native";
+import {Pressable, StyleSheet, Image, GestureResponderEvent} from "react-native";
 import {useState} from "react";
 
-export function HeartButton() {
-  const [isFavorite, setFavorite] = useState(false);
+export function HeartButton({isFavorite, onPress}:{isFavorite:boolean, onPress:(event: GestureResponderEvent) => void}) {
 
   function Favorite() {
     if (isFavorite) {
@@ -24,9 +23,7 @@ export function HeartButton() {
 
   return (
     <Pressable
-      onPress={() => {
-        setFavorite(!isFavorite);
-      }}>
+      onPress={onPress}>
       <Favorite />
     </Pressable>
   );

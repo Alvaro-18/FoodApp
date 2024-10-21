@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
   },
 
   searchBar: {
-    width: 342,
+    width: "100%",
     height: 40,
     marginTop: 8,
     paddingHorizontal: 7,

@@ -1,8 +1,8 @@
 import {ParamListBase, useNavigation} from "@react-navigation/native";
 import {NativeStackNavigationProp} from "@react-navigation/native-stack";
 import {
+  ActivityIndicator,
   FlatList,
-  Image,
   ImageBackground,
   Pressable,
   StyleSheet,
@@ -12,16 +12,17 @@ import {
 import {Colors} from "../assets/constants/Colors";
 import {StorePresentationCard} from "../components/store/StorePresentationCard";
 import {ContactButtons} from "../components/UI/ContactButtons";
-import { STORE} from "../store/Data";
+import {STORE} from "../store/Data";
 import {ProductCard} from "../components/store/ProductCard";
 import {useCallback, useEffect, useState} from "react";
 import {Product} from "../types/interfaces/Product";
-import { Store } from "../types/interfaces/Store";
+import {Store} from "../types/interfaces/Store";
+import {ChevronLeft} from "lucide-react-native";
 
 export function StoreScreen({route}: {route: any}) {
   const {id} = route.params;
   const [dado, setDado] = useState<Store>();
-  
+
   const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
   function navigationHandler() {
@@ -32,7 +33,7 @@ export function StoreScreen({route}: {route: any}) {
     navigation.navigate("chat", {id: item.id});
   }, []);
 
-  function phoneHandler(){
+  function phoneHandler() {
     console.log("ring");
   }
 
@@ -45,9 +46,9 @@ export function StoreScreen({route}: {route: any}) {
       const store = STORE.find(store => store.id === id);
       if (store) {
         setDado(store);
-      } 
+      }
     }
-    
+
     fetchStore();
   }, [id]);
 
@@ -69,14 +70,15 @@ export function StoreScreen({route}: {route: any}) {
         <FetchImage>
           <View style={styles.container}>
             <Pressable onPress={navigationHandler}>
-              <Image
-                source={require("../assets/images/Arrow-back.png")}
+              <ChevronLeft
+                color={Colors.white200}
+                size={32}
                 style={styles.icon}
               />
             </Pressable>
           </View>
           <View style={styles.cardContainer}>
-            <StorePresentationCard dado={(dado) ? dado : STORE[0]} />
+            <StorePresentationCard dado={dado ? dado : STORE[0]} />
           </View>
         </FetchImage>
 
@@ -86,9 +88,21 @@ export function StoreScreen({route}: {route: any}) {
               Status:
               <Text style={styles.statusText}> Open for delivery</Text>
             </Text>
-            <ContactButtons onPressChatBtn={chatHandler} onPressPhoneBtn={phoneHandler} data={(dado) ? dado : STORE[0]}/>
+            <ContactButtons
+              onPressChatBtn={chatHandler}
+              onPressPhoneBtn={phoneHandler}
+              data={dado ? dado : STORE[0]}
+            />
           </View>
         </View>
+      </View>
+    );
+  }
+
+  if (!dado) {
+    return (
+      <View style={{flex: 1, justifyContent: "center"}}>
+        <ActivityIndicator color={Colors.green600} size={80} />
       </View>
     );
   }
@@ -98,7 +112,9 @@ export function StoreScreen({route}: {route: any}) {
       <FlatList
         ListHeaderComponent={listHeader}
         data={dado?.products}
-        renderItem={({item}) => <ProductCard data={item} onPress={productNavigation}/>}
+        renderItem={({item}) => (
+          <ProductCard data={item} onPress={productNavigation} />
+        )}
       />
     </View>
   );
@@ -124,7 +140,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: Colors.secundaryColor,
+    backgroundColor: Colors.green600,
     borderRadius: 50,
     width: 32,
     height: 32,
@@ -149,6 +165,6 @@ const styles = StyleSheet.create({
   statusText: {
     fontSize: 16,
     fontWeight: "700",
-    color: Colors.secundaryColor,
+    color: Colors.green600,
   },
 });

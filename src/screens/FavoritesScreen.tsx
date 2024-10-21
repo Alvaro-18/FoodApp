@@ -1,10 +1,10 @@
-import {View, StyleSheet, FlatList} from "react-native";
-import {PRODUCTS} from "../store/Data";
+import {View, StyleSheet, FlatList, Text} from "react-native";
 import {FavoritesCard} from "../components/home/FavoritesCard";
 import {ParamListBase, useNavigation} from "@react-navigation/native";
 import {NativeStackNavigationProp} from "@react-navigation/native-stack";
-import {useCallback} from "react";
 import {Product} from "../types/interfaces/Product";
+import {useCallback, useContext} from "react";
+import { AppContext } from "../store/AppContext";
 
 export function FavoritesScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
@@ -13,11 +13,18 @@ export function FavoritesScreen() {
     navigation.navigate("product", {id: item.id});
   }, []);
 
+  const userContext = useContext(AppContext);
+
   return (
     <View style={styles.container}>
       <FlatList
-        data={PRODUCTS}
+        data={userContext.favorites}
         renderItem={({item}) => <FavoritesCard data={item} onPress={productNavigation}/>}
+        ListEmptyComponent={
+        <Text style={styles.text}>
+          Que tal adicionar algo a sua lista de favoritos ? 
+        </Text>
+        }
       />
     </View>
   );
@@ -26,6 +33,13 @@ export function FavoritesScreen() {
 const styles = StyleSheet.create({
   container: {
     alignSelf: "center",
-    width: "95%",
+    width: "96%",
   },
+
+  text:{
+    color: "#000", 
+    fontWeight: "bold", 
+    textAlign: "center", 
+    marginTop: "90%"
+  }
 });

@@ -1,11 +1,11 @@
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import { icons } from "lucide-react-native";
 
-export function Icon({color, size, name}: any){
-  return (
-    <FontAwesome5
-    name={name}
-    color={color}
-    size={size}
-  />
-  );
-} 
+type IconName = keyof typeof icons;
+
+const Icon = ({ name, color, size }: { name: IconName; color: string; size: number }) => {
+  const LucideIcon = icons[name];
+
+  return <LucideIcon color={color} size={size} strokeWidth={1.5}/>;
+};
+
+export default Icon;

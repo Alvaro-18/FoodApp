@@ -1,4 +1,5 @@
 import { OrderStatus } from "../enums/OrderStatus";
+import { Address } from "./Address";
 
 interface item {
   id: string,
@@ -9,10 +10,14 @@ interface item {
 
 export interface Order {
   id: string,
-  storeName: string,
-  storeImage: string,
+  storeId: string,
   status: OrderStatus,
   itens: item[],
-  total: number
+  total: number,
+  address: Address,
+  paymentMethod: string,
+  deliveryMethod: string,
+  date: Date,
+
 }
 

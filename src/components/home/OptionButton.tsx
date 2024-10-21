@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
 
   buttonSelected: {
     borderWidth: 2,
-    borderColor: Colors.secundaryColor,
+    borderColor: Colors.green600,
   },
 
   container: {

@@ -1,4 +1,4 @@
-import {useState} from "react";
+import { useState} from "react";
 import {
   View,
   Pressable,
@@ -71,9 +71,9 @@ export function NotificationButton() {
 const styles = StyleSheet.create({
   modalContainer: {
     alignSelf: "center",
-    marginTop: "4.6%",
+    marginTop: "4%",
     alignItems: "flex-end",
-    width: "95%",
+    width: "96%",
     justifyContent: "flex-end",
     paddingHorizontal: "2%"
   },
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 226,
     padding: 10,
-    backgroundColor: Colors.secundaryColor,
+    backgroundColor: Colors.green600,
     borderRadius: 8,
   },
 
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   badge: {
     width: 10,
     height: 10,
-    backgroundColor: Colors.secundaryColor,
+    backgroundColor: Colors.green600,
     borderRadius: 50,
     position: "absolute",
     alignSelf: "flex-end",

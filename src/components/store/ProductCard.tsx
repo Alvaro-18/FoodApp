@@ -1,9 +1,11 @@
-import {memo} from "react";
+import {memo, useContext} from "react";
 import {Image, Pressable, View, Text, StyleSheet} from "react-native";
 import {Product} from "../../types/interfaces/Product";
 import {HeartButton} from "../UI/HeartButton";
+import { AppContext } from "../../store/AppContext";
 
 export const ProductCard = memo(({data, onPress}: {data: Product, onPress: (item:Product) => void}) => {
+  const {favorites, addFavorite} = useContext(AppContext);
 
   return (
     <View style={styles.container}>
@@ -20,11 +22,11 @@ export const ProductCard = memo(({data, onPress}: {data: Product, onPress: (item
             <Text style={styles.price}>R$ {data.price.toFixed(2)}</Text>
           </View>
         </Pressable>
-        <HeartButton />
+        <HeartButton isFavorite={favorites.find(item => item.id === data.id) !== undefined} onPress={() => addFavorite(data)}/>
       </View>
 
-      <Pressable onPress={() => onPress(data)}>
-        <Text style={styles.description} numberOfLines={3}>{data.description}</Text>
+      <Pressable onPress={() => onPress(data)} style={{width: "90%"}}>
+        <Text style={styles.description} numberOfLines={2}>{data.description}</Text>
       </Pressable>
     </View>
   );
@@ -89,11 +91,9 @@ const styles = StyleSheet.create({
 
   description: {
     color: "#000",
-    maxWidth: 310,
+    alignSelf: "center",
     fontSize: 12,
     fontWeight: "400",
     marginTop: 4,
-    textAlign: "justify",
-    alignItems: "center"
   },
 });
